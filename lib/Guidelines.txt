@@ -1,0 +1,1 @@
+All art assets that show up in the game should go in here.
