@@ -1,0 +1,22 @@
+<?xml version="1.0" ?> 
+<game>
+	<charData 
+	gold = "999"
+	atkPwr = "10"
+	speed = "0"
+	effectUnder = "0"
+	missChance = "5"
+	statusPrevention = "0"
+	critChance = "0"
+	healthRegen = "5"
+	speedBoostChance = "0"
+	dodgeChance = "0"
+	/>
+	<armorData
+	id = "0"
+	lvl = "1"
+	iName = "Basic Robes"
+	prof = "0"
+	statCount = "0"
+	/>
+</game>
