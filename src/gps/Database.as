@@ -420,7 +420,7 @@
 				pageLoader.load(url);
 			}
 		}
-		private function addValuesFromServer(e:Event)
+		private function addValuesFromServer(e:Event):void
 		{
 			//trace("grabbed stuff off the internet");
 			appendMessage("\nRetrieved new data from server");
@@ -431,7 +431,7 @@
 			var pageLines:Array = pageData.split("\n");
 			
 			//parse the web page information using specific table values
-			var pageTableName = pageLines[0]; //the first line is the name of the table
+			var pageTableName:String = pageLines[0]; //the first line is the name of the table
 			var dbNamesArray:Array = getTableNamesArray(pageTableName);
 			var dbTypesArray:Array = getTableTypesArray(pageTableName);
 			var dbValuesArray:Array = new Array();
@@ -619,7 +619,7 @@
 			var statement:SQLStatement = new SQLStatement();
 			statement.sqlConnection = db_connection;
 			
-			var sqlStatement = "SELECT * FROM " + tblName;
+			var sqlStatement:String = "SELECT * FROM " + tblName;
 			if (rowName != null && rowValue != null)
 			{
 				sqlStatement += " WHERE " + rowName + " = " + rowValue;
@@ -637,7 +637,7 @@
 			var statement:SQLStatement = new SQLStatement();
 			statement.sqlConnection = db_connection;
 			
-			var sqlStatement = "SELECT * FROM " + tblName;
+			var sqlStatement:String = "SELECT * FROM " + tblName;
 			if (rowName != null && rowValue != null)
 			{
 				sqlStatement += " WHERE " + rowName + " = " + rowValue;
@@ -666,7 +666,7 @@
 						var row:Object = result.data[i];
 						//trace("-row[" + i + "] = " + row);
 						appendMessage("-row[" + i + "] = " + row);
-						for (var internalValue in row)
+						for (var internalValue:Object in row)
 						{
 							appendMessage("\t-" + internalValue + ": " + row[internalValue]);							
 						}

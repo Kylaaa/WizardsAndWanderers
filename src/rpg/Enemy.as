@@ -1,18 +1,21 @@
 ﻿package rpg
 {
 	import flash.events.MouseEvent;
+	import flash.text.TextField;
 	
 	public class Enemy extends GameEntity
 	{
 		public var selected:Boolean;
-		public var enemyNum;
+		public var enemyNum:int;
 		public var dead:Boolean = false;
-		public var overShot = false;
+		public var overShot:Boolean = false;
 		public var moveForward:Boolean = false;
 		
 		public var rarity:int = 0;
 		public var esscenceType:int; //1 = Forest, 2 = Wetland, 3 = Mountain 4 = Desert
 		protected var backPreferece:Boolean = false;
+		
+		private var txt_health:TextField;
 		
 		public var done:Boolean = false;
 		
@@ -33,13 +36,13 @@
 			rarity = rar;
 		}
 		
-		public function rearrangeLocation(xLoc:Number, yLoc:Number)
+		public function rearrangeLocation(xLoc:Number, yLoc:Number):void
 		{
 			x = xLoc;
 			y = yLoc;
 		}
 		
-		public function setupEnemy(/* take id? */)
+		public function setupEnemy(/* take id? */):void
 		{
 			/*
 			call the database
@@ -62,7 +65,7 @@
 			*/
 		} 
 		
-		public function theChosen(e:MouseEvent)
+		public function theChosen(e:MouseEvent):void
 		{
 			//this checks if the enemy is being attacked by something that can hit any target or if it is in the front row
 			if(battle.atkType == 4 || battle.atkType == 12 || enemyNum <= 3 || battle.enemies[enemyNum - 4] == null)
@@ -90,14 +93,14 @@
 			}
 		}
 		
-		public function goForward()
+		public function goForward():void
 		{
 			// makes this walk later
 			moveForward = true;
 		}
 		
 		// Things the enemy can do (should be moved to enemy class)
-		public function enemyOptions()
+		public function enemyOptions():void
 		{
 			var randGen:int;
 							
@@ -160,7 +163,7 @@
 			}
 		}
 		
-		public function moveUp()
+		public function moveUp():void
 		{
 			if(x <= stage.stageWidth - 150)
 			{
@@ -178,7 +181,7 @@
 			}
 		}
 		
-		public function checkDeath()
+		public function checkDeath():void
 		{
 			if(health <= 0)
 			{
@@ -192,7 +195,7 @@
 			}
 		}
 		
-		public function update()
+		public function update():void
 		{
 			trace("Enemy " + enemyNum + " = " + health);
 			done = false;

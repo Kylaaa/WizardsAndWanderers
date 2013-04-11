@@ -33,7 +33,7 @@ package rpg
 		}
 		
 		// applies effects to the entity
-		public function applyEffects()
+		public function applyEffects():void
 		{
 			var i:int;
 			
@@ -65,7 +65,7 @@ package rpg
 			}
 		}
 		
-		public function imobolized()
+		public function imobolized():void
 		{
 			var randGen:int;
 			
@@ -167,7 +167,7 @@ package rpg
 			}
 		}
 		
-		public function multiTurnDamage()
+		public function multiTurnDamage():void
 		{
 			var randGen:int;
 			

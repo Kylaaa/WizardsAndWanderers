@@ -2,6 +2,7 @@
 {
 
 	import flash.display.MovieClip;
+	import flash.display.SimpleButton;
 	import rpg.Battle;
 	import flash.events.MouseEvent;	
 
@@ -9,6 +10,9 @@
 	{
 
 		private var bMan:Battle;
+		private var btn_cC:SimpleButton;
+		private var btn_lS:SimpleButton;
+		
 		public function SpellScreen(baMa:Battle)
 		{
 			// constructor code
@@ -17,12 +21,12 @@
 			btn_lS.addEventListener(MouseEvent.CLICK, spellDemoButton14);
 		}
 
-		function spellDemoButton15(event:MouseEvent):void
+		private function spellDemoButton15(event:MouseEvent):void
 		{
 			bMan.spellAtk(15);
 			bMan.removeChild(this);
 		}
-		function spellDemoButton14(event:MouseEvent):void
+		private function spellDemoButton14(event:MouseEvent):void
 		{
 			bMan.spellAtk(14);
 			bMan.removeChild(this);

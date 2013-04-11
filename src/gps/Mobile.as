@@ -88,7 +88,7 @@ package gps {
 		
 		
 		//GEO LOCATION
-		private function initGeolocation()
+		private function initGeolocation():void
 		{
 			if (Geolocation.isSupported)
 			{
@@ -124,7 +124,7 @@ package gps {
 			pGeolocation.setRequestedUpdateInterval((secondsToWait / currentSpeed) * 1000); //interval is in milliseconds
 
 			//check online where we are
-			var url = "http://itreallyiskyler.com/games/GPSRPG/database/getCurrentBiome.php?";
+			var url:String = "http://itreallyiskyler.com/games/GPSRPG/database/getCurrentBiome.php?";
 			url += "lat=" + e.latitude.toString();
 			url += "&long=" + e.longitude.toString();
 			appendMessage(url);
@@ -178,7 +178,7 @@ package gps {
 				
 				writeMessage("Seaching the database for our enemies...");
 				appendMessage("-num enemies to search for = " + numBiomeEnemies);
-				for (var i = 2; i < biomeDataArray.length - 2; i++) 
+				for (var i:int = 2; i < biomeDataArray.length - 2; i++) 
 				{ 
 					tempBiomeEnemies += biomeDataArray[i] + ", "; 
 					
@@ -232,7 +232,7 @@ package gps {
 						//trace("-row[" + i + "] = " + row);
 						//appendMessage("\t-row[" + i + "] = " + row);
 						//appendMessage("\t-Enemy Name: " + row["id"]);
-						for (var internalValue in row)
+						for (var internalValue:Object in row)
 						{
 							//appendMessage("\t-" + internalValue + ": " + row[internalValue]);				
 							//*******
@@ -256,7 +256,7 @@ package gps {
 			
 
 		}
-		private function createBiome()
+		private function createBiome():void
 		{
 			isReady = true;
 			currentBiome = new Biome(tempBiomeID, tempBiomeType, biomeMonsters);
@@ -281,7 +281,7 @@ package gps {
 		
 		
 		//ANDROID helper functions
-		private function closeAllConnections(e:Event)
+		private function closeAllConnections(e:Event):void
 		{
 			trace("closing");
 			
