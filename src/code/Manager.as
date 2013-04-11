@@ -8,7 +8,7 @@
 	import flash.events.MouseEvent;
 	import flash.notifications.NotificationStyle;
 	
-	import rpg.ManagerAlpha;
+	import ManagerAlpha;
 	import screen.Screen;
 	import screen.MainScreen;
 

@@ -3,7 +3,7 @@ package screen
 	import flash.display.SimpleButton;
 	import flash.events.MouseEvent;
 	
-	import rpg.ManagerAlpha;
+	import ManagerAlpha;
 	import screen.MainScreen;
 	import code.*;
 	

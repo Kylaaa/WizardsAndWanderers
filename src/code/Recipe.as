@@ -3,7 +3,7 @@ package code
 {
 	
 	import flash.events.MouseEvent;
-	import rpg.ManagerAlpha;
+	import ManagerAlpha;
 	import code.Armor;
 	
 	public class Recipe extends Item

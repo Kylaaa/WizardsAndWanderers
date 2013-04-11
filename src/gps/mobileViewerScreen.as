@@ -2,7 +2,7 @@
 	
 	import screen.MainScreen;
 	import screen.Screen;
-	import rpg.ManagerAlpha;
+	import ManagerAlpha;
 	
 	import gps.Mobile;
 	import gps.Database;

@@ -1,7 +1,7 @@
 ﻿//Alex Goldberger
 package code {
 	
-	import rpg.ManagerAlpha;
+	import ManagerAlpha;
 	
 	public class Exploring {
 		

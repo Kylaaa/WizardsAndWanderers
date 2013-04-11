@@ -11,7 +11,7 @@
 	import flash.net.URLVariables;
 	
 	import rpg.Battle;
-	import rpg.ManagerAlpha;
+	import ManagerAlpha;
 	
 	import screen.Castle;
 	import screen.Character;

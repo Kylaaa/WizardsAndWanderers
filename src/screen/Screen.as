@@ -14,22 +14,24 @@
 			manage = newManager;
 		}
 		
-		public function bringIn()
+		public function bringIn():void
 		{
 			
 		}
 		
-		public function bringOut()
+		public function bringOut():void
 		{
 			cleanUp();
 		}
 		
-		public function cleanUp()
+		public function cleanUp():void
 		{
 			if(parent != null)
 			{
 				stage.stageFocusRect = false;
 				stage.focus = manage;
+				
+				while (this.numChildren > 0 ) {	this.removeChildAt(0);	}
 				parent.removeChild(this);
 			}
 		}

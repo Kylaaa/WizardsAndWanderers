@@ -4,7 +4,7 @@ package code {
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	import rpg.ManagerAlpha;
+	import ManagerAlpha;
 	
 	//LEGACY///////LEGACY/////////////////LEGACY///////////////LEGACY///////////////LEGACY//////////////LEGACY//////////////LEGACY////////////
 	public class ItemDescriptionScreen extends MovieClip {

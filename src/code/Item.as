@@ -2,7 +2,7 @@
 package code  {
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
-	import rpg.ManagerAlpha;
+	import ManagerAlpha;
 	import code.inventoryScreen;
 	
 	public class Item extends Sprite {

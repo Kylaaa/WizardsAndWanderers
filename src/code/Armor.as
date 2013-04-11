@@ -4,7 +4,7 @@ package code
 	
 	import flash.events.MouseEvent;
 	
-	import rpg.ManagerAlpha;
+	import ManagerAlpha;
 	
 	public class Armor extends Item
 	{

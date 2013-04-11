@@ -5,7 +5,7 @@ package code {
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
-	import rpg.ManagerAlpha;
+	import ManagerAlpha;
 	
 	public class EssencesScreen extends MovieClip {
 		
