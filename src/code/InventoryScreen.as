@@ -2,9 +2,11 @@
 package code {
 	
 	import flash.display.MovieClip;
+	import flash.display.SimpleButton;
 	import flash.events.Event;
 	import flash.events.MouseEvent;	
 	import flash.display3D.IndexBuffer3D;
+	import flash.text.TextField;
 	import ManagerAlpha;
 	
 	public class InventoryScreen extends MovieClip {
@@ -13,6 +15,15 @@ package code {
 		private var currentIndex:int;
 		private var tempArray:Array;
 		private var weapon:Boolean;
+		
+		private var btn_equip:SimpleButton;
+		private var btn_Back_Item:SimpleButton;
+		private var btn_left:SimpleButton;
+		private var btn_right:SimpleButton;
+		
+		private var txt_inventory:TextField;
+		private var txt_iSize:TextField;
+		private var txt_index:TextField;
 		
 		public function InventoryScreen(man:ManagerAlpha, type:String) {
 			

@@ -3,10 +3,13 @@ package code
 {
 	
 	import flash.display.MovieClip;
+	import flash.display.SimpleButton;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.text.TextField;
 	import ManagerAlpha;
 	
+
 	public class RecipeScreen extends MovieClip
 	{
 		
@@ -15,6 +18,37 @@ package code
 		private var currentIndex:int;
 		private var tempRecipeArray:Array;
 		private var textBoxArray:Array;
+		
+		private var btn_Back:SimpleButton;
+		private var btn_left:SimpleButton;
+		private var btn_right:SimpleButton;
+		private var btn_create:SimpleButton;
+		
+		
+		private var txt_e_F1:TextField;
+		private var txt_e_F2:TextField;
+		private var txt_e_F3:TextField;
+		private var txt_e_F4:TextField;
+		
+		private var txt_e_W1:TextField;
+		private var txt_e_W2:TextField;
+		private var txt_e_W3:TextField;
+		private var txt_e_W4:TextField;
+		
+		private var txt_e_M1:TextField;
+		private var txt_e_M2:TextField;
+		private var txt_e_M3:TextField;
+		private var txt_e_M4:TextField;
+		
+		private var txt_e_D1:TextField;
+		private var txt_e_D2:TextField;
+		private var txt_e_D3:TextField;
+		private var txt_e_D4:TextField;
+		
+		private var txt_recipeDescription:TextField;
+		private var txt_index:TextField;
+		
+		
 		
 		public function RecipeScreen(man:ManagerAlpha)
 		{

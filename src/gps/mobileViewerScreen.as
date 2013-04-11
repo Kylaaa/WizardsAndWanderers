@@ -24,8 +24,10 @@
 		public var txtBiomeMonsters:TextField;
 		public var txtErrorMessage:TextField;
 
-		var device:Mobile;
-		var db:Database;
+		private var device:Mobile;
+		private var db:Database;
+		
+		//private var prgLoader:
 		
 		public function mobileViewerScreen(newManager:ManagerAlpha) 
 		{
@@ -35,7 +37,7 @@
 			txtErrorMessage.text = "";
 			
 			//progress bar
-			prgLoader.setProgress(0, 100);
+			//prgLoader.setProgress(0, 100);
 			
 			//initialize the database first
 			db = new Database(txtErrorMessage);
@@ -49,7 +51,7 @@
 			device = new Mobile(db, txtErrorMessage);
 			device.addEventListener(Event.CHANGE, locationChange);
 			device.addEventListener(Event.COMPLETE, locationReady);
-			prgLoader.setProgress(50, 100);
+			//prgLoader.setProgress(50, 100);
 		}
 		
 		private function locationReady(e:Event):void
@@ -84,7 +86,7 @@
 				txtBiomeMonsters.text = enemyNames;
 			}
 			
-			prgLoader.setProgress(100, 100);
+			//prgLoader.setProgress(100, 100);
 		}
 		private function locationChange(e:Event):void
 		{
@@ -93,13 +95,13 @@
 			txtSpeedVal.text= device.CurrentSpeed.toString();
 		}
 		
-		public override function bringIn()
+		public override function bringIn():void
 		{
 			super.bringIn();
 			exit_btn.addEventListener(MouseEvent.CLICK, onExit);
 		}
 		
-		private function onExit(e:MouseEvent)
+		private function onExit(e:MouseEvent):void
 		{
 			//clear off the stage
 			if (this.stage.numChildren >= 2)
@@ -108,7 +110,7 @@
 			manage.displayScreen(MainScreen);
 		}
 		
-		public override function cleanUp()
+		public override function cleanUp():void
 		{
 			exit_btn.removeEventListener(MouseEvent.CLICK, onExit);
 			super.cleanUp();

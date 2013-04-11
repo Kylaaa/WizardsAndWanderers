@@ -24,11 +24,11 @@ package code {
 			manager.removeChild(this);
 		}
 		function wIButton(event:MouseEvent):void{
-			var wIScreen:inventoryScreen = new inventoryScreen(manager,"weapon");
+			var wIScreen:InventoryScreen = new InventoryScreen(manager,"weapon");
 			manager.addChild(wIScreen);
 		}
 		function aIButton(event:MouseEvent):void{
-			var aIScreen:inventoryScreen = new inventoryScreen(manager,"armor");
+			var aIScreen:InventoryScreen = new InventoryScreen(manager,"armor");
 			manager.addChild(aIScreen);
 		}		
 	}

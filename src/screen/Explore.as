@@ -15,18 +15,18 @@ package screen
 			super(newManager);
 		}
 		
-		public override function bringIn()
+		public override function bringIn():void
 		{
 			super.bringIn();
 			exit_btn.addEventListener(MouseEvent.CLICK, onExit);
 		}
 		
-		private function onExit(e:MouseEvent)
+		private function onExit(e:MouseEvent):void
 		{
 			manage.displayScreen(MainScreen);
 		}
 		
-		public override function cleanUp()
+		public override function cleanUp():void
 		{
 			exit_btn.removeEventListener(MouseEvent.CLICK, onExit);
 			super.cleanUp();

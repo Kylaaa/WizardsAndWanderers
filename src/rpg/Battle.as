@@ -3,6 +3,7 @@
 	import buttons.AttackButton;
 	import buttons.FleeButton;
 	import buttons.MagicButton;
+	import flash.text.TextField;
 	
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -63,6 +64,8 @@
 		
 		private var spellSelected:int = 1; // move this somewhere when done testing
 		public var spScreen:SpellScreen;
+		
+		private var txt_health:TextField;
 		
 		public function Battle(newManager:ManagerAlpha)
 		{

@@ -6,7 +6,7 @@
 	import flash.text.engine.Kerning;
 	import flash.display.SimpleButton;
 	import flash.events.MouseEvent;
-	import flash.notifications.NotificationStyle;
+	//import flash.notifications.NotificationStyle;
 	
 	import ManagerAlpha;
 	import screen.Screen;
@@ -15,6 +15,11 @@
 	public class Manager extends Screen
 	{
 		public var manager:ManagerAlpha;
+		
+		private var btn_defaultItems:SimpleButton;
+		private var btn_Essences:SimpleButton;
+		private var btn_Stats:SimpleButton;
+		private var btn_back:SimpleButton;
 		
 		public function Manager(newManager:ManagerAlpha)
 		{

@@ -15,6 +15,13 @@ package
 	public class Main extends Sprite 
 	{
 		//CONSTANTS
+		public static var STAGE_CENTER_X:int = 381;
+		public static var STAGE_CENTER_Y:int = 240;
+		public static var STAGE_LEFT:int = 0;
+		public static var STAGE_RIGHT:int = 762;
+		public static var STAGE_TOP:int = 0;
+		public static var STAGE_BOTTOM:int = 480;
+		
 		
 		//GLOBAL VARIABLES
 		private var theGame:ManagerAlpha;

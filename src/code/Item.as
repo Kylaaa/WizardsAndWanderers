@@ -3,7 +3,7 @@ package code  {
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import ManagerAlpha;
-	import code.inventoryScreen;
+	import code.InventoryScreen;
 	
 	public class Item extends Sprite {
 		
@@ -48,16 +48,16 @@ package code  {
 			}
 		}
 		
-		public function openInventory(weapon:Boolean)
+		public function openInventory(weapon:Boolean):void
 		{
 			if(weapon)
 			{
-				var wIScreen:inventoryScreen = new inventoryScreen(manager,"weapon");
+				var wIScreen:InventoryScreen = new InventoryScreen(manager,"weapon");
 				manager.addChild(wIScreen);
 			}
 			else
 			{
-				var aIScreen:inventoryScreen = new inventoryScreen(manager,"armor");
+				var aIScreen:InventoryScreen = new InventoryScreen(manager,"armor");
 				manager.addChild(aIScreen);
 			}
 		}

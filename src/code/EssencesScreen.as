@@ -2,14 +2,47 @@
 package code {
 	
 	import flash.display.MovieClip;
+	import flash.display.SimpleButton;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.text.TextField;
 	
 	import ManagerAlpha;
 	
 	public class EssencesScreen extends MovieClip {
 		
 		protected var manager:ManagerAlpha;
+		private var txt_biome:TextField;
+		private var txt_eLevel:TextField;
+		
+		private var txt_e_F1:TextField;
+		private var txt_e_F2:TextField;
+		private var txt_e_F3:TextField;
+		private var txt_e_F4:TextField;
+		
+		private var txt_e_W1:TextField;
+		private var txt_e_W2:TextField;
+		private var txt_e_W3:TextField;
+		private var txt_e_W4:TextField;
+		
+		private var txt_e_M1:TextField;
+		private var txt_e_M2:TextField;
+		private var txt_e_M3:TextField;
+		private var txt_e_M4:TextField;
+		
+		private var txt_e_D1:TextField;
+		private var txt_e_D2:TextField;
+		private var txt_e_D3:TextField;
+		private var txt_e_D4:TextField;
+		
+		private var btn_Back_Essences:SimpleButton;
+		private var btn_essenceUp:SimpleButton;
+		private var btn_essenceDown:SimpleButton;
+		private var btn_EssenceBiomeLeft:SimpleButton;
+		private var btn_EssenceBiomeRight:SimpleButton;
+		private var btn_essenceAdd:SimpleButton;
+		private var btn_recipe:SimpleButton;
+		
 		
 		public function EssencesScreen(man:ManagerAlpha) {
 			// constructor code

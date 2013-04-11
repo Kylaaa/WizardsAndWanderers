@@ -1,6 +1,8 @@
 ﻿package 
 {
 	import code.*;
+	import rpg.Battle;
+	import rpg.Player;
 	
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -51,7 +53,7 @@
 			startUp();
 		}
 		
-		function startUp()
+		public function startUp():void
 		{
 			//Set the default weapon (later get the weapon/armor from the Player XML)
 			var tempWeapon:Weapon = new Weapon(this,0,true,1,"Wooden Staff",true,15,1.75,6);
@@ -68,14 +70,14 @@
 			//tempArmor.onEquip(); //changes stats based on the equipped armor
 		}
 		
-		public function displayScreen(screenClass:Class)
+		public function displayScreen(screenClass:Class):void
 		{
 			if(currentScreen != null)
 			{
 				currentScreen.bringOut();
 			}
 			
-			if(screenClass == Battle)
+			if(screenClass === Battle)
 			{
 				battle = new Battle(this);
 				addChild(battle);
@@ -94,21 +96,21 @@
 		}
 		
 		
-		public function openInventory(weapon:Boolean)
+		public function openInventory(weapon:Boolean):void
 		{
 			if(weapon)
 			{
-				var wIScreen:inventoryScreen = new inventoryScreen(this,"weapon");
+				var wIScreen:InventoryScreen = new InventoryScreen(this,"weapon");
 				addChild(wIScreen);
 			}
 			else
 			{
-				var aIScreen:inventoryScreen = new inventoryScreen(this,"armor");
+				var aIScreen:InventoryScreen = new InventoryScreen(this,"armor");
 				addChild(aIScreen);
 			}
 		}
 		
-		public function populateArmorArray(armor:Armor)
+		public function populateArmorArray(armor:Armor):void
 		{
 			//find the end of the armorArray
 			var posToAddTo:int = armorArray.length;
@@ -116,7 +118,7 @@
 			armorArray[posToAddTo] = armor;
 		}
 		
-		public function populateWeaponArray(weapon:Weapon)
+		public function populateWeaponArray(weapon:Weapon):void
 		{
 			//find the end of the inventoryArray
 			var posToAddTo:int = weaponArray.length;
@@ -124,7 +126,7 @@
 			weaponArray[posToAddTo] = weapon;
 		}
 		
-		public function populateRecipeArray(recipe:Recipe)
+		public function populateRecipeArray(recipe:Recipe):void
 		{
 			//find the end of the inventoryArray
 			var posToAddTo:int = recipeArray.length;

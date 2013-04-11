@@ -38,7 +38,7 @@
 			super(newManager);
 		}
 		
-		public override function bringIn()
+		public override function bringIn():void
 		{
 			super.bringIn();
 			
@@ -50,39 +50,39 @@
 			castle_btn.addEventListener(MouseEvent.CLICK, onCastle);
 		}
 		
-		private function onEncounter(e:MouseEvent)
+		private function onEncounter(e:MouseEvent):void
 		{
 			if(manage.player.curHealth > 0)
 				manage.displayScreen(Battle);
 		}
 		
-		private function onExplore(e:MouseEvent)
+		private function onExplore(e:MouseEvent):void
 		{
 			manage.exploring.Explore();
 			manage.displayScreen(Explore);
 		}
 		
-		private function onExit(e:MouseEvent)
+		private function onExit(e:MouseEvent):void
 		{
 			fscommand("quit");
 		}
 		
-		private function onCharacter(e:MouseEvent)
+		private function onCharacter(e:MouseEvent):void
 		{
 			manage.displayScreen(Manager);
 		}
 		
-		private function onQuests(e:MouseEvent)
+		private function onQuests(e:MouseEvent):void
 		{
 			manage.displayScreen(QuestsRecipes);
 		}
 		
-		private function onCastle(e:MouseEvent)
+		private function onCastle(e:MouseEvent):void
 		{
 			manage.displayScreen(mobileViewerScreen);
 		}
 		
-		public override function cleanUp()
+		public override function cleanUp():void
 		{
 			encounter_btn.removeEventListener(MouseEvent.CLICK, onEncounter);
 			explore_btn.removeEventListener(MouseEvent.CLICK, onExplore);
