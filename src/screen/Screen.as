@@ -2,7 +2,7 @@
 {
 	import caurina.transitions.Tweener;
 	import flash.display.Sprite;
-	import rpg.ManagerAlpha;
+	import ManagerAlpha;
 	
 	public class Screen extends Sprite
 	{

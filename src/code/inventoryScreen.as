@@ -5,16 +5,16 @@ package code {
 	import flash.events.Event;
 	import flash.events.MouseEvent;	
 	import flash.display3D.IndexBuffer3D;
-	import rpg.ManagerAlpha;
+	import ManagerAlpha;
 	
-	public class inventoryScreen extends MovieClip {
+	public class InventoryScreen extends MovieClip {
 		
 		protected var manager:ManagerAlpha;
 		private var currentIndex:int;
 		private var tempArray:Array;
 		private var weapon:Boolean;
 		
-		public function inventoryScreen(man:ManagerAlpha, type:String) {
+		public function InventoryScreen(man:ManagerAlpha, type:String) {
 			
 			// constructor code
 			manager = man;

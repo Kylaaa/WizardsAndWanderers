@@ -24,8 +24,8 @@ package managers
 		
 		
 		private static var images:Object = new Array();
-			images["nothing"]					= Nothing();				//debug
-			images["traffic-cones.png"] 		= MissingImage();
+			images["nothing"]					= Nothing;				//debug
+			images["traffic-cones.png"] 		= MissingImage;
 			
 			
 		
@@ -38,7 +38,7 @@ package managers
 				return ImgMissing();
 			}
 			
-			return images[fileName];
+			return (images[fileName] as Function).call();
 		}
 			
 		public function ImageManager() 

@@ -1,4 +1,4 @@
-﻿package rpg
+﻿package 
 {
 	import code.*;
 	
@@ -32,6 +32,9 @@
 		//explore
 		public var exploring:Exploring;
 		
+		
+		
+		//CONSTRUCTOR
 		public function ManagerAlpha()
 		{
 			super();

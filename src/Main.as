@@ -14,6 +14,10 @@ package
 	 */
 	public class Main extends Sprite 
 	{
+		//CONSTANTS
+		
+		//GLOBAL VARIABLES
+		private var theGame:ManagerAlpha;
 		
 		public function Main():void 
 		{
@@ -25,7 +29,7 @@ package
 			Multitouch.inputMode = MultitouchInputMode.TOUCH_POINT;
 			
 			// entry point
-			
+			theGame = new ManagerAlpha();
 		}
 		
 		private function deactivate(e:Event):void 
