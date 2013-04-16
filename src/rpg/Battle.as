@@ -75,7 +75,7 @@
 			addEventListener(Event.ENTER_FRAME, update);
 		}
 		
-		public function initialize()
+		public function initialize():void
 		{			
 			// adds multiple drawing layers
 			addChild(backgroundLayer);
@@ -101,10 +101,10 @@
 		
 		// Creates enemies by choosing an available enemy and then randomly placing
 		// it in one of 8 spaces
-		public function generateEnemies()
+		public function generateEnemies():void
 		{
 			var i:int;
-			var enemyCreator;
+			var enemyCreator:Enemy;
 			var rar:int = (Math.random() * 3) + 1; // randomizer variable for rarity, will be read from biome later
 			var randGen:int = (Math.random() * 8) + 1; // randomizer variable
 			//randGen = 8;
@@ -155,9 +155,9 @@
 		
 		// Creates the buttons that the user can interact with that have different actions
 		// depending on the button
-		public function generateButtons()
+		public function generateButtons():void
 		{
-			var seperationDist = 100;
+			var seperationDist:int = 100;
 			
 			// Attack Button
 			attackBtn = new AttackButton();
@@ -183,7 +183,7 @@
 		
 		// When the player goes to attack, this sets it up as well as what kind
 		// of attack it will be
-		private function onAttack(e:MouseEvent)
+		private function onAttack(e:MouseEvent):void
 		{
 			// opens up a menu of skills that the player has and continues when one is selected
 			attacking = true;
@@ -199,7 +199,7 @@
 		}
 		
 		// Allows the player to cast a magic spell 
-		private function onMagic(e:MouseEvent)
+		private function onMagic(e:MouseEvent):void
 		{
 			//spawns or makes visible both buttons
 			addChild(spScreen);
@@ -209,14 +209,14 @@
 		}
 		
 		// Allows the player to run away
-		private function onFlee(e:MouseEvent)
+		private function onFlee(e:MouseEvent):void
 		{
 			fleeing = true;
 			endTurn();
 		}
 		
 		// Ends the players turn
-		private function endTurn()
+		private function endTurn():void
 		{
 			playerTurn =  false;
 		}
@@ -247,7 +247,7 @@
 		}
 		
 		// Applies damage to enemies depending on the type of attack used
-		private function damagingEnemies()
+		private function damagingEnemies():void
 		{
 			var i:int;
 			
@@ -355,7 +355,7 @@
 		}
 		
 		// uses a spell to hit an enemy (move this to its own class)
-		public function spellAtk(ss:int)
+		public function spellAtk(ss:int):void
 		{			
 			//var spellSelected:int = 8; // move this somewhere when done testing
 			spellSelected = ss;
@@ -442,7 +442,7 @@
 		
 		// Checks to see if an enemy is dead and if they are to remove it from the
 		// game
-		public function checkDeath()
+		public function checkDeath():void
 		{
 			var i:int;
 			
@@ -468,7 +468,7 @@
 		}
 		
 		// Allows the player to run away from the battle
-		public function runningAway()
+		public function runningAway():void
 		{
 			var randGen:int = (Math.random() * 2) + 1;
 			
@@ -591,7 +591,7 @@
 		}
 		
 		// Destroys everything in the battle screen
-		public function destroyAll()
+		public function destroyAll():void
 		{	
 			var i:int;
 			
@@ -617,7 +617,7 @@
 		}
 		
 		// Cleans the current screen
-		public function cleanup()
+		public function cleanup():void
 		{
 			manage.player.curHealth = health;
 			

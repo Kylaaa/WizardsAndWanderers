@@ -13,7 +13,7 @@ package rpg
 		}
 		
 		// Hit two chosen enemies
-		public function doubleHit(doubleEnemyHeld:Enemy, damageDealt:int)
+		public function doubleHit(doubleEnemyHeld:Enemy, damageDealt:int):void
 		{
 			doubleEnemyHeld.health -= damageDealt;
 			
@@ -25,7 +25,7 @@ package rpg
 		}
 		
 		// Deal damage to the 4 enemies in front
-		public function multiHit(selectedEnemy:Enemy, damageDealt:int)
+		public function multiHit(selectedEnemy:Enemy, damageDealt:int):void
 		{
 			for(var j:int = 0; j <= battle.enemies.length; j++)
 			{
@@ -43,7 +43,7 @@ package rpg
 		}
 		
 		// Deal damage to the front and back of a row
-		public function piercingHit(chosenEnemy:Enemy, damageDealt:int)
+		public function piercingHit(chosenEnemy:Enemy, damageDealt:int):void
 		{
 			if(chosenEnemy != null)
 			{
@@ -55,7 +55,7 @@ package rpg
 		}
 		
 		// Deal damage in the 4 cardinal directions
-		public function radialHit(chosenEnemy:Enemy, enemyNum:int, damageDealt:int)
+		public function radialHit(chosenEnemy:Enemy, enemyNum:int, damageDealt:int):void
 		{
 			hitAdjacent(enemyNum, damageDealt, false);
 			
@@ -69,7 +69,7 @@ package rpg
 		}
 		
 		// If the enemy in front dies, damage the one behind it
-		public function trampleHit(selectedEnemy:Enemy, enemyBehind:Enemy, damageDealt:int)
+		public function trampleHit(selectedEnemy:Enemy, enemyBehind:Enemy, damageDealt:int):void
 		{
 			if(selectedEnemy.health <= 0)
 			{
@@ -84,7 +84,7 @@ package rpg
 		}
 		
 		// Deals damage in to two full rows
-		public function meteorHit(selectedEnemy:Enemy, secondEnemy:Enemy, damageDealt:int)
+		public function meteorHit(selectedEnemy:Enemy, secondEnemy:Enemy, damageDealt:int):void
 		{
 			secondEnemy.health -= damageDealt;
 			
@@ -109,7 +109,7 @@ package rpg
 		}
 		
 		// Deals damage in a specific area
-		public function hailHit(selectedEnemy:Enemy, damageDealt:int)
+		public function hailHit(selectedEnemy:Enemy, damageDealt:int):void
 		{
 			hitAdjacent(selectedEnemy.enemyNum, damageDealt, false);
 			hitAdjacent(selectedEnemy.enemyNum + 4, damageDealt, false);
@@ -124,7 +124,7 @@ package rpg
 		}
 		
 		// Deals damage to all enemies on screen
-		public function allHit(damageDealt:int)
+		public function allHit(damageDealt:int):void
 		{
 			for(var i:int = 0; i < battle.enemies.length; i++)
 			{
@@ -139,7 +139,7 @@ package rpg
 		}
 		
 		// Used for Random 2, Random 3, and Random 6 attack types
-		public function randomAtk(enemiesHit:int, damageDealt)
+		public function randomAtk(enemiesHit:int, damageDealt:int):void
 		{
 			var i:int;
 			var randGen:int;
@@ -159,7 +159,7 @@ package rpg
 		}
 		
 		// Used to hit 3 enemies at a given time
-		public function hitAdjacent(selectedNum:int, damageDealt:int, triple:Boolean)
+		public function hitAdjacent(selectedNum:int, damageDealt:int, triple:Boolean):void
 		{
 			var i:int;
 			var tempLeft:Enemy;

@@ -51,25 +51,25 @@
 			btn_back.addEventListener(MouseEvent.CLICK, backToMenu);
 		}
 		
-		function essencesButton(event:MouseEvent):void
+		private function essencesButton(event:MouseEvent):void
 		{
 			var eScreen:EssencesScreen = new EssencesScreen(manager);
 			manager.addChild(eScreen);
 		}
 		
-		function backToMenu(event:MouseEvent):void
+		private function backToMenu(event:MouseEvent):void
 		{
 			manage.displayScreen(MainScreen);
 		}
 		
-		function statsButton(event:MouseEvent):void
+		private function statsButton(event:MouseEvent):void
 		{
 			var statsScreen:CharacterStatsScreen = new CharacterStatsScreen(manage);
 			manage.addChild(statsScreen);
 		}
 		
 		//makes some pre-set recipes and items for testing
-		function dItemButton(event:MouseEvent):void
+		private function dItemButton(event:MouseEvent):void
 		{
 			var tempWeapon2:Weapon = new Weapon(manager,2,true,3,"Magic Wand",true,20,12,3);
 			manager.populateWeaponArray(tempWeapon2);

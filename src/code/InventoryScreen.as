@@ -67,11 +67,13 @@ package code {
 			
 			checkEquipped();
 		}
-		function bButton(event:MouseEvent):void{
+		private function bButton(event:MouseEvent):void
+		{
 			manager.removeChild(this);
 		}
 		
-		function rButton(event:MouseEvent):void{
+		private function rButton(event:MouseEvent):void
+		{
 			if(tempArray.length > currentIndex + 1)
 			{
 				currentIndex++;
@@ -86,7 +88,7 @@ package code {
 			checkEquipped();
 		}
 		
-		function lButton(event:MouseEvent):void{
+		private function lButton(event:MouseEvent):void{
 			if(currentIndex > 0)
 			{
 				currentIndex--;
@@ -102,7 +104,7 @@ package code {
 		}
 		
 		//Pressing this button will equip the new item
-		function equipButton(event:MouseEvent):void
+		private function equipButton(event:MouseEvent):void
 		{
 			if(weapon)
 			{
@@ -122,7 +124,7 @@ package code {
 		
 		//this function checks to see if the current item is the equipped item
 		//if it is, then it hides the button, otherwise it shows it
-		function checkEquipped():void
+		private function checkEquipped():void
 		{
 			if(weapon)
 			{
@@ -149,7 +151,7 @@ package code {
 			
 		}
 		//this function returns the id of the equipped item
-		function findEquippedId():int
+		private function findEquippedId():int
 		{
 			var toReturn:int;
 			toReturn = 0;

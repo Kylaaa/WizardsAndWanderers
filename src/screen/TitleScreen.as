@@ -24,7 +24,7 @@ package screen
 			play_btn.addEventListener(MouseEvent.CLICK, onPlay);
 		}
 		
-		private function onPlay(e:MouseEvent)
+		private function onPlay(e:MouseEvent):void
 		{
 			manage.displayScreen(MainScreen);
 		}

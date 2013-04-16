@@ -83,12 +83,12 @@
 			</xml>;*/
 		}
 
-		public function loadPlayerXML()
+		public function loadPlayerXML():void
 		{
 			//Load Code
 			var loader:URLLoader =  new URLLoader();
 			loader.addEventListener(Event.COMPLETE, onLoaded);
-			var url:URLRequest = new URLRequest("xml/PlayerData.xml");
+			var url:URLRequest = new URLRequest("../xml/PlayerData.xml");
 			loader.load(url);
 			
 			//POST DATABASE
@@ -147,17 +147,9 @@
 			*/
 		}
 		
-		public function WriteXML()
-		{
-			//var file:File = File.documentsDirectory.resolvePath("xml/PlayerData.xml"); 
-			//var fileStr:FileStream = new FileStream(); 
-			//fileStr.open(file, FileMode.UPDATE);
-			
-			//fileStr
-		}
 
 		// set up the player for the game
-		public function setupPlayer()
+		public function setupPlayer():void
 		{
 			missChance = 10;
 
@@ -183,7 +175,7 @@
 			speed = 3;
 		}
 
-		public function writeXml()
+		public function writeXml():void
 		{
 			var ba:ByteArray = new ByteArray();
 			ba.writeUTFBytes(xml);
@@ -198,7 +190,7 @@
 		}
 
 		// save the player to the database
-		public function savePlayer()
+		public function savePlayer():void
 		{
 			/*
 			database.level = level
@@ -223,7 +215,7 @@
 		//the essence code is incomplete
 		//later this could take the distance from home to get extra exp
 		//later this could check to see if the player has never fought this enemy before, and record kill totals
-		public function onMonsterKill(en:Enemy, feared:Boolean)
+		public function onMonsterKill(en:Enemy, feared:Boolean):void
 		{
 			if (! feared)
 			{
@@ -323,7 +315,7 @@
 			}
 		}
 		//this function is used to change values in the essences array
-		public function SetEsscencesBiomeArray(j,k,newCount):void
+		public function SetEsscencesBiomeArray(j:int,k:int,newCount:int):void
 		{
 			esscencesBiomeArray[j][k] = newCount;
 		}

@@ -76,11 +76,13 @@ package code {
 			txt_e_D4.text = manager.player.esscencesBiomeArray[3][3].toString();
 		}
 		
-		function bButton(event:MouseEvent):void{
+		private function bButton(event:MouseEvent):void
+		{
 			manager.removeChild(this);
 		}
 		
-		function addButton(event:MouseEvent):void{
+		private function addButton(event:MouseEvent):void
+		{
 			
 			var row:int;
 			var column:int;
@@ -142,7 +144,7 @@ package code {
 			
 		}
 		
-		function upButton(event:MouseEvent):void{
+		private function upButton(event:MouseEvent):void{
 			if(txt_eLevel.text == "Average")
 			{
 				txt_eLevel.text = "Lesser";
@@ -159,7 +161,7 @@ package code {
 			//trace("." + txt_eLevel.text + ".");
 		}
 		
-		function downButton(event:MouseEvent):void{
+		private function downButton(event:MouseEvent):void{
 			if(txt_eLevel.text == "Lesser")
 			{
 				txt_eLevel.text = "Average";
@@ -175,7 +177,7 @@ package code {
 			
 		}
 		
-		function rightButton(event:MouseEvent):void{
+		private function rightButton(event:MouseEvent):void{
 			if(txt_biome.text == "Forest")
 			{
 				txt_biome.text = "Wetlands";
@@ -194,7 +196,7 @@ package code {
 			}						
 		}	
 		
-		function leftButton(event:MouseEvent):void{
+		private function leftButton(event:MouseEvent):void{
 			if(txt_biome.text == "Wetlands")
 			{
 				txt_biome.text = "Forest";
@@ -213,7 +215,7 @@ package code {
 			}			
 		}
 		
-		function recipeButton(event:MouseEvent):void{
+		private function recipeButton(event:MouseEvent):void{
 			if(manager.recipeArray.length > 0)
 			{
 			var rScreen:RecipeScreen = new RecipeScreen(manager);

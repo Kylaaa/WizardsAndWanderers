@@ -115,7 +115,7 @@ package code
 		}
 		
 		//This code fills in the text boxes with the essences that the player has
-		function FillTextBoxes():void
+		private function FillTextBoxes():void
 		{
 			var i:int = 0;
 			var j:int = 0;
@@ -136,7 +136,7 @@ package code
 		}
 		
 		//Makes an item from the recipe
-		function createButton(event:MouseEvent):void
+		private function createButton(event:MouseEvent):void
 		{
 			if (checkCost(tempRecipeArray[currentIndex].cost)) //checks to make sure the player can afford the item
 			{
@@ -152,14 +152,14 @@ package code
 			}
 		}
 		
-		function bButton(event:MouseEvent):void
+		private function bButton(event:MouseEvent):void
 		{
 			var eScreen:EssencesScreen = new EssencesScreen(manager);
 			manager.addChild(eScreen);
 			manager.removeChild(this);
 		}
 		
-		function rButton(event:MouseEvent):void
+		private function rButton(event:MouseEvent):void
 		{
 			if (tempRecipeArray.length > currentIndex + 1)
 			{
@@ -174,7 +174,7 @@ package code
 			readCost(tempRecipeArray[currentIndex].cost);
 		}
 		
-		function lButton(event:MouseEvent):void
+		private function lButton(event:MouseEvent):void
 		{
 			if (currentIndex > 0)
 			{
@@ -190,7 +190,7 @@ package code
 		}
 		
 		//sets the textBoxes to show the players essences and the recipe cost
-		function readCost(costArray:Array)
+		private function readCost(costArray:Array):void
 		{
 			var i:int = 0;
 			var j:int = 0;
@@ -215,7 +215,7 @@ package code
 		}
 		
 		//returns true if the player can afford the item
-		function checkCost(costArray:Array):Boolean
+		private function checkCost(costArray:Array):Boolean
 		{
 			var toReturn:Boolean = false;
 			var i:int = 0;
@@ -253,7 +253,7 @@ package code
 			return toReturn;
 		}
 		
-		function removeEssences(costArray:Array)
+		private function removeEssences(costArray:Array):void
 		{
 			var i:int = 0;
 			var j:int = 0;
@@ -263,7 +263,7 @@ package code
 				var have:int = manager.player.esscencesBiomeArray[j][k];
 				var need:int = costArray[j][k];
 				
-				var newCount = have - need;
+				var newCount:int = have - need;
 				//manager.essencesBiomeArray[j][k] = newCount;
 				manager.player.SetEsscencesBiomeArray(j,k,newCount);
 				//This is where you stopped, maybe you need to make a function in manager that sets it, have it take 3 parameters, the row, column and the new cost
@@ -281,7 +281,7 @@ package code
 		}
 		
 		//creates an item from the recipe and adds it to the inventory in manager
-		function makeItem(r:Recipe)
+		private function makeItem(r:Recipe):void
 		{
 			if(r.weapon)
 			{
@@ -295,7 +295,7 @@ package code
 			}
 		}
 		
-		function removeRecipe()
+		private function removeRecipe():void
 		{
 			manager.recipeArray.splice(currentIndex,1);
 		}
