@@ -15,12 +15,15 @@ package screen
 		{
 			super(newManager);
 			
-			play_btn = ShapesManager.drawButton(0, 0, 0, 0, "play");
+			play_btn = ShapesManager.drawButton(0, 0, 200, 100, "play");
+			
+			
 		}
 		
 		override public function bringIn():void 
 		{
 			super.bringIn();
+			this.addChild(play_btn);
 			play_btn.addEventListener(MouseEvent.CLICK, onPlay);
 		}
 		
@@ -31,6 +34,8 @@ package screen
 		
 		override public function cleanUp():void 
 		{
+		
+			this.removeChild(play_btn);
 			play_btn.removeEventListener(MouseEvent.CLICK, onPlay);
 			super.cleanUp();
 		}

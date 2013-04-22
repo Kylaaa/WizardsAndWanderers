@@ -4,6 +4,7 @@
 	import buttons.FleeButton;
 	import buttons.MagicButton;
 	import flash.text.TextField;
+	import managers.ShapesManager;
 	
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -55,8 +56,8 @@
 		public var effectUnder:int;
 		public var missChance:int;
 		
-		// for critical attacks
-		public var critAttack:Boolean = false;
+		// for critical attacksy
+		public var critAttack:Boolean = false; 
 		public var currentCritEffect:int = 0;
 		
 		// used for special attacks
@@ -73,6 +74,9 @@
 			
 			specAtk = new SpecialAttacks(this, newManager);
 			addEventListener(Event.ENTER_FRAME, update);
+			
+			txt_health = new TextField();
+			txt_health.setTextFormat(ShapesManager.textFormat);
 		}
 		
 		public function initialize():void
@@ -455,6 +459,7 @@
 			
 			for(i = 0; i < enemies.length; i++)
 			{
+				if (enemies[i] == null) continue;
 				if(enemies[i].dead)
 				{
 					currEnemyAmount++;

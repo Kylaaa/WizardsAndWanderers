@@ -12,11 +12,16 @@
 		{
 			super();
 			manage = newManager;
+			
+			this.x = 0;
+			this.y = 0;
+			this.visible = true;
+			this.alpha = 1.0;
 		}
 		
 		public function bringIn():void
 		{
-			
+			trace("bringing in: " + this);
 		}
 		
 		public function bringOut():void
@@ -26,6 +31,7 @@
 		
 		public function cleanUp():void
 		{
+			trace("Cleaning up: " + this);
 			if(parent != null)
 			{
 				stage.stageFocusRect = false;

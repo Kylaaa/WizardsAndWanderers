@@ -37,9 +37,17 @@ package
 			
 			// entry point
 			theGame = new ManagerAlpha();
+			this.addChild(theGame);
+			theGame.startUp();
 		}
 		
 		private function deactivate(e:Event):void 
+		{
+			// auto-close
+			NativeApplication.nativeApplication.exit();
+		}
+		
+		public static function exitGame():void
 		{
 			// auto-close
 			NativeApplication.nativeApplication.exit();

@@ -50,7 +50,7 @@
 			weaponArray = new Array();
 			recipeArray = new Array();
 			
-			startUp();
+			//startUp();
 		}
 		
 		public function startUp():void
@@ -72,6 +72,7 @@
 		
 		public function displayScreen(screenClass:Class):void
 		{
+			trace("displaying screen: " + screenClass);
 			if(currentScreen != null)
 			{
 				currentScreen.bringOut();
@@ -83,7 +84,9 @@
 				addChild(battle);
 				battle.bringIn();
 				battle.initialize();
-			} else {
+			} 
+			else 
+			{
 				currentScreen = new screenClass(this);
 				addChild(currentScreen);
 				currentScreen.bringIn();

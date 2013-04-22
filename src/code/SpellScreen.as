@@ -3,6 +3,7 @@
 
 	import flash.display.MovieClip;
 	import flash.display.SimpleButton;
+	import managers.ShapesManager;
 	import rpg.Battle;
 	import flash.events.MouseEvent;	
 
@@ -17,6 +18,13 @@
 		{
 			// constructor code
 			bMan = baMa;
+			
+			btn_cC = ShapesManager.drawButton(0,   0, 200, 100, "CC");
+			btn_lS = ShapesManager.drawButton(0, 100, 200, 100, "LS");
+			
+			this.addChild(btn_cC);
+			this.addChild(btn_lS);
+			
 			btn_cC.addEventListener(MouseEvent.CLICK, spellDemoButton15);
 			btn_lS.addEventListener(MouseEvent.CLICK, spellDemoButton14);
 		}

@@ -9,6 +9,7 @@
 	import flash.net.URLRequest;
 	import flash.net.URLRequestMethod;
 	import flash.net.URLVariables;
+	import managers.ShapesManager;
 	
 	import rpg.Battle;
 	import ManagerAlpha;
@@ -36,12 +37,28 @@
 		public function MainScreen(newManager:ManagerAlpha)
 		{
 			super(newManager);
+			
+			encounter_btn =	ShapesManager.drawButton(0,   0, 200, 100, "Encounter");
+			explore_btn =	ShapesManager.drawButton(0, 100, 200, 100, "Explore");
+			exit_btn = 		ShapesManager.drawButton(0, 200, 200, 100, "Exit");
+			character_btn = ShapesManager.drawButton(0, 300, 200, 100, "Character");
+			quests_btn = 	ShapesManager.drawButton(0, 400, 200, 100, "Quests");
+			castle_btn = 	ShapesManager.drawButton(0, 500, 200, 100, "Castle");
 		}
 		
 		public override function bringIn():void
 		{
 			super.bringIn();
 			
+			//add everything to the stage
+			this.addChild(encounter_btn);
+			this.addChild(explore_btn);
+			this.addChild(exit_btn);
+			this.addChild(character_btn);
+			this.addChild(quests_btn);
+			this.addChild(castle_btn);
+			
+			//add events to the buttons
 			encounter_btn.addEventListener(MouseEvent.CLICK, onEncounter);
 			explore_btn.addEventListener(MouseEvent.CLICK, onExplore);
 			exit_btn.addEventListener(MouseEvent.CLICK, onExit);
@@ -65,6 +82,7 @@
 		private function onExit(e:MouseEvent):void
 		{
 			fscommand("quit");
+			Main.exitGame();
 		}
 		
 		private function onCharacter(e:MouseEvent):void
@@ -84,6 +102,15 @@
 		
 		public override function cleanUp():void
 		{
+			//remove everything to the stage
+			this.removeChild(encounter_btn);
+			this.removeChild(explore_btn);
+			this.removeChild(exit_btn);
+			this.removeChild(character_btn);
+			this.removeChild(quests_btn);
+			this.removeChild(castle_btn);
+			
+			//remove the event listeners from the stage
 			encounter_btn.removeEventListener(MouseEvent.CLICK, onEncounter);
 			explore_btn.removeEventListener(MouseEvent.CLICK, onExplore);
 			exit_btn.removeEventListener(MouseEvent.CLICK, onExit);
@@ -91,6 +118,7 @@
 			quests_btn.removeEventListener(MouseEvent.CLICK, onQuests);
 			castle_btn.removeEventListener(MouseEvent.CLICK, onCastle);
 			
+			//make sure everything gets cleaned up
 			super.cleanUp();
 		}
 	}

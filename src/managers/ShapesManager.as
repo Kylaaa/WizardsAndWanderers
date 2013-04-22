@@ -55,7 +55,7 @@ package managers
 		}
 		
 		//button stuff
-		private static function buttonNormalState(w:Number, h:Number, text:String = null):MovieClip
+		public static function buttonNormalState(w:Number, h:Number, text:String = null):MovieClip
 		{
 			var bns:MovieClip = new MovieClip();
 				bns.graphics.beginFill ( 0x000000 );
@@ -67,7 +67,7 @@ package managers
 				
 			return bns;
 		}
-		private static function buttonOverState(w:Number, h:Number, text:String = null):MovieClip
+		public static function buttonOverState(w:Number, h:Number, text:String = null):MovieClip
 		{
 			var bos:MovieClip = new MovieClip();
 				bos.graphics.beginFill ( 0x00AAAA  );
@@ -80,7 +80,7 @@ package managers
 			return bos;
 			
 		}
-		private static function buttonDownState(w:Number, h:Number, text:String = null):MovieClip
+		public static function buttonDownState(w:Number, h:Number, text:String = null):MovieClip
 		{
 			var bds:MovieClip = new MovieClip();
 				bds.graphics.beginFill ( 0x000000 );

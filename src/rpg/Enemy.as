@@ -2,6 +2,7 @@
 {
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
+	import managers.ShapesManager;
 	
 	public class Enemy extends GameEntity
 	{
@@ -34,6 +35,9 @@
 			atkPwr = 0;
 			speed = 10;
 			rarity = rar;
+			
+			txt_health = new TextField();
+			txt_health.setTextFormat(ShapesManager.textFormat);
 		}
 		
 		public function rearrangeLocation(xLoc:Number, yLoc:Number):void

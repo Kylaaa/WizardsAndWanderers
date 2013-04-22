@@ -11,6 +11,11 @@
 
 	public class Player
 	{
+		//SIMPLY EMBEDDING FILES TO MAKE STUFF EASY
+		[Embed(source = "../xml/PlayerData.xml", 	mimeType = "application/octet-stream")] 	private static var xmlPlayerData:Class; 
+		public static function get XMLplayerData():XML 	{ 	var byteArray:ByteArray = new xmlPlayerData() as ByteArray; 			return new XML(byteArray.readUTFBytes(byteArray.length)); }
+	
+		
 		public var manager:ManagerAlpha;
 		
 		public var skills:Array = new Array("slash","stab");
@@ -86,10 +91,12 @@
 		public function loadPlayerXML():void
 		{
 			//Load Code
-			var loader:URLLoader =  new URLLoader();
+			/*var loader:URLLoader =  new URLLoader();
 			loader.addEventListener(Event.COMPLETE, onLoaded);
 			var url:URLRequest = new URLRequest("../xml/PlayerData.xml");
-			loader.load(url);
+			loader.load(url);*/
+			//since file is embedded, no need to load it
+			
 			
 			//POST DATABASE
 			//Store only the armor and weapon id's, both in inventory and equipped
@@ -97,21 +104,22 @@
 			//Right now the entire default armor is in the XML class
 		}
 		
-		public function onLoaded(evt:Event):void
+		public function onLoaded(evt:Event = null):void
 		{
 			//maybe make it so that only some values get saved here such as health, equipped item, equipped armor, essccences, and equipped other
 			//then have the other stuff all get taken care of when they are equipped
-			myData = new XML(evt.target.data);
-			gold = myData.charData. @ gold;
-			atkPwr = myData.charData. @ atkPwr;
-			speed = myData.charData. @ speed;
-			effectUnder = myData.charData. @ effectUnder;
-			missChance = myData.charData. @ missChance;
-			statusPrevention = myData.charData. @ statusPrevention;
-			healthRegen = myData.charData. @ healthRegen;
-			critChance = myData.charData. @ critChance;
-			speedBoostChance = myData.charData. @ speedBoostChance;
-			dodgeChance = myData.charData. @ dodgeChance;
+			//myData = new XML(evt.target.data);
+			myData 			= XMLplayerData; //load the data from the embedded xml file
+			gold 			= myData.charData. @ gold;
+			atkPwr 			= myData.charData. @ atkPwr;
+			speed 			= myData.charData. @ speed;
+			effectUnder 	= myData.charData. @ effectUnder;
+			missChance 		= myData.charData. @ missChance;
+			statusPrevention= myData.charData. @ statusPrevention;
+			healthRegen 	= myData.charData. @ healthRegen;
+			critChance 		= myData.charData. @ critChance;
+			speedBoostChance= myData.charData. @ speedBoostChance;
+			dodgeChance 	= myData.charData. @ dodgeChance;
 			
 			
 			//Load the default armor
