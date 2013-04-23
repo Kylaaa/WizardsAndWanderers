@@ -1,7 +1,9 @@
 ﻿package rpg
 {
+	import flash.display.Bitmap;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
+	import managers.ImageManager;
 	import managers.ShapesManager;
 	
 	public class Enemy extends GameEntity
@@ -26,15 +28,7 @@
 			
 			addEventListener(MouseEvent.CLICK, theChosen);
 			
-			enemyNum = num;
-			
-			selected = false;
-			
-			maxHealth = 25;
-			health = 25;
-			atkPwr = 0;
-			speed = 10;
-			rarity = rar;
+			setupEnemy(xLoc, yLoc, num, rar);
 			
 			txt_health = new TextField();
 			txt_health.setTextFormat(ShapesManager.textFormat);
@@ -46,8 +40,23 @@
 			y = yLoc;
 		}
 		
-		public function setupEnemy(/* take id? */):void
+		public function setupEnemy(xLoc:Number, yLoc:Number, num:int, rar:int):void
 		{
+			myImage = ImageManager.MissingImage();
+			myImage.width = 50;
+			myImage.height = 50;
+			addChild(myImage);
+			
+			enemyNum = num;
+			
+			selected = false;
+			
+			maxHealth = 25;
+			health = 25;
+			atkPwr = 0;
+			speed = 10;
+			rarity = rar;
+			
 			/*
 			call the database
 			
@@ -169,7 +178,7 @@
 		
 		public function moveUp():void
 		{
-			if(x <= stage.stageWidth - 150)
+			if(x <= battle.manage.stage.stageWidth - 150)
 			{
 				if(enemyNum > 3)
 				{
@@ -177,7 +186,7 @@
 				}
 				
 				moveForward = false;
-				x = stage.stageWidth - 150;
+				x = battle.manage.stage.stageWidth - 150;
 			}
 			else
 			{

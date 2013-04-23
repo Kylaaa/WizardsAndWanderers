@@ -3,7 +3,9 @@
 	import buttons.AttackButton;
 	import buttons.FleeButton;
 	import buttons.MagicButton;
+	import flash.display.SimpleButton;
 	import flash.text.TextField;
+	import managers.ImageManager;
 	import managers.ShapesManager;
 	
 	import flash.display.Sprite;
@@ -29,9 +31,9 @@
 		
 		// button variables
 		private var buttonArray:Array = new Array();
-		private var attackBtn:AttackButton;
-		private var magicBtn:MagicButton;
-		private var fleeBtn:FleeButton;
+		private var attackBtn:SimpleButton;
+		private var magicBtn:SimpleButton;
+		private var fleeBtn:SimpleButton;
 		private var listening:Boolean;
 		
 		// turn variable
@@ -91,7 +93,7 @@
 			
 			generateEnemies();
 			
-			player = new PlayerSprite(50, stage.stageHeight / 2);
+			player = new PlayerSprite(50, manage.stage.stageHeight / 2);
 			characterLayer.addChild(player);
 			
 			health = manage.player.curHealth;
@@ -125,12 +127,12 @@
 						if(randLoc <= 3)
 						{
 							// enemyCreator = database.enemy (check biome, go through numbers, randomize the rarity, etc.)
-							enemyCreator = new Enemy(this, stage.stageWidth - 150, (randLoc * 70) + 85, randLoc,rar);
+							enemyCreator = new Enemy(this, manage.stage.stageWidth - 150, (randLoc * 70) + 85, randLoc,rar);
 						}
 						else
 						{
 							// enemyCreator = database.enemy (check biome, go through numbers, randomize the rarity, etc.)
-							enemyCreator = new Enemy(this, stage.stageWidth - 50, ((randLoc - 4) * 70) + 85, randLoc,rar);
+							enemyCreator = new Enemy(this, manage.stage.stageWidth - 50, ((randLoc - 4) * 70) + 85, randLoc,rar);
 						}
 						
 						enemies[randLoc] = enemyCreator;
@@ -164,23 +166,30 @@
 			var seperationDist:int = 100;
 			
 			// Attack Button
-			attackBtn = new AttackButton();
+			
+			attackBtn = new SimpleButton(ImageManager.MissingImage());
+			attackBtn.width = 50;
+			attackBtn.height = 20;
 			attackBtn.x = (attackBtn.width * 0) + seperationDist;
-			attackBtn.y = (stage.stageHeight - attackBtn.height / 2) - 10;
+			attackBtn.y = (manage.stage.stageHeight - attackBtn.height / 2) - 10;
 			foregroundLayer.addChild(attackBtn);
 			buttonArray.push(attackBtn);
 			
 			// Magic Button
-			magicBtn = new MagicButton();
+			magicBtn = new SimpleButton(ImageManager.MissingImage());
+			magicBtn.width = 50;
+			magicBtn.height = 20;
 			magicBtn.x = (attackBtn.width * 1) + seperationDist;
-			magicBtn.y = (stage.stageHeight - magicBtn.height / 2) - 10;
+			magicBtn.y = (manage.stage.stageHeight - magicBtn.height / 2) - 10;
 			foregroundLayer.addChild(magicBtn);
 			buttonArray.push(magicBtn);
 			
 			// Flee Button
-			fleeBtn = new FleeButton();
+			fleeBtn = new SimpleButton(ImageManager.MissingImage());
+			fleeBtn.width = 50;
+			fleeBtn.height = 20;
 			fleeBtn.x = (attackBtn.width * 2) + seperationDist;
-			fleeBtn.y = (stage.stageHeight - fleeBtn.height / 2) - 10;
+			fleeBtn.y = (manage.stage.stageHeight - fleeBtn.height / 2) - 10;
 			foregroundLayer.addChild(fleeBtn);
 			buttonArray.push(fleeBtn);
 		}
@@ -189,6 +198,7 @@
 		// of attack it will be
 		private function onAttack(e:MouseEvent):void
 		{
+			trace("attack");
 			// opens up a menu of skills that the player has and continues when one is selected
 			attacking = true;
 			atkType = 0;
@@ -205,6 +215,7 @@
 		// Allows the player to cast a magic spell 
 		private function onMagic(e:MouseEvent):void
 		{
+			trace("magic");
 			//spawns or makes visible both buttons
 			addChild(spScreen);
 			
@@ -215,6 +226,7 @@
 		// Allows the player to run away
 		private function onFlee(e:MouseEvent):void
 		{
+			trace("flee");
 			fleeing = true;
 			endTurn();
 		}
@@ -465,11 +477,13 @@
 					currEnemyAmount++;
 				}
 			}
-			
+		
+			/*
 			if(currEnemyAmount <= 0)
 			{
-				this.cleanup();
+				cleanup();
 			}
+			*/
 		}
 		
 		// Allows the player to run away from the battle
@@ -486,7 +500,6 @@
 		}
 		
 		
-		/*
 		// currently only applies effects to enemies
 		public function applyEffects()
 		{
@@ -522,7 +535,6 @@
 				}
 			}
 		}
-		*/
 		
 		// Updates the game (hurdur)
 		public function update(e:Event):void
@@ -533,6 +545,7 @@
 					Enemy Turn
 					playerTurn = true;
 			*/
+					
 			txt_health.text = "Health: " + health;
 			var i:int;
 			
@@ -541,7 +554,6 @@
 			// following is what can happen during the players turn
 			if(playerTurn)
 			{
-				
 				if(!listening)
 				{
 					listening = true;
@@ -571,7 +583,7 @@
 				if(listening)
 				{
 					listening = false;
-					
+					trace("remove");
 					attackBtn.removeEventListener(MouseEvent.CLICK, onAttack);
 					magicBtn.removeEventListener(MouseEvent.CLICK, onMagic);
 					fleeBtn.removeEventListener(MouseEvent.CLICK, onFlee);
@@ -591,8 +603,10 @@
 				{
 					checkDeath();
 				}
+				
 				playerTurn = true;
 			}
+			
 		}
 		
 		// Destroys everything in the battle screen

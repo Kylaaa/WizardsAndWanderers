@@ -1,6 +1,8 @@
 package rpg
 {
 	import flash.display.Sprite;
+	import flash.display.Bitmap;
+	import managers.ImageManager;
 	
 	public class GameEntity extends Sprite
 	{
@@ -14,6 +16,8 @@ package rpg
 		public var accuracy:Number = 1;
 		
 		public var critChance:Number;
+		
+		protected var myImage:Bitmap;
 		
 		// variables used for damage that applies multiple turns
 		public var imobile:Boolean = false;
