@@ -1,5 +1,7 @@
 ﻿package screen
 {
+	import flash.display.Bitmap;
+	import flash.display.MovieClip;
 	import flash.system.fscommand;
 	import flash.display.SimpleButton;
 	import flash.events.Event;
@@ -9,6 +11,7 @@
 	import flash.net.URLRequest;
 	import flash.net.URLRequestMethod;
 	import flash.net.URLVariables;
+	import managers.ImageManager;
 	import managers.ShapesManager;
 	
 	import rpg.Battle;
@@ -30,20 +33,32 @@
 		public var encounter_btn:SimpleButton;
 		public var explore_btn:SimpleButton;
 		public var exit_btn:SimpleButton;
-		public var character_btn:SimpleButton;
-		public var quests_btn:SimpleButton;
-		public var castle_btn:SimpleButton;
+		public var character_btn:MovieClip;
+		public var quests_btn:MovieClip;
+		public var castle_btn:MovieClip;
+		
+		private var backgroundImg:Bitmap;
 		
 		public function MainScreen(newManager:ManagerAlpha)
 		{
 			super(newManager);
 			
+			//USE SOME LOGIC TO FIGURE OUT WHICH IMAGE TO DRAW
+			
+			backgroundImg = ImageManager.BackgroundCavern();
+			
 			encounter_btn =	ShapesManager.drawButton(0,   0, 200, 100, "Encounter");
 			explore_btn =	ShapesManager.drawButton(0, 100, 200, 100, "Explore");
 			exit_btn = 		ShapesManager.drawButton(0, 200, 200, 100, "Exit");
-			character_btn = ShapesManager.drawButton(0, 300, 200, 100, "Character");
-			quests_btn = 	ShapesManager.drawButton(0, 400, 200, 100, "Quests");
-			castle_btn = 	ShapesManager.drawButton(0, 500, 200, 100, "Castle");
+			
+			character_btn = new MovieClip();
+			character_btn.addChild(ShapesManager.drawImage("iconWizard.png", -200, -200, 80, 130, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM));
+			
+			quests_btn = 	new MovieClip();
+			quests_btn.addChild(ShapesManager.drawImage("iconScroll.png", 0, -200, 110, 100, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM));
+			
+			castle_btn = 	new MovieClip();
+			castle_btn.addChild(ShapesManager.drawImage("iconCastle.png", 200, -200, 150, 150, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM));
 		}
 		
 		public override function bringIn():void
@@ -66,6 +81,14 @@
 			quests_btn.addEventListener(MouseEvent.CLICK, onQuests);
 			castle_btn.addEventListener(MouseEvent.CLICK, onCastle);
 		}
+		
+		private function initWithProperBiome():void
+		{
+			
+			
+		}
+		
+		
 		
 		private function onEncounter(e:MouseEvent):void
 		{

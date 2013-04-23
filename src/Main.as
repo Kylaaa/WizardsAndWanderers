@@ -38,7 +38,7 @@ package
 			// entry point
 			theGame = new ManagerAlpha();
 			this.addChild(theGame);
-			theGame.startUp();
+			//theGame.startUp(); //this gets called internally
 		}
 		
 		private function deactivate(e:Event):void 

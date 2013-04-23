@@ -93,6 +93,7 @@
 			//Load Code
 			/*var loader:URLLoader =  new URLLoader();
 			loader.addEventListener(Event.COMPLETE, onLoaded);
+			trace("creating urlRequest");
 			var url:URLRequest = new URLRequest("../xml/PlayerData.xml");
 			loader.load(url);*/
 			//since file is embedded, no need to load it
@@ -106,6 +107,7 @@
 		
 		public function onLoaded(evt:Event = null):void
 		{
+			 trace("on loaded function");
 			//maybe make it so that only some values get saved here such as health, equipped item, equipped armor, essccences, and equipped other
 			//then have the other stuff all get taken care of when they are equipped
 			//myData = new XML(evt.target.data);
