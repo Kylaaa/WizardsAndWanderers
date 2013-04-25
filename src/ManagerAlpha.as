@@ -153,9 +153,10 @@
 				currentScreen.bringOut();
 			}
 			
-			if(screenClass === Battle)
+			if(screenClass == Battle)
 			{
 				battle = new Battle(this);
+				currentScreen = battle;
 				addChild(battle);
 				battle.bringIn();
 				battle.initialize();
@@ -166,6 +167,7 @@
 				addChild(currentScreen);
 				currentScreen.bringIn();
 			}
+			
 		}
 		public function CreateNotification(notification:String):void
 		{

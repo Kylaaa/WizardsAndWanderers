@@ -210,7 +210,6 @@
 		
 		public function update():void
 		{
-			trace("Enemy " + enemyNum + " = " + health);
 			done = false;
 			
 			applyEffects();

@@ -167,27 +167,21 @@
 			
 			// Attack Button
 			
-			attackBtn = new SimpleButton(ImageManager.MissingImage());
-			attackBtn.width = 50;
-			attackBtn.height = 20;
+			attackBtn = ShapesManager.drawButton(50, 50, 100, 50, "Attack");
 			attackBtn.x = (attackBtn.width * 0) + seperationDist;
 			attackBtn.y = (manage.stage.stageHeight - attackBtn.height / 2) - 10;
 			foregroundLayer.addChild(attackBtn);
 			buttonArray.push(attackBtn);
 			
 			// Magic Button
-			magicBtn = new SimpleButton(ImageManager.MissingImage());
-			magicBtn.width = 50;
-			magicBtn.height = 20;
+			magicBtn = ShapesManager.drawButton(50, 50, 100, 50, "Magic");
 			magicBtn.x = (attackBtn.width * 1) + seperationDist;
 			magicBtn.y = (manage.stage.stageHeight - magicBtn.height / 2) - 10;
 			foregroundLayer.addChild(magicBtn);
 			buttonArray.push(magicBtn);
 			
 			// Flee Button
-			fleeBtn = new SimpleButton(ImageManager.MissingImage());
-			fleeBtn.width = 50;
-			fleeBtn.height = 20;
+			fleeBtn = ShapesManager.drawButton(50, 50, 100, 50, "Flee");
 			fleeBtn.x = (attackBtn.width * 2) + seperationDist;
 			fleeBtn.y = (manage.stage.stageHeight - fleeBtn.height / 2) - 10;
 			foregroundLayer.addChild(fleeBtn);
@@ -198,7 +192,6 @@
 		// of attack it will be
 		private function onAttack(e:MouseEvent):void
 		{
-			trace("attack");
 			// opens up a menu of skills that the player has and continues when one is selected
 			attacking = true;
 			atkType = 0;
@@ -215,7 +208,6 @@
 		// Allows the player to cast a magic spell 
 		private function onMagic(e:MouseEvent):void
 		{
-			trace("magic");
 			//spawns or makes visible both buttons
 			addChild(spScreen);
 			
@@ -226,7 +218,6 @@
 		// Allows the player to run away
 		private function onFlee(e:MouseEvent):void
 		{
-			trace("flee");
 			fleeing = true;
 			endTurn();
 		}
@@ -464,7 +455,7 @@
 			
 			if(player != null && health <= 0)	// if the player is dead then clean up the game
 			{
-				cleanup();
+				endBattle();
 			}
 			
 			var currEnemyAmount:int = 0;
@@ -472,18 +463,25 @@
 			for(i = 0; i < enemies.length; i++)
 			{
 				if (enemies[i] == null) continue;
-				if(enemies[i].dead)
+				if(!enemies[i].dead)
 				{
 					currEnemyAmount++;
 				}
+				/*
+				else
+				{
+					var deadEnemy:Enemy = enemies[i];
+					enemies.splice(1);
+					characterLayer.removeChild(deadEnemy);
+				}
+				*/
 			}
 		
-			/*
+			trace("enemies.length " + enemies.length);
 			if(currEnemyAmount <= 0)
 			{
-				cleanup();
+				endBattle();
 			}
-			*/
 		}
 		
 		// Allows the player to run away from the battle
@@ -493,7 +491,7 @@
 			
 			if(randGen == 1)
 			{
-				cleanup();
+				endBattle();
 			}
 			
 			fleeing = false;
@@ -583,7 +581,6 @@
 				if(listening)
 				{
 					listening = false;
-					trace("remove");
 					attackBtn.removeEventListener(MouseEvent.CLICK, onAttack);
 					magicBtn.removeEventListener(MouseEvent.CLICK, onMagic);
 					fleeBtn.removeEventListener(MouseEvent.CLICK, onFlee);
@@ -631,19 +628,20 @@
 			}
 			
 			// removes update
-			
 			removeEventListener(Event.ENTER_FRAME, update);
 		}
 		
+		public function endBattle():void
+		{
+			manage.displayScreen(MainScreen);
+		}
+		
 		// Cleans the current screen
-		public function cleanup():void
+		public override function cleanUp():void
 		{
 			manage.player.curHealth = health;
-			
 			destroyAll();
 			txt_health.text = "";
-			
-			manage.displayScreen(MainScreen);
 		}
 	}
 }

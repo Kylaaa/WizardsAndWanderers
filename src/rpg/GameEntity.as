@@ -193,7 +193,7 @@ package rpg
 		
 		public function destroy():void
 		{
-			battle.characterLayer.removeChild(this);
+			//battle.characterLayer.removeChild(this);
 		}
 	}
 }
