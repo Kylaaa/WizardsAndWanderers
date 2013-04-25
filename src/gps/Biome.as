@@ -19,7 +19,8 @@
 		private var biomeType:String;
 		private var biomeID:String;
 		private var enemies:Array;
-
+		
+		private const LIBRARY_PATH:String = "lib/sprites/";
 
 		public function Biome(id:String, type:String, listOfEnemies:Array) 
 		{
@@ -60,7 +61,7 @@
 			//load the image and add it to the stage
 			//if (File(enemies[index]["imagePath"].toString()).exists)
 			//{
-				imagePathURL.url = enemies[index]["imagePath"].toString();
+				imagePathURL.url = LIBRARY_PATH + enemies[index]["imagePath"].toString();
 				trace("\timagePath: " + imagePathURL.url.toString());
 				
 				try	{ imageLoader.load(imagePathURL); }

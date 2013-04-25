@@ -80,24 +80,37 @@ package gps {
 		}
 		
 		//ACCESSORS		
-		public function get IsReady():Boolean { return isReady; }
-		public function get CurrentBiome():Biome { return currentBiome; }
-		public function get CurrentLatitude():Number { return currentLatitude; }
-		public function get CurrentLongitude():Number { return currentLongitude; }
-		public function get CurrentSpeed():Number { return currentSpeed; }
+		public function get IsReady():Boolean 			{ return isReady; }
+		public function get CurrentBiome():Biome 		{ return currentBiome; }
+		public function get CurrentLatitude():Number 	{ return currentLatitude; }
+		public function get CurrentLongitude():Number 	{ return currentLongitude; }
+		public function get CurrentSpeed():Number 		{ return currentSpeed; }
 		
 		
 		//GEO LOCATION
 		private function initGeolocation():void
 		{
+			pGeolocation = new Geolocation();
+			pGeolocation.addEventListener(GeolocationEvent.UPDATE, onGeoLocationUpdate, false, 0, true);
+			pGeolocation.addEventListener(StatusEvent.STATUS, onGeoStatusChange, false, 0, true);
+			
+			//check online where we are by getting a debug location on RIT's campus
+			var url:String = "http://itreallyiskyler.com/games/GPSRPG/database/getCurrentBiome.php?";
+			url += "lat=" + 43.0838;
+			url += "&long=" + -77.680;
+			appendMessage(url);
+			trace(url);
+			
+			var aRequest:URLRequest = new URLRequest(url)
+			loader = new URLLoader();
+			loader.addEventListener(Event.COMPLETE, loadComplete);
+			loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, error);
+			loader.load(aRequest);
+			
 			if (Geolocation.isSupported)
 			{
 				//displayMessage("Geolocation is supported");
-				pGeolocation = new Geolocation();
 				pGeolocation.setRequestedUpdateInterval(1); //get an immediate read out
-				
-				pGeolocation.addEventListener(GeolocationEvent.UPDATE, onGeoLocationUpdate, false, 0, true);
-				pGeolocation.addEventListener(StatusEvent.STATUS, onGeoStatusChange, false, 0, true);
 				
 				if (pGeolocation.muted)
 				{
@@ -106,6 +119,7 @@ package gps {
 			}
 			else
 			{
+				trace("Geolocation is not supported on this device");
 				writeMessage("Error: Geolocation is not supported on this device!");
 			}
 		}

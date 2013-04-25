@@ -3,6 +3,7 @@
 	import code.*;
 	import flash.display.Bitmap;
 	import flash.display.MovieClip;
+	import flash.filesystem.File;
 	import flash.text.TextField;
 	import gps.Database;
 	import gps.Mobile;
@@ -71,6 +72,7 @@
 		
 		private function dbLoaded(e:Event):void
 		{
+			trace("database completely loaded");
 			//clean up the stage
 			this.removeChild(txtErrorMessage);
 			this.removeChild(loadingMessage);
@@ -80,7 +82,7 @@
 			device.addEventListener(Event.CHANGE, locationChange);
 			device.addEventListener(Event.COMPLETE, locationReady);
 			
-			startUp();
+			device.addEventListener(Event.COMPLETE, startUp);
 		}
 		
 		
@@ -89,11 +91,12 @@
 			//clear off the stage
 			//if (this.stage.numChildren >= 2)
 			//this.stage.removeChildren(1, this.stage.numChildren -1);
-			
+			trace("location ready event");
 			if (device.IsReady)
 			{
 				//txtBiomeIDVal.text = device.CurrentBiome.ID;
 				//txtBiomeType.text = device.CurrentBiome.Type;
+				trace("Current Biome is: " + device.CurrentBiome.Type);
 				
 				//build our string of enemies
 				var enemyNames:String = "";
@@ -103,7 +106,7 @@
 					
 					
 					//draw it to the screen too
-					try
+					/*try
 					{
 						device.CurrentBiome.drawEnemy(this.stage, i, 15 + (i * 70), 5);
 					}
@@ -111,11 +114,11 @@
 					{
 						txtErrorMessage.text = "Error Loading " + device.CurrentBiome.Enemies[i]["name"].toString() + "\'s image.\n";
 						txtErrorMessage.appendText(err.getStackTrace());		
-					}
+					}*/
 				}
 				//txtBiomeMonsters.text = enemyNames;
 			}
-			
+			trace("Enemy names = " + enemyNames);
 			//prgLoader.setProgress(100, 100);
 		}
 		private function locationChange(e:Event):void
@@ -123,11 +126,16 @@
 			//txtLongVal.text = device.CurrentLongitude.toString();
 			//txtLatVal.text  = device.CurrentLatitude.toString();
 			//txtSpeedVal.text= device.CurrentSpeed.toString();
+			
+			trace("Location changed: (" + device.CurrentLatitude + ", " + device.CurrentLongitude + ")");
 		}
 		
 		
-		public function startUp():void
+		public function startUp(e:Event):void
 		{
+			//remove the event listener from the device and start the game
+			device.removeEventListener(Event.COMPLETE, startUp);
+			
 			//Set the default weapon (later get the weapon/armor from the Player XML)
 			var tempWeapon:Weapon = new Weapon(this,0,true,1,"Wooden Staff",true,15,1.75,6);
 			populateWeaponArray(tempWeapon);
