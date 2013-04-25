@@ -45,25 +45,46 @@
 			
 			//USE SOME LOGIC TO FIGURE OUT WHICH IMAGE TO DRAW
 			
-			backgroundImg = ImageManager.BackgroundCavern();
+			
+			if (manage.device.IsReady)
+			{
+				trace("We are currently in a " + manage.device.CurrentBiome.Type + " biome");
+				switch(manage.device.CurrentBiome.Type)
+				{
+					//initialize the background image here
+					default:
+						backgroundImg = ImageManager.BackgroundCavern();
+						break;
+				}
+			}
+			else {	backgroundImg = ImageManager.BackgroundCavern(); }
+			
+			backgroundImg.x = 0;
+			backgroundImg.y = 0;
+			
 			
 			encounter_btn =	ShapesManager.drawButton(0,   0, 200, 100, "Encounter");
 			explore_btn =	ShapesManager.drawButton(0, 100, 200, 100, "Explore");
 			exit_btn = 		ShapesManager.drawButton(0, 200, 200, 100, "Exit");
 			
 			character_btn = new MovieClip();
-			character_btn.addChild(ShapesManager.drawImage("iconWizard.png", -200, -200, 80, 130, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM));
+			character_btn.addChild(ShapesManager.drawImage("iconWizard.png", -200, -130, 80, 130, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM));
 			
 			quests_btn = 	new MovieClip();
-			quests_btn.addChild(ShapesManager.drawImage("iconScroll.png", 0, -200, 110, 100, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM));
+			quests_btn.addChild(ShapesManager.drawImage("iconScroll.png", 0, -100, 110, 100, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM));
 			
 			castle_btn = 	new MovieClip();
-			castle_btn.addChild(ShapesManager.drawImage("iconCastle.png", 200, -200, 150, 150, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM));
+			castle_btn.addChild(ShapesManager.drawImage("iconCastle.png", 200, -150, 150, 150, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM));
 		}
 		
 		public override function bringIn():void
 		{
 			super.bringIn();
+			
+			//format the background image
+			backgroundImg.width = stage.stageWidth;
+			backgroundImg.height = stage.stageHeight;
+			this.addChild(backgroundImg);
 			
 			//add everything to the stage
 			this.addChild(encounter_btn);

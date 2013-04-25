@@ -19,13 +19,14 @@ package managers
 		[Embed(source = "../../lib/sprites/navigation/buttons/iconScroll.png", 			mimeType = "image/png")] 	private static var ImgIconScroll:Class; 
 		[Embed(source = "../../lib/sprites/navigation/buttons/iconWizard.png", 			mimeType = "image/png")] 	private static var ImgIconWizard:Class; 
 		[Embed(source = "../../lib/sprites/navigation/panels/backgroundCavern.png", 	mimeType = "image/png")] 	private static var ImgBackgroundCavern:Class; 
-		
+		[Embed(source = "../../lib/sprites/navigation/panels/titleScreen.png", 			mimeType = "image/png")] 	private static var ImgTitleScreen:Class; 
 		
 		//accessors
 		public static function Nothing():Bitmap				{ return new Bitmap(); }					//debug graphics
 		public static function MissingImage():Bitmap 		{ return new ImgMissing(); }
 		
 		public static function BackgroundCavern():Bitmap	{ return new ImgBackgroundCavern(); } 		//background images
+		public static function TitleScreen():Bitmap			{ return new ImgTitleScreen(); }
 		
 		public static function IconCastle():Bitmap 			{ return new ImgIconCastle(); }				//navigation icons
 		public static function IconScroll():Bitmap 			{ return new ImgIconScroll(); }
@@ -36,7 +37,8 @@ package managers
 			images["nothing"]					= Nothing;				//debug
 			images["traffic-cones.png"] 		= MissingImage;
 			
-			images["backgroundCavern.png"]		= BackgroundCavern();	//background images
+			images["backgroundCavern.png"]		= BackgroundCavern;	//background images
+			images["titleScreen.png"]			= TitleScreen;
 			
 			images["iconCastle.png"]			= IconCastle;           //navigation icons
 			images["iconScroll.png"]			= IconScroll;

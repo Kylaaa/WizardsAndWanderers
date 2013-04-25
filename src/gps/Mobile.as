@@ -32,7 +32,7 @@ package gps {
 	{
 		// Constant for geolocation
 		private var pGeolocation:Geolocation;
-		private static const LOCATION_UPDATE_INTERVAL:Number = 5000; //in milliseconds = 1 second
+		private static const LOCATION_UPDATE_INTERVAL:int = 60000; //in milliseconds = 1 second
 		
 		//web stuff
 		private var loader:URLLoader;
