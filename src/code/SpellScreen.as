@@ -19,8 +19,8 @@
 			// constructor code
 			bMan = baMa;
 			
-			btn_cC = ShapesManager.drawButton(0,   0, 200, 100, "CC");
-			btn_lS = ShapesManager.drawButton(0, 100, 200, 100, "LS");
+			btn_cC = ShapesManager.drawButton(0,   0, 200, 100, "Creeping Cold");
+			btn_lS = ShapesManager.drawButton(0, 100, 200, 100, "Lightning Strike");
 			
 			this.addChild(btn_cC);
 			this.addChild(btn_lS);

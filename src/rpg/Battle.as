@@ -1,12 +1,10 @@
 ﻿package rpg
 {
-	import buttons.AttackButton;
-	import buttons.FleeButton;
-	import buttons.MagicButton;
 	import flash.display.SimpleButton;
 	import flash.text.TextField;
 	import managers.ImageManager;
 	import managers.ShapesManager;
+	import mx.core.ButtonAsset;
 	
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -31,9 +29,9 @@
 		
 		// button variables
 		private var buttonArray:Array = new Array();
-		private var attackBtn:SimpleButton;
-		private var magicBtn:SimpleButton;
-		private var fleeBtn:SimpleButton;
+		private var attackBtn:Sprite;
+		private var magicBtn:Sprite;
+		private var fleeBtn:Sprite;
 		private var listening:Boolean;
 		
 		// turn variable
@@ -87,6 +85,8 @@
 			addChild(backgroundLayer);
 			addChild(characterLayer);
 			addChild(foregroundLayer);
+			
+			backgroundLayer.addChild(manage.biomeBackground);
 			
 			listening = false;
 			generateButtons();
@@ -167,21 +167,24 @@
 			
 			// Attack Button
 			
-			attackBtn = ShapesManager.drawButton(50, 50, 100, 50, "Attack");
+			attackBtn = new Sprite();
+			attackBtn.addChild(ImageManager.IconCastle());
 			attackBtn.x = (attackBtn.width * 0) + seperationDist;
 			attackBtn.y = (manage.stage.stageHeight - attackBtn.height / 2) - 10;
 			foregroundLayer.addChild(attackBtn);
 			buttonArray.push(attackBtn);
 			
 			// Magic Button
-			magicBtn = ShapesManager.drawButton(50, 50, 100, 50, "Magic");
+			magicBtn = new Sprite();
+			magicBtn.addChild(ImageManager.IconWizard());
 			magicBtn.x = (attackBtn.width * 1) + seperationDist;
 			magicBtn.y = (manage.stage.stageHeight - magicBtn.height / 2) - 10;
 			foregroundLayer.addChild(magicBtn);
 			buttonArray.push(magicBtn);
 			
 			// Flee Button
-			fleeBtn = ShapesManager.drawButton(50, 50, 100, 50, "Flee");
+			fleeBtn = new Sprite();
+			fleeBtn.addChild(ImageManager.IconScroll());
 			fleeBtn.x = (attackBtn.width * 2) + seperationDist;
 			fleeBtn.y = (manage.stage.stageHeight - fleeBtn.height / 2) - 10;
 			foregroundLayer.addChild(fleeBtn);
@@ -364,6 +367,7 @@
 		// uses a spell to hit an enemy (move this to its own class)
 		public function spellAtk(ss:int):void
 		{			
+			trace(ss);
 			//var spellSelected:int = 8; // move this somewhere when done testing
 			spellSelected = ss;
 			
@@ -467,17 +471,19 @@
 				{
 					currEnemyAmount++;
 				}
-				/*
 				else
 				{
-					var deadEnemy:Enemy = enemies[i];
-					enemies.splice(1);
-					characterLayer.removeChild(deadEnemy);
+					if(characterLayer.contains(enemies[i]))
+					{
+						characterLayer.removeChild(enemies[i]);
+						enemies[i] = null;
+						
+						if(i < 3 && enemies[i + 4] != null)
+							enemies[i + 4].moveForward = true;
+					}
 				}
-				*/
 			}
 		
-			trace("enemies.length " + enemies.length);
 			if(currEnemyAmount <= 0)
 			{
 				endBattle();
@@ -499,7 +505,7 @@
 		
 		
 		// currently only applies effects to enemies
-		public function applyEffects()
+		public function applyEffects():void
 		{
 			var i:int;
 			

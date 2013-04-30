@@ -36,6 +36,9 @@
 		public var weaponArray:Array;
 		public var recipeArray:Array;
 		
+		//background
+		public var biomeBackground:Bitmap;
+		
 		//explore
 		public var exploring:Exploring;
 		

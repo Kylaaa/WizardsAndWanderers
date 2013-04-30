@@ -210,6 +210,7 @@
 		
 		public function update():void
 		{
+			trace("Enemy " + enemyNum + " health: " + health);
 			done = false;
 			
 			applyEffects();
@@ -225,10 +226,13 @@
 			{
 				if(moveForward)
 				{
-					while(moveForward)
+					while (moveForward)
+					{
 						moveUp();
+					}
 				}
-				else if(battle.player != null)
+				
+				if(battle.player != null)
 				{
 					enemyOptions();
 					done = true;

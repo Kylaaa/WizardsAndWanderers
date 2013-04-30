@@ -38,6 +38,7 @@
 		public var castle_btn:MovieClip;
 		
 		private var backgroundImg:Bitmap;
+		public function get GetBackground():Bitmap {return backgroundImg;}
 		
 		public function MainScreen(newManager:ManagerAlpha)
 		{
@@ -59,6 +60,7 @@
 			}
 			else {	backgroundImg = ImageManager.BackgroundCavern(); }
 			
+			manage.biomeBackground = backgroundImg;
 			backgroundImg.x = 0;
 			backgroundImg.y = 0;
 			
