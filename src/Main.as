@@ -7,7 +7,7 @@ package
 	import flash.display.StageScaleMode;
 	import flash.ui.Multitouch;
 	import flash.ui.MultitouchInputMode;
-	
+
 	/**
 	 * ...
 	 * @author Alex, Connor, Kyler, and Mark
@@ -34,6 +34,7 @@ package
 			
 			// touch or gesture?
 			Multitouch.inputMode = MultitouchInputMode.TOUCH_POINT;
+			
 			
 			// entry point
 			theGame = new ManagerAlpha();
