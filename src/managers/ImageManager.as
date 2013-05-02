@@ -14,12 +14,29 @@ package managers
 	public class ImageManager extends Manager 
 	{
 		//IMAGE FILES ARE EMBEDDED AT COMPILE TIME, NOT AT RUN-TIME
-		[Embed(source = "../../lib/traffic-cones.png", 									mimeType = "image/png")] 	private static var ImgMissing:Class; 
-		[Embed(source = "../../lib/sprites/navigation/buttons/iconCastle.png", 			mimeType = "image/png")] 	private static var ImgIconCastle:Class; 
-		[Embed(source = "../../lib/sprites/navigation/buttons/iconScroll.png", 			mimeType = "image/png")] 	private static var ImgIconScroll:Class; 
-		[Embed(source = "../../lib/sprites/navigation/buttons/iconWizard.png", 			mimeType = "image/png")] 	private static var ImgIconWizard:Class; 
-		[Embed(source = "../../lib/sprites/navigation/panels/backgroundCavern.png", 	mimeType = "image/png")] 	private static var ImgBackgroundCavern:Class; 
-		[Embed(source = "../../lib/sprites/navigation/panels/titleScreen.png", 			mimeType = "image/png")] 	private static var ImgTitleScreen:Class; 
+		[Embed(source = "../../lib/traffic-cones.png", 											mimeType = "image/png")] 	private static var ImgMissing:Class; 
+		[Embed(source = "../../lib/sprites/navigation/buttons/buttonLargeCanyon.png", 			mimeType = "image/png")] 	private static var ImgButtonLargeCanyon:Class; 
+		[Embed(source = "../../lib/sprites/navigation/buttons/buttonLargeCavern.png", 			mimeType = "image/png")] 	private static var ImgButtonLargeCavern:Class; 
+		[Embed(source = "../../lib/sprites/navigation/buttons/buttonLargeDesert.png", 			mimeType = "image/png")] 	private static var ImgButtonLargeDesert:Class; 
+		[Embed(source = "../../lib/sprites/navigation/buttons/buttonLargeForest.png", 			mimeType = "image/png")] 	private static var ImgButtonLargeForest:Class; 
+		[Embed(source = "../../lib/sprites/navigation/buttons/buttonLargeHills.png", 			mimeType = "image/png")] 	private static var ImgButtonLargeHills:Class; 
+		[Embed(source = "../../lib/sprites/navigation/buttons/buttonLargeMountain.png", 		mimeType = "image/png")] 	private static var ImgButtonLargeMountains:Class; 
+		[Embed(source = "../../lib/sprites/navigation/buttons/buttonLargePlains.png", 			mimeType = "image/png")] 	private static var ImgButtonLargePlains:Class; 
+		[Embed(source = "../../lib/sprites/navigation/buttons/buttonLargeSavannah.png", 		mimeType = "image/png")] 	private static var ImgButtonLargeSavannah:Class; 
+		[Embed(source = "../../lib/sprites/navigation/buttons/buttonLargeWetlands.png", 		mimeType = "image/png")] 	private static var ImgButtonLargeWetlands:Class; 
+		[Embed(source = "../../lib/sprites/navigation/buttons/iconCastle.png", 					mimeType = "image/png")] 	private static var ImgIconCastle:Class; 
+		[Embed(source = "../../lib/sprites/navigation/buttons/iconScroll.png", 					mimeType = "image/png")] 	private static var ImgIconScroll:Class; 
+		[Embed(source = "../../lib/sprites/navigation/buttons/iconWizard.png", 					mimeType = "image/png")] 	private static var ImgIconWizard:Class; 
+		[Embed(source = "../../lib/sprites/navigation/panels/backgroundCanyon.png", 			mimeType = "image/png")] 	private static var ImgBackgroundCanyon:Class; 
+		[Embed(source = "../../lib/sprites/navigation/panels/backgroundCavern.png", 			mimeType = "image/png")] 	private static var ImgBackgroundCavern:Class; 
+		[Embed(source = "../../lib/sprites/navigation/panels/backgroundDesert.png", 			mimeType = "image/png")] 	private static var ImgBackgroundDesert:Class; 
+		[Embed(source = "../../lib/sprites/navigation/panels/backgroundForest.png", 			mimeType = "image/png")] 	private static var ImgBackgroundForest:Class; 
+		[Embed(source = "../../lib/sprites/navigation/panels/backgroundHills.png", 				mimeType = "image/png")] 	private static var ImgBackgroundHills:Class; 
+		[Embed(source = "../../lib/sprites/navigation/panels/backgroundMountain.png", 			mimeType = "image/png")] 	private static var ImgBackgroundMountain:Class; 
+		[Embed(source = "../../lib/sprites/navigation/panels/backgroundPlains.png", 			mimeType = "image/png")] 	private static var ImgBackgroundPlains:Class; 
+		[Embed(source = "../../lib/sprites/navigation/panels/backgroundSavannah.png", 			mimeType = "image/png")] 	private static var ImgBackgroundSavannah:Class; 
+		[Embed(source = "../../lib/sprites/navigation/panels/backgroundWetlands.png", 			mimeType = "image/png")] 	private static var ImgBackgroundWetlands:Class; 
+		[Embed(source = "../../lib/sprites/navigation/panels/titleScreen.png", 					mimeType = "image/png")] 	private static var ImgTitleScreen:Class; 
 		
 		//ENEMIES
 		//canyon
@@ -142,11 +159,31 @@ package managers
 		//accessors
 		public static function Nothing():Bitmap										{ return new Bitmap(); }					//debug graphics
 		public static function MissingImage():Bitmap 								{ return new ImgMissing(); }
-		public static function BackgroundCavern():Bitmap							{ return new ImgBackgroundCavern(); } 		//background images
+		public static function BackgroundCanyon():Bitmap							{ return new ImgBackgroundCanyon(); } 		//background images
+		public static function BackgroundCavern():Bitmap							{ return new ImgBackgroundCavern(); }
+		public static function BackgroundDesert():Bitmap							{ return new ImgBackgroundDesert(); }
+		public static function BackgroundForest():Bitmap							{ return new ImgBackgroundForest(); }
+		public static function BackgroundHills():Bitmap								{ return new ImgBackgroundHills(); }
+		public static function BackgroundMountains():Bitmap							{ return new ImgBackgroundMountain(); }
+		public static function BackgroundPlains():Bitmap							{ return new ImgBackgroundPlains(); }
+		public static function BackgroundSavannah():Bitmap							{ return new ImgBackgroundSavannah(); }
+		public static function BackgroundWetlands():Bitmap							{ return new ImgBackgroundWetlands(); }
+		
 		public static function TitleScreen():Bitmap									{ return new ImgTitleScreen(); }
 		public static function IconCastle():Bitmap 									{ return new ImgIconCastle(); }				//navigation icons
 		public static function IconScroll():Bitmap 									{ return new ImgIconScroll(); }
 		public static function IconWizard():Bitmap 									{ return new ImgIconWizard(); }
+		public static function LargeButtonCanyon():Bitmap 							{ return new ImgButtonLargeCanyon(); }		//button Themes
+		public static function LargeButtonCavern():Bitmap 							{ return new ImgButtonLargeCavern(); }
+		public static function LargeButtonDesert():Bitmap 							{ return new ImgButtonLargeDesert(); }
+		public static function LargeButtonForest():Bitmap 							{ return new ImgButtonLargeForest(); }
+		public static function LargeButtonHills():Bitmap 							{ return new ImgButtonLargeHills(); }
+		public static function LargeButtonMountains():Bitmap 						{ return new ImgButtonLargeMountains(); }
+		public static function LargeButtonPlains():Bitmap 							{ return new ImgButtonLargePlains(); }
+		public static function LargeButtonSavannah():Bitmap 						{ return new ImgButtonLargeSavannah(); }
+		public static function LargeButtonWetlands():Bitmap 						{ return new ImgButtonLargeWetlands(); }
+		
+		
 		public static function EnemyCanyonBossRagenFyre():Bitmap					{ return new ImgCanyonBossRagenFyre(); }	//enemies
 		public static function EnemyCanyonBossRagenFyre2():Bitmap					{ return new ImgCanyonBossRagenFyre2(); }
 		public static function EnemyCanyonCommonBurrower():Bitmap					{ return new ImgCanyonCommonBurrower(); }
@@ -258,7 +295,15 @@ package managers
 		private static var images:Object = new Array();
 			images["nothing"]					= Nothing;				//debug
 			images["traffic-cones.png"] 		= MissingImage;
-			images["backgroundCavern.png"]		= BackgroundCavern;		//background images
+			images["backgroundCanyon.png"]		= BackgroundCanyon;		//background images
+			images["backgroundCavern.png"]		= BackgroundCavern;
+			images["backgroundDesert.png"]		= BackgroundDesert;
+			images["backgroundForest.png"]		= BackgroundForest;
+			images["backgroundHills.png"]		= BackgroundHills;
+			images["backgroundMountains.png"]	= BackgroundMountains;
+			images["backgroundPlains.png"]		= BackgroundPlains;
+			images["backgroundSavannah.png"]	= BackgroundSavannah;
+			images["backgroundWetlands.png"]	= BackgroundWetlands;
 			images["titleScreen.png"]			= TitleScreen;
 			images["iconCastle.png"]			= IconCastle;           //navigation icons
 			images["iconScroll.png"]			= IconScroll;

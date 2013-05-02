@@ -23,7 +23,7 @@
 	{
 		private var biomeType:String;
 		private var biomeID:String;
-		private var enemies:Array;
+		private var enemyDataObjects:Array;
 		
 		private const LIBRARY_PATH:String = "lib/sprites/";
 
@@ -32,13 +32,45 @@
 			// constructor code
 			biomeID = id;
 			biomeType = type;
-			enemies = listOfEnemies;
+			enemyDataObjects = listOfEnemies; //Object objects
+			/*enemies = new Array(); //array of bitmap images
+			trace("-row[" + i + "] = " + row);
+			trace("\t-Enemy Name: " + row["id"]);
+			appendMessage("\t-row[" + i + "] = " + row);
+			appendMessage("\t-Enemy Name: " + row["id"]);
+			for (var row:int = 0; row < enemyDataObjects.length; row ++)
+				for (var internalValue:Object in row)
+				{
+					appendMessage("\t-" + internalValue + ": " + row[internalValue]);	
+					trace("\t-" + internalValue + ":\t" + row[internalValue]);
+					//*******
+					//parse an enemy's information out here
+					//********
+				}*/
 		}
 
 		//accessors
 		public function get Type():String { return biomeType; }
-		public function get Enemies():Array { return enemies; }
+		public function get Enemies():Array { return enemyDataObjects; } //returns an array of Object objects
 		public function get ID():String { return biomeID; }
+		/*public function get TypeName():String 
+		{
+			trace("Getting Biome Type Name from type: "  + biomeType);
+			switch(biomeType)
+			{
+				case ("1"): 	return "Forest"; 	break;
+				case ("2"): 	return "Wetlands"; 	break;
+				case ("3"): 	return "Mountains"; break;
+				case ("4"): 	return "Desert"; 	break;
+				case ("5"): 	return "Cave"; 		break;
+				case ("6"): 	return "Swamp"; 	break;
+				case ("7"): 	return "Plains"; 	break;
+				case ("8"): 	return "Hills"; 	break;
+				case ("9"): 	return "Canyon"; 	break;
+				case ("10"): 	return "Savannah"; 	break;
+			}
+			return "Nether World";
+		}*/
 		//public function get EnemyAt(index:int):Enemy { return enemies[index] as Enemy; }
 
 
@@ -51,7 +83,7 @@
 			//CATCHING THIS ERROR HAS PROVEN DIFFICULT
 			
 			trace("Drawing an enemy to the stage");
-			if (index < 0 || index >= enemies.length) { trace("\t-error with index input, exiting."); return; }				
+			if (index < 0 || index >= enemyDataObjects.length) { trace("\t-error with index input, exiting."); return; }				
 			
 			//intantiate a few variables
 			//var imageLoader:Loader = new Loader();
@@ -77,7 +109,7 @@
 			//	trace("image file does not exist at url: " + enemies[index]["imagePath"].toString());
 			//}
 			var enemyMC:MovieClip = new MovieClip();
-			var anImage:Bitmap = ImageManager.getImageByName(enemies[index]["imagePath"].toString());
+			var anImage:Bitmap = ImageManager.getImageByName(enemyDataObjects[index]["imagePath"].toString());
 				anImage.x = 0;
 				anImage.y = 0;
 			enemyMC.addChild(anImage);

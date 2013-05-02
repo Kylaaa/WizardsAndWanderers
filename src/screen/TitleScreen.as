@@ -23,7 +23,8 @@ package screen
 			background.x = 0;
 			background.y = 0;
 			
-			play_btn = ShapesManager.drawButton(-100, -110, 200, 100, "play", ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM);
+			trace("Current Biome Type: " + manage.device.CurrentBiome.Type);
+			play_btn = ShapesManager.drawButton(-100, -110, 200, 100, "play", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM);
 			
 			
 		}

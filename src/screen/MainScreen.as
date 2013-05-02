@@ -46,13 +46,15 @@
 			
 			//USE SOME LOGIC TO FIGURE OUT WHICH IMAGE TO DRAW
 			
-			
+			trace("Current Biome Type: " + manage.device.CurrentBiome.Type);
 			if (manage.device.IsReady)
 			{
 				trace("We are currently in a " + manage.device.CurrentBiome.Type + " biome");
 				switch(manage.device.CurrentBiome.Type)
 				{
 					//initialize the background image here
+					
+					
 					default:
 						backgroundImg = ImageManager.BackgroundCavern();
 						break;
@@ -64,11 +66,7 @@
 			backgroundImg.x = 0;
 			backgroundImg.y = 0;
 			
-			
-			encounter_btn =	ShapesManager.drawButton(0,   0, 200, 100, "Encounter");
-			explore_btn =	ShapesManager.drawButton(0, 100, 200, 100, "Explore");
-			exit_btn = 		ShapesManager.drawButton(0, 200, 200, 100, "Exit");
-			
+
 			character_btn = new MovieClip();
 			character_btn.addChild(ShapesManager.drawImage("iconWizard.png", -200, -130, 80, 130, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM));
 			
@@ -82,6 +80,12 @@
 		public override function bringIn():void
 		{
 			super.bringIn();
+			
+			//initialize our theme
+			
+			encounter_btn =	ShapesManager.drawButton(0,   0, 200, 100, "Encounter", manage.device.CurrentBiome.Type);
+			explore_btn =	ShapesManager.drawButton(0, 100, 200, 100, "Explore", manage.device.CurrentBiome.Type);
+			exit_btn = 		ShapesManager.drawButton(0, 200, 200, 100, "Exit", manage.device.CurrentBiome.Type);
 			
 			//format the background image
 			backgroundImg.width = stage.stageWidth;
