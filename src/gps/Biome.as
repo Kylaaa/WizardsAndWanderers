@@ -33,20 +33,6 @@
 			biomeID = id;
 			biomeType = type;
 			enemyDataObjects = listOfEnemies; //Object objects
-			/*enemies = new Array(); //array of bitmap images
-			trace("-row[" + i + "] = " + row);
-			trace("\t-Enemy Name: " + row["id"]);
-			appendMessage("\t-row[" + i + "] = " + row);
-			appendMessage("\t-Enemy Name: " + row["id"]);
-			for (var row:int = 0; row < enemyDataObjects.length; row ++)
-				for (var internalValue:Object in row)
-				{
-					appendMessage("\t-" + internalValue + ": " + row[internalValue]);	
-					trace("\t-" + internalValue + ":\t" + row[internalValue]);
-					//*******
-					//parse an enemy's information out here
-					//********
-				}*/
 		}
 
 		//accessors
