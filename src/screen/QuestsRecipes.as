@@ -2,6 +2,7 @@ package screen
 {
 	import flash.display.SimpleButton;
 	import flash.events.MouseEvent;
+	import managers.ShapesManager;
 	
 	import ManagerAlpha;
 	import screen.MainScreen;
@@ -13,11 +14,13 @@ package screen
 		public function QuestsRecipes(newManager:ManagerAlpha)
 		{
 			super(newManager);
+			exit_btn = ShapesManager.drawButton(0, 0, 200, 100, "exit");
 		}
 		
 		public override function bringIn():void
 		{
 			super.bringIn();
+			this.addChild(exit_btn);
 			exit_btn.addEventListener(MouseEvent.CLICK, onExit);
 		}
 		
