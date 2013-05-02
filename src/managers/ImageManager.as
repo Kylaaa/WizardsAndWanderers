@@ -171,6 +171,7 @@ package managers
 		public static function EnemyDesertCommonBurrower():Bitmap					{ return new ImgDesertCommonBurrower(); }
 		public static function EnemyDesertCommonCarrionFeeder():Bitmap				{ return new ImgDesertCommonCarrionFeeder(); }
 		public static function EnemyDesertCommonSandGoblinArcher():Bitmap			{ return new ImgDesertCommonSandGoblinArcher(); }
+		public static function EnemyDesertCommonSandGoblinFighter():Bitmap			{ return new ImgDesertCommonSandGoblinFighter(); }
 		public static function EnemyDesertCommonSandGoblinSpearman():Bitmap			{ return new ImgDesertCommonSandGoblinSpearman(); }
 		public static function EnemyDesertRareScorpio():Bitmap						{ return new ImgDesertRareScorpio(); }
 		public static function EnemyDesertRareVrack():Bitmap						{ return new ImgDesertRareVrack(); }
@@ -199,15 +200,15 @@ package managers
 		public static function EnemyHillsRareYeti():Bitmap							{ return new ImgHillRareYeti(); }
 		public static function EnemyHillsUncommonVargathBrute():Bitmap				{ return new ImgHillUncommonVargathBrute(); }
 		public static function EnemyHillsUncommonWolfAlpha():Bitmap					{ return new ImgHillUncommonWolfAlpha(); }
-		public static function EnemyMountiansBossMoltenBeast():Bitmap				{ return new ImgMountainBossMoltenBeast(); }
-		public static function EnemyMountiansCommonGoblinBasic():Bitmap				{ return new ImgMountainCommonGoblinBasic(); }
-		public static function EnemyMountiansCommonMoltenMan():Bitmap				{ return new ImgMountainCommonMoltenMan(); }
-		public static function EnemyMountiansCommonMoltenWarrior():Bitmap			{ return new ImgMountainCommonMoltenWarrior(); }
-		public static function EnemyMountiansRareMoltenThug():Bitmap				{ return new ImgMountainRareMoltenThug(); }
-		public static function EnemyMountiansRareRoc():Bitmap						{ return new ImgMountainRareRoc(); }
-		public static function EnemyMountiansUncommonSpikedBurrower():Bitmap		{ return new ImgMountainUncommonSpikedBurrower(); }
-		public static function EnemyPlainsCommonCommonHobtaVanguard():Bitmap		{ return new ImgPlainsCommonHobtaVanguard(); }
-		public static function EnemyPlainCommonsWolfDemonWhite():Bitmap				{ return new ImgPlainsCommonWolfDemonWhite(); }
+		public static function EnemyMountainsBossMoltenBeast():Bitmap				{ return new ImgMountainBossMoltenBeast(); }
+		public static function EnemyMountainsCommonGoblinBasic():Bitmap				{ return new ImgMountainCommonGoblinBasic(); }
+		public static function EnemyMountainsCommonMoltenMan():Bitmap				{ return new ImgMountainCommonMoltenMan(); }
+		public static function EnemyMountainsCommonMoltenWarrior():Bitmap			{ return new ImgMountainCommonMoltenWarrior(); }
+		public static function EnemyMountainsRareMoltenThug():Bitmap				{ return new ImgMountainRareMoltenThug(); }
+		public static function EnemyMountainsRareRoc():Bitmap						{ return new ImgMountainRareRoc(); }
+		public static function EnemyMountainsUncommonSpikedBurrower():Bitmap		{ return new ImgMountainUncommonSpikedBurrower(); }
+		public static function EnemyPlainsCommonHobtaVanguard():Bitmap				{ return new ImgPlainsCommonHobtaVanguard(); }
+		public static function EnemyPlainsCommonWolfDemonWhite():Bitmap				{ return new ImgPlainsCommonWolfDemonWhite(); }
 		public static function EnemyPlainsRareBeloom():Bitmap						{ return new ImgPlainsRareBeloom(); }
 		public static function EnemyPlainsRareRaptorDune():Bitmap					{ return new ImgPlainsRareRaptorDune(); }
 		public static function EnemySavannahCommonCarrionFeeder():Bitmap			{ return new ImgSavannahCommonCarrionFeeder(); }
@@ -217,14 +218,14 @@ package managers
 		public static function EnemySavannahCommonLeonaiSunSage():Bitmap			{ return new ImgSavannahCommonLeoniaSunSage(); }
 		public static function EnemySavannahCommonWildCat():Bitmap					{ return new ImgSavannahCommonWildCat(); }
 		public static function EnemySavannahRareBezzle():Bitmap						{ return new ImgSavannahRareBezzle(); }
-		public static function EnemySavannaRareElephantMonster():Bitmap				{ return new ImgSavannahRareElephantMonster(); }
+		public static function EnemySavannahRareElephantMonster():Bitmap			{ return new ImgSavannahRareElephantMonster(); }
 		public static function EnemySavannahUncommonHyenaBeast():Bitmap				{ return new ImgSavannahUncommonHyenaBeast(); }
 		public static function EnemySavannahUncommonLeonaiHuntress():Bitmap			{ return new ImgSavannahUncommonLeonaiHuntress(); }
 		public static function EnemySavannahUncommonLeonaiSunPriest():Bitmap		{ return new ImgSavannahUncommonLeonaiSunPriest(); }
 		public static function EnemySavannahUncommonLionBeast():Bitmap				{ return new ImgSavannahUncommonLionBeast(); }
 		public static function EnemySavannahUncommonScarabBrute():Bitmap			{ return new ImgSavannahUncommonScarabBrute(); }
 		public static function EnemySavannahUncommonScarabGiant():Bitmap			{ return new ImgSavannahUncommonScarabGiant(); }
-		public static function EnemySavannahUncommonWildBoard():Bitmap				{ return new ImgSavannahUncommonWildBoar(); }
+		public static function EnemySavannahUncommonWildBoar():Bitmap				{ return new ImgSavannahUncommonWildBoar(); }
 		public static function EnemySwampBossKramTheSpine():Bitmap					{ return new ImgSwampBossKramTheSpine(); }
 		public static function EnemySwampCommonDrakkonFrenzyWarrior():Bitmap		{ return new ImgSwampCommonDrakkonFrenzyWarrior(); }
 		public static function EnemySwampCommonDrakkonMen():Bitmap					{ return new ImgSwampCommonDrakkonMen(); }
@@ -270,102 +271,102 @@ package managers
 			images["canyon/common/goblinSlinger.png"] 				= EnemyCanyonCommonGoblinSlinger;	
 			images["canyon/common/sandGoblinArcher.png"] 			= EnemyCanyonCommonSandGoblinArcher;	
 			images["canyon/common/sandGoblinSpearman.png"] 			= EnemyCanyonCommonSandGoblinSpearman;	
-			images["canyon/uncommon/goblinFanatic.png"] 			= MissingImage;	
-			images["cave/boss/demonGoldy.png"] 						= MissingImage;	
-			images["cave/common/burrower.png"] 						= MissingImage;	
-			images["cave/common/goblinArcher.png"] 					= MissingImage;	
-			images["cave/common/goblinSlinger.png"] 				= MissingImage;	
-			images["cave/common/goblinSpearman.png"] 				= MissingImage;	
-			images["cave/common/goblinWarrior.png"] 				= MissingImage;	
-			images["cave/common/impGreen.png"] 						= MissingImage;	
-			images["cave/common/moltenWarrior.png"] 				= MissingImage;	
-			images["cave/common/skeletonWarrior.png"] 				= MissingImage;	
-			images["cave/uncommon/goblinFanatic.png"] 				= MissingImage;	
-			images["cave/uncommon/skeletonMage.png"] 				= MissingImage;	
-			images["desert/boss/nackacrong.png"] 					= MissingImage;	
-			images["desert/boss/nackacrongHelmed.png"] 				= MissingImage;	
-			images["desert/common/burrower.png"] 					= MissingImage;	
-			images["desert/common/carrionFeeder.png"] 				= MissingImage;	
-			images["desert/common/sandGoblinArcher.png"] 			= MissingImage;	
-			images["desert/common/sandGoblinFighter.png"] 			= MissingImage;	
-			images["desert/common/sandGoblinSpearman.png"] 			= MissingImage;	
-			images["desert/rare/scorpio.png"] 						= MissingImage;	
-			images["desert/rare/vrack.png"] 						= MissingImage;	
-			images["desert/uncommon/burrowerSpiked.png"] 			= MissingImage;	
-			images["desert/uncommon/sandGoblinAssassin.png"] 		= MissingImage;	
-			images["desert/uncommon/sandGoblinAssassin2.png"] 		= MissingImage;	
-			images["desert/uncommon/scarabBrute.png"] 				= MissingImage;	
-			images["desert/uncommon/scarabGiant.png"] 				= MissingImage;	
-			images["forest/boss/mossTroll.png"] 					= MissingImage;	
-			images["forest/common/gnarlerBlocker.png"] 				= MissingImage;	
-			images["forest/common/gnarlerWarrior.png"] 				= MissingImage;	
-			images["forest/common/impPurple.png"] 					= MissingImage;	
-			images["forest/common/spiderJumper1.png"] 				= MissingImage;	
-			images["forest/common/spiderJumper2.png"] 				= MissingImage;	
-			images["forest/common/wolfDemon.png"] 					= MissingImage;	
-			images["forest/rare/bigFoot.png"] 						= MissingImage;	
-			images["forest/rare/forestRaptor.png"] 					= MissingImage;	
-			images["forest/uncommon/dryad.png"] 					= MissingImage;	
-			images["forest/uncommon/gnarlerSage.png"]		 		= MissingImage;	
-			images["forest/uncommon/wildboar.png"] 					= MissingImage;	
-			images["forest/uncommon/wolfAlpha.png"] 				= MissingImage;	
-			images["hills/boss/shaneTheWizard.png"] 				= MissingImage;	
-			images["hills/boss/shaneTheWizardwithElemental.png"] 	= MissingImage;	
-			images["hills/common/vargath.png"] 						= MissingImage;	
-			images["hills/common/wolfDemon.png"] 					= MissingImage;	
-			images["hills/rare/yeti.png"] 							= MissingImage;	
-			images["hills/uncommon/vargathBrute.png"] 				= MissingImage;	
-			images["hills/uncommon/wolfAlpha.png"] 					= MissingImage;	
-			images["mountain/boss/moltenBeast.png"] 				= MissingImage;	
-			images["mountain/common/goblinBasic.png"] 				= MissingImage;	
-			images["mountain/common/moltenMan.png"] 				= MissingImage;	
-			images["mountain/common/moltenWarrior.png"] 			= MissingImage;	
-			images["mountain/rare/moltenThug.png"] 					= MissingImage;	
-			images["mountain/rare/roc.png"] 						= MissingImage;	
-			images["mountain/uncommon/spikedBurrower.png"] 			= MissingImage;	
-			images["plains/common/hobtaVanguard.png"] 				= MissingImage;	
-			images["plains/common/wolfDemonWhite.png"] 				= MissingImage;	
-			images["plains/rare/beloom.png"] 						= MissingImage;	
-			images["plains/rare/raptorDune.png"] 					= MissingImage;	
-			images["savannah/common/carrionFeeder.png"] 			= MissingImage;	
-			images["savannah/common/gnarlerBlocker.png"] 			= MissingImage;	
-			images["savannah/common/gnarlerWarrior.png"] 			= MissingImage;	
-			images["savannah/common/leonaiGuardian.png"] 			= MissingImage;	
-			images["savannah/common/leonaiSunSage.png"] 			= MissingImage;	
-			images["savannah/common/wildCat.png"] 					= MissingImage;	
-			images["savannah/rare/bezzle.png"] 						= MissingImage;	
-			images["savannah/rare/elephantMonster.png"] 			= MissingImage;	
-			images["savannah/uncommon/hyenaBeast.png"] 				= MissingImage;	
-			images["savannah/uncommon/leonaiHuntress.png"] 			= MissingImage;	
-			images["savannah/uncommon/leonaiSunPriest.png"] 		= MissingImage;	
-			images["savannah/uncommon/lionBeast.png"] 				= MissingImage;	
-			images["savannah/uncommon/scarabBrute.png"] 			= MissingImage;	
-			images["savannah/uncommon/scarabGiant.png"] 			= MissingImage;	
-			images["savannah/uncommon/wildBoar.png"] 				= MissingImage;	
-			images["swamp/boss/kramTheSpine.png"] 					= MissingImage;	
-			images["swamp/common/drakkonFrenzyWarrior.png"] 		= MissingImage;	
-			images["swamp/common/drakkonMen.png"] 					= MissingImage;	
-			images["swamp/common/gnarlerBlocker.png"] 				= MissingImage;	
-			images["swamp/common/gnarlerWarrior.png"]		 		= MissingImage;	
-			images["swamp/common/impBrown.png"] 					= MissingImage;	
-			images["swamp/common/skeletonArcher.png"] 				= MissingImage;	
-			images["swamp/common/skeletonWarrior.png"] 				= MissingImage;	
-			images["swamp/common/zombie.png"] 						= MissingImage;	
-			images["swamp/uncommon/drakkonHonorGuard.png"] 			= MissingImage;	
-			images["swamp/uncommon/gnarlerSage.png"] 				= MissingImage;	
-			images["swamp/uncommon/skeletonMage.png"] 				= MissingImage;	
-			images["wetlands/boss/Kylaaa.png"] 						= MissingImage;	
-			images["wetlands/boss/KylaaaArmored.png"] 				= MissingImage;	
-			images["wetlands/common/drakkonFrenzyWarrior.png"] 		= MissingImage;	
-			images["wetlands/common/drakkonSpearman.png"] 			= MissingImage;	
-			images["wetlands/common/hobtaVanguard.png"] 			= MissingImage;	
-			images["wetlands/common/impBlue.png"] 					= MissingImage;	
-			images["wetlands/common/wolfDemonWhite.png"] 			= MissingImage;	
-			images["wetlands/rare/drakkonVoodoo.png"] 				= MissingImage;	
-			images["wetlands/rare/werewolfWhite.png"] 				= MissingImage;	
-			images["wetlands/uncommon/drakkonHonorGuard.png"] 		= MissingImage;	
-			images["wetlands/uncommon/hobtaFighter.png"] 			= MissingImage;	
-			images["wetlands/uncommon/wolfAlphaWhite.png"] 			= MissingImage;	
+			images["canyon/uncommon/goblinFanatic.png"] 			= EnemyCanyonUncommonGoblinFanatic;	
+			images["cave/boss/demonGoldy.png"] 						= EnemyCaveBossDemonGoldy;	
+			images["cave/common/burrower.png"] 						= EnemyCaveCommonBurrower;	
+			images["cave/common/goblinArcher.png"] 					= EnemyCaveCommonGoblinArcher;	
+			images["cave/common/goblinSlinger.png"] 				= EnemyCaveCommonGoblinSlinger;	
+			images["cave/common/goblinSpearman.png"] 				= EnemyCaveCommonGoblinSpearman;	
+			images["cave/common/goblinWarrior.png"] 				= EnemyCaveCommonGoblinWarrior;	
+			images["cave/common/impGreen.png"] 						= EnemyCaveCommonImpGreen;	
+			images["cave/common/moltenWarrior.png"] 				= EnemyCaveCommonMoltenWarrior;	
+			images["cave/common/skeletonWarrior.png"] 				= EnemyCaveCommonSkeletonWarrior;	
+			images["cave/uncommon/goblinFanatic.png"] 				= EnemyCaveUncommonGoblinFanatic;	
+			images["cave/uncommon/skeletonMage.png"] 				= EnemyCaveUncommonSkeletonMage;	
+			images["desert/boss/nackacrong.png"] 					= EnemyDesertBossNackacrong;	
+			images["desert/boss/nackacrongHelmed.png"] 				= EnemyDesertBossNackacrongHelmed;	
+			images["desert/common/burrower.png"] 					= EnemyDesertCommonBurrower;	
+			images["desert/common/carrionFeeder.png"] 				= EnemyDesertCommonCarrionFeeder;	
+			images["desert/common/sandGoblinArcher.png"] 			= EnemyDesertCommonSandGoblinArcher;
+			images["desert/common/sandGoblinFighter.png"] 			= EnemyDesertCommonSandGoblinFighter;	
+			images["desert/common/sandGoblinSpearman.png"] 			= EnemyDesertCommonSandGoblinSpearman;	
+			images["desert/rare/scorpio.png"] 						= EnemyDesertRareScorpio;	
+			images["desert/rare/vrack.png"] 						= EnemyDesertRareVrack;	
+			images["desert/uncommon/burrowerSpiked.png"] 			= EnemyDesertUncommonBurrowerSpiked;	
+			images["desert/uncommon/sandGoblinAssassin.png"] 		= EnemyDesertUncommonSandGoblinAssassin;	
+			images["desert/uncommon/sandGoblinAssassin2.png"] 		= EnemyDesertUncommonSandGoblinAssassin2;	
+			images["desert/uncommon/scarabBrute.png"] 				= EnemyDesertUncommonScarabBrute;	
+			images["desert/uncommon/scarabGiant.png"] 				= EnemyDesertUncommonScarabGiant;	
+			images["forest/boss/mossTroll.png"] 					= EnemyForestBossMossTroll;	
+			images["forest/common/gnarlerBlocker.png"] 				= EnemyForestCommonGnarlerBlocker;	
+			images["forest/common/gnarlerWarrior.png"] 				= EnemyForestCommonGnarlerWarrior;	
+			images["forest/common/impPurple.png"] 					= EnemyForestCommonImpPurple;	
+			images["forest/common/spiderJumper1.png"] 				= EnemyForestCommonSpiderJumper1;	
+			images["forest/common/spiderJumper2.png"] 				= EnemyForestCommonSpiderJumper2;	
+			images["forest/common/wolfDemon.png"] 					= EnemyForestCommonWolfDemon;	
+			images["forest/rare/bigFoot.png"] 						= EnemyForestRareBigFoot;	
+			images["forest/rare/forestRaptor.png"] 					= EnemyForestRareForestRaptor;	
+			images["forest/uncommon/dryad.png"] 					= EnemyForestUncommonDryad;	
+			images["forest/uncommon/gnarlerSage.png"]		 		= EnemyForestUncommonGnarlerSage;	
+			images["forest/uncommon/wildboar.png"] 					= EnemyForestUncommonWildBoar;	
+			images["forest/uncommon/wolfAlpha.png"] 				= EnemyForestUncommonWolfAlpha;	
+			images["hills/boss/shaneTheWizard.png"] 				= EnemyHillsBossShaneTheWizard;	
+			images["hills/boss/shaneTheWizardwithElemental.png"] 	= EnemyHillsBossShaneTheWizardWithElemental;	
+			images["hills/common/vargath.png"] 						= EnemyHillsCommonVargath;	
+			images["hills/common/wolfDemon.png"] 					= EnemyHillsCommonWolfDemon;	
+			images["hills/rare/yeti.png"] 							= EnemyHillsRareYeti;	
+			images["hills/uncommon/vargathBrute.png"] 				= EnemyHillsUncommonVargathBrute;	
+			images["hills/uncommon/wolfAlpha.png"] 					= EnemyHillsUncommonWolfAlpha;	
+			images["mountain/boss/moltenBeast.png"] 				= EnemyMountainsBossMoltenBeast;	
+			images["mountain/common/goblinBasic.png"] 				= EnemyMountainsCommonGoblinBasic;	
+			images["mountain/common/moltenMan.png"] 				= EnemyMountainsCommonMoltenMan;	
+			images["mountain/common/moltenWarrior.png"] 			= EnemyMountainsCommonMoltenWarrior;	
+			images["mountain/rare/moltenThug.png"] 					= EnemyMountainsRareMoltenThug;	
+			images["mountain/rare/roc.png"] 						= EnemyMountainsRareRoc;	
+			images["mountain/uncommon/spikedBurrower.png"] 			= EnemyMountainsUncommonSpikedBurrower;	
+			images["plains/common/hobtaVanguard.png"] 				= EnemyPlainsCommonHobtaVanguard;	
+			images["plains/common/wolfDemonWhite.png"] 				= EnemyPlainsCommonWolfDemonWhite;	
+			images["plains/rare/beloom.png"] 						= EnemyPlainsRareBeloom;	
+			images["plains/rare/raptorDune.png"] 					= EnemyPlainsRareRaptorDune;	
+			images["savannah/common/carrionFeeder.png"] 			= EnemySavannahCommonCarrionFeeder;	
+			images["savannah/common/gnarlerBlocker.png"] 			= EnemySavannahCommonGnarlerBlocker;	
+			images["savannah/common/gnarlerWarrior.png"] 			= EnemySavannahCommonGnarlerWarrior;	
+			images["savannah/common/leonaiGuardian.png"] 			= EnemySavannahCommonLeonaiGuardian;	
+			images["savannah/common/leonaiSunSage.png"] 			= EnemySavannahCommonLeonaiSunSage;	
+			images["savannah/common/wildCat.png"] 					= EnemySavannahCommonWildCat;	
+			images["savannah/rare/bezzle.png"] 						= EnemySavannahRareBezzle;	
+			images["savannah/rare/elephantMonster.png"] 			= EnemySavannahRareElephantMonster;	
+			images["savannah/uncommon/hyenaBeast.png"] 				= EnemySavannahUncommonHyenaBeast;	
+			images["savannah/uncommon/leonaiHuntress.png"] 			= EnemySavannahUncommonLeonaiHuntress;	
+			images["savannah/uncommon/leonaiSunPriest.png"] 		= EnemySavannahUncommonLeonaiSunPriest;	
+			images["savannah/uncommon/lionBeast.png"] 				= EnemySavannahUncommonLionBeast;	
+			images["savannah/uncommon/scarabBrute.png"] 			= EnemySavannahUncommonScarabBrute;	
+			images["savannah/uncommon/scarabGiant.png"] 			= EnemySavannahUncommonScarabGiant;	
+			images["savannah/uncommon/wildBoar.png"] 				= EnemySavannahUncommonWildBoar;	
+			images["swamp/boss/kramTheSpine.png"] 					= EnemySwampBossKramTheSpine;	
+			images["swamp/common/drakkonFrenzyWarrior.png"] 		= EnemySwampCommonDrakkonFrenzyWarrior;	
+			images["swamp/common/drakkonMen.png"] 					= EnemySwampCommonDrakkonMen;	
+			images["swamp/common/gnarlerBlocker.png"] 				= EnemySwampCommonGnarlerBlocker;	
+			images["swamp/common/gnarlerWarrior.png"]		 		= EnemySwampCommonGnarlerWarrior;	
+			images["swamp/common/impBrown.png"] 					= EnemySwampCommonImpBrown;	
+			images["swamp/common/skeletonArcher.png"] 				= EnemySwampCommonSkeletonArcher;	
+			images["swamp/common/skeletonWarrior.png"] 				= EnemySwampCommonSkeletonWarrior;	
+			images["swamp/common/zombie.png"] 						= EnemySwampCommonZombie;	
+			images["swamp/uncommon/drakkonHonorGuard.png"] 			= EnemySwampUncommonDrakkonHonorGuard;	
+			images["swamp/uncommon/gnarlerSage.png"] 				= EnemySwampUncommonGnarlerSage;	
+			images["swamp/uncommon/skeletonMage.png"] 				= EnemySwampUncommonSkeletonMage;	
+			images["wetlands/boss/Kylaaa.png"] 						= EnemyWetlandsBossKylaaa;	
+			images["wetlands/boss/KylaaaArmored.png"] 				= EnemyWetlandsBossKylaaaArmored;	
+			images["wetlands/common/drakkonFrenzyWarrior.png"] 		= EnemyWetlandsCommonDrakkonFrenzyWarrior;	
+			images["wetlands/common/drakkonSpearman.png"] 			= EnemyWetlandsCommonDrakkonSpearman;	
+			images["wetlands/common/hobtaVanguard.png"] 			= EnemyWetlandsCommonHobtaVanguard;	
+			images["wetlands/common/impBlue.png"] 					= EnemyWetlandsCommonImpBlue;	
+			images["wetlands/common/wolfDemonWhite.png"] 			= EnemyWetlandsCommonWolfDemonWhite;	
+			images["wetlands/rare/drakkonVoodoo.png"] 				= EnemyWetlandsRareDrakkonVoodoo;	
+			images["wetlands/rare/werewolfWhite.png"] 				= EnemyWetlandsRareWereWolfWhite;	
+			images["wetlands/uncommon/drakkonHonorGuard.png"] 		= EnemyWetlandsUncommonDrakkonHonorGuard;	
+			images["wetlands/uncommon/hobtaFighter.png"] 			= EnemyWetlandsUncommonHobtaFighter;	
+			images["wetlands/uncommon/wolfAlphaWhite.png"] 			= EnemyWetlandsUncommonWolfAlphaWhite;	
 				
 			
 			
