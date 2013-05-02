@@ -3,6 +3,7 @@
 	import flash.display.Bitmap;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
+	import flash.utils.Timer;
 	import managers.ImageManager;
 	import managers.ShapesManager;
 	
@@ -21,6 +22,11 @@
 		private var txt_health:TextField;
 		
 		public var done:Boolean = false;
+		
+		private var startX:int;
+		private var startY:int;
+		
+		private var moveTick:Timer = new Timer(1000);
 		
 		public function Enemy(aBattle:Battle, xLoc:Number, yLoc:Number, num:int, rar:int)
 		{
@@ -42,9 +48,12 @@
 		
 		public function setupEnemy(xLoc:Number, yLoc:Number, num:int, rar:int):void
 		{
-			myImage = ImageManager.MissingImage();
-			myImage.width = 50;
-			myImage.height = 50;
+			startX = xLoc;
+			startY = yLoc;
+			
+			myImage = ImageManager.EnemyCanyonCommonSandGoblinSpearman();
+			myImage.width = 150;
+			myImage.height = 150;
 			addChild(myImage);
 			
 			enemyNum = num;
@@ -176,21 +185,30 @@
 			}
 		}
 		
-		public function moveUp():void
+		public function moveUp():Boolean
 		{
-			if(x <= battle.manage.stage.stageWidth - 150)
+			if (!moveTick.running)
+				moveTick.start();
+				
+			if(x <= startX - 200)
 			{
 				if(enemyNum > 3)
 				{
 					enemyNum = enemyNum - 4;
 				}
 				
+				moveTick.stop();
+				moveTick.reset();
+				
 				moveForward = false;
-				x = battle.manage.stage.stageWidth - 150;
+				x = startX - 200;
+				return true;
 			}
 			else
 			{
-				x -= 3;
+				if(moveTick.currentCount % 2 == 0)
+					x -= 3;
+				return false;
 			}
 		}
 		

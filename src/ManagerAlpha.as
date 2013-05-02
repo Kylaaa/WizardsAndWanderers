@@ -53,7 +53,6 @@
 		{
 			super();
 			
-			player = new Player(this);
 			exploring = new Exploring(this);
 			armorArray = new Array();
 			weaponArray = new Array();
@@ -71,6 +70,13 @@
 			//initialize the database first
 			database = new Database(txtErrorMessage);
 			database.addEventListener(Event.COMPLETE, dbLoaded)
+			
+			createPlayer();
+		}
+		
+		public function createPlayer():void
+		{
+			player = new Player(this, 1);
 		}
 		
 		private function dbLoaded(e:Event):void

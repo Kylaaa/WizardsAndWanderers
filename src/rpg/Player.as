@@ -67,13 +67,23 @@
 		//playerFile = playerFile.resolvePath(playerFile.xml);
 		
 		// access yjr sttsu
-		public function Player(man:ManagerAlpha)
+		public function Player(man:ManagerAlpha, playerLevel:int = 1)
 		{
 			manager = man;
-			health = 100;
-			atkPwr = 10;
+			
+			if (playerLevel == 1)
+			{
+				health = 250;
+				atkPwr = 30;
+			}
+			else
+			{
+				health = 350;
+				atkPwr = 35;
+			}
+			
+			curHealth = health;
 			speed = 10;
-			curHealth = 100;
 
 			esscencesBiomeArray = new Array(4);
 			esscencesBiomeArray[0] = [1,2,3,0];//lesser

@@ -66,7 +66,11 @@
 		private var spellSelected:int = 1; // move this somewhere when done testing
 		public var spScreen:SpellScreen;
 		
+		private var criticalChance:int; 
+		
 		private var txt_health:TextField;
+		
+		private var spellCrit:Boolean = false;
 		
 		public function Battle(newManager:ManagerAlpha)
 		{
@@ -101,6 +105,7 @@
 			speed = manage.player.speed;
 			effectUnder = manage.player.effectUnder;
 			missChance = manage.player.missChance;
+			criticalChance = manage.currentWeapon.critChance;
 			
 			spScreen = new SpellScreen(this);
 		}
@@ -113,7 +118,7 @@
 			var enemyCreator:Enemy;
 			var rar:int = (Math.random() * 3) + 1; // randomizer variable for rarity, will be read from biome later
 			var randGen:int = (Math.random() * 8) + 1; // randomizer variable
-			//randGen = 8;
+			randGen = 8;
 			for(i = 0; i < randGen; i++)
 			{
 				var placedEnemy:Boolean = false;
@@ -124,19 +129,32 @@
 					
 					if(enemies[randLoc] == null)
 					{
+						var staggering:int;
+						
 						if(randLoc <= 3)
 						{
+							staggering = 350;
+							if (randLoc % 2 == 0)
+							{
+								staggering = 400;
+							}
+							
 							// enemyCreator = database.enemy (check biome, go through numbers, randomize the rarity, etc.)
-							enemyCreator = new Enemy(this, manage.stage.stageWidth - 150, (randLoc * 70) + 85, randLoc,rar);
+							enemyCreator = new Enemy(this, manage.stage.stageWidth - staggering, (randLoc * 70) + 85, randLoc,rar);
 						}
 						else
 						{
+							staggering = 150;
+							if (randLoc % 2 == 0)
+							{
+								staggering = 200;
+							}
+							
 							// enemyCreator = database.enemy (check biome, go through numbers, randomize the rarity, etc.)
-							enemyCreator = new Enemy(this, manage.stage.stageWidth - 50, ((randLoc - 4) * 70) + 85, randLoc,rar);
+							enemyCreator = new Enemy(this, manage.stage.stageWidth - staggering, ((randLoc - 4) * 70) + 85, randLoc,rar);
 						}
 						
 						enemies[randLoc] = enemyCreator;
-						characterLayer.addChild(enemies[randLoc]);
 						
 						placedEnemy = true;
 					}
@@ -156,6 +174,11 @@
 					while(enemies[i].moveForward)
 						enemies[i].update();
 				}
+			}
+			
+			for (var j:int = 0; j < enemies.length; j++)
+			{
+				characterLayer.addChild(enemies[j]);
 			}
 		}
 		
@@ -263,7 +286,7 @@
 			
 			if(selected)
 			{
-				var damageDealt:int = damageDealing(manage.currentWeapon.critChance, manage.currentWeapon.critDamageBonus);	// saves how much damage the player does
+				var damageDealt:int = damageDealing(criticalChance, manage.currentWeapon.critDamageBonus);	// saves how much damage the player does
 				
 				damageDealt *= dmgModifier;
 
@@ -276,8 +299,11 @@
 					{
 						selectedEnemy.health -= damageDealt; // damages the clicked upon enemy
 						
-						if(critAttack)
+						if(critAttack || spellCrit)
 							selectedEnemy.effectUnder = currentCritEffect;
+							
+						if (spellCrit)
+							spellCrit = !spellCrit;
 					}
 					
 					// originally used to locate where the enemy was, may be redundant now
@@ -366,16 +392,17 @@
 		
 		// uses a spell to hit an enemy (move this to its own class)
 		public function spellAtk(ss:int):void
-		{			
-			trace(ss);
+		{
 			//var spellSelected:int = 8; // move this somewhere when done testing
 			spellSelected = ss;
+			
+			spellCrit = true;
 			
 			switch(spellSelected)
 			{
 				case 1:	// arcane missles 					
 					atkType = 10;
-					dmgModifier = 1.75;
+					dmgModifier = 1.5;
 					currentCritEffect = 0;
 					break;
 				case 2: // arcane missles 2
@@ -441,7 +468,32 @@
 					atkType = 7;
 					dmgModifier = 1.25;
 					currentCritEffect = 1;
-					break;					
+					break;
+				case 16:// Rampant Vines
+					atkType = 12;
+					dmgModifier = 0;
+					currentCritEffect = 4;
+					break;
+				case 17:// Nature's Grasp
+					atkType = 4;
+					dmgModifier = 2;
+					
+					var qkRand:int = Math.random() * 2;
+					
+					if (qkRand % 2 == 0)
+					{
+						currentCritEffect = 0;
+					}
+					else
+					{
+						currentCritEffect = 4;
+					}
+					break;
+				case 18:// Fury of the Wild
+					atkPwr += 5;
+					criticalChance += 5;
+					currentCritEffect = 0;
+					break;
 				default:
 					atkType = 0;
 					dmgModifier = 1;
@@ -478,8 +530,22 @@
 						characterLayer.removeChild(enemies[i]);
 						enemies[i] = null;
 						
-						if(i < 3 && enemies[i + 4] != null)
-							enemies[i + 4].moveForward = true;
+						if (i <= 3 && enemies[i + 4] != null)
+						{ 	enemies[i] = enemies[i + 4];
+							enemies[i + 4] = null;
+							enemies[i].moveForward = true;
+							
+							while (!enemies[i].moveUp());
+							
+							for (var j:int = i; j <= enemies.length; j++)
+							{
+								if (enemies[j] != null)
+								{
+									var testEnemy:Enemy = enemies[j];
+									characterLayer.setChildIndex(testEnemy, characterLayer.numChildren - 1);
+								}
+							}
+						}
 					}
 				}
 			}
