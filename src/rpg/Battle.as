@@ -115,89 +115,128 @@
 		public function generateEnemies():void
 		{
 			var i:int;
+			var j:int;
 			var enemyCreator:Enemy;
-			if (manage.device.IsReady == false)
-			{
-				var rar:int = (Math.random() * 3) + 1; // randomizer variable for rarity, will be read from biome later
-				var randGen:int = (Math.random() * 8) + 1; // randomizer variable
-				randGen = 8;
-				for(i = 0; i < randGen; i++)
-				{
-					var placedEnemy:Boolean = false;
-					
-					while(placedEnemy == false)
-					{
-						var randLoc:int = (Math.random() * 8);
-						
-						if(enemies[randLoc] == null)
-						{
-							var staggering:int;
-							
-							if(randLoc <= 3)
-							{
-								staggering = 350;
-								if (randLoc % 2 == 0)
-								{
-									staggering = 400;
-								}
-								
-								// enemyCreator = database.enemy (check biome, go through numbers, randomize the rarity, etc.)
-								enemyCreator = new Enemy(this, manage.stage.stageWidth - staggering, (randLoc * 70) + 85, randLoc,rar);
-							}
-							else
-							{
-								staggering = 150;
-								if (randLoc % 2 == 0)
-								{
-									staggering = 200;
-								}
-								
-								// enemyCreator = database.enemy (check biome, go through numbers, randomize the rarity, etc.)
-								enemyCreator = new Enemy(this, manage.stage.stageWidth - staggering, ((randLoc - 4) * 70) + 85, randLoc,rar);
-							}
-							
-							enemies[randLoc] = enemyCreator;
-							
-							placedEnemy = true;
-						}
-					}
-				}
-			}
-			else
-			{//read in from our current biome to make some enemies
-				
-				var enemies:Array = battle.manage.device.CurrentBiome.Enemies; //array of database Objects
-				//trace("-row[" + i + "] = " + row);
-				//t
-				//appendMessage("\t-row[" + i + "] = " + row);
-				//appendMessage("\t-Enemy Name: " + row["id"]);
-				
-				for (var i:int = 0; i < enemies.length; i ++)
-				{
-					trace("\t-Enemy Name: " + enemies[i]["id"]);
-					for (var internalValue:Object in enemies[i])
-					{
-						trace("\t-" + internalValue + ":\t" + enemies[i][internalValue]);
-					}
-					
-					/*values include:
-					-enemies[i]["health"]		//int but must be parsed from string
-					-enemies[i]["speed"]
-					-enemies[i]["attack"]
-					-enemies[i]["block"] 		//boolean
-					-enemies[i]["backRowTend"] 	//boolean
-					-enemies[i]["monsterType"]	//String
-					-enemies[i]["name"]			//String
-					-enemies[i]["imagePath"]	//String
-					-enemies[i]["powers"]		//String
-					-enemies[i]["rarity"]
-					-enemies[i]["id"]			//int but must be parsed
-					*/
-				}
-				
-				
-			}
 			
+			//read in from our current biome to make some enemies
+				
+			var allEnemies:Array = manage.device.CurrentBiome.Enemies; //array of database Objects
+			//trace("-row[" + i + "] = " + row);
+			//t
+			//appendMessage("\t-row[" + i + "] = " + row);
+			//appendMessage("\t-Enemy Name: " + row["id"]);
+			
+			// seperate enemies based upon rarity
+			var commonEnemies:Array = new Array();
+			var uncommonEnemies:Array = new Array();
+			var rareEnemies:Array = new Array();
+				
+			for (i = 0; i < allEnemies.length; i ++)
+			{
+				/*
+				trace("\t-Enemy Name: " + allEnemies[i]["id"]);
+				for (var internalValue:Object in allEnemies[i])
+				{
+					trace("\t-" + internalValue + ":\t" + allEnemies[i][internalValue]);
+				}
+				*/
+				
+				if (allEnemies[i]["rarity"] == "COMMON")
+				{
+					commonEnemies.push(allEnemies[i]);
+				}
+				else if(allEnemies[i]["rarity"] == "UNCOMMON")
+				{
+					uncommonEnemies.push(allEnemies[i]);
+				}
+				else
+				{
+					rareEnemies.push(allEnemies[i]);
+				}
+				
+				trace(commonEnemies.length);
+				trace(uncommonEnemies.length);
+				trace(rareEnemies.length);
+				
+				/*values include:
+				-enemies[i]["health"]		//int but must be parsed from string
+				-enemies[i]["speed"]
+				-enemies[i]["attack"]
+				-enemies[i]["block"] 		//boolean
+				-enemies[i]["backRowTend"] 	//boolean
+				-enemies[i]["monsterType"]	//String
+				-enemies[i]["name"]			//String
+				-enemies[i]["imagePath"]	//String
+				-enemies[i]["powers"]		//String
+				-enemies[i]["rarity"]
+				-enemies[i]["id"]			//int but must be parsed
+				*/
+			}
+				
+			var randGen:int = (Math.random() * 8) + 1; // randomizer variable
+			randGen = 8;
+			for(i = 0; i < randGen; i++)
+			{
+				// Used to determine which enemy you're fighting
+				var newEnemyIs:Object;
+				
+				randGen = Math.random() * 100;
+				
+				if (randGen < 50)
+				{
+						randGen = Math.random() * commonEnemies.length;
+						
+						newEnemyIs = commonEnemies[randGen];
+				}
+				else if (randGen < 90)
+				{
+					
+				}
+				else
+				{
+					
+				}
+				
+				trace(newEnemyIs[0]["name"]);
+				
+				var placedEnemy:Boolean = false;
+				
+				while(placedEnemy == false)
+				{
+					var randLoc:int = (Math.random() * 8);
+					var rar = 3;
+					
+					if(enemies[randLoc] == null)
+					{
+						var staggering:int;
+						
+						if(randLoc <= 3)
+						{
+							staggering = 350;
+							if (randLoc % 2 == 0)
+							{
+								staggering = 400;
+							}
+							
+							enemyCreator = new Enemy(this, manage.stage.stageWidth - staggering, (randLoc * 70) + 85, randLoc,rar);
+						}
+						else
+						{
+							staggering = 150;
+							if (randLoc % 2 == 0)
+							{
+								staggering = 200;
+							}
+							
+							enemyCreator = new Enemy(this, manage.stage.stageWidth - staggering, ((randLoc - 4) * 70) + 85, randLoc,rar);
+						}
+						
+						enemies[randLoc] = enemyCreator;
+						
+						placedEnemy = true;
+					}
+				}
+			}
 			
 			// go through and arrange them based on front - back preference (bubble sort)
 			
@@ -214,9 +253,10 @@
 				}
 			}
 			
-			for (var j:int = 0; j < enemies.length; j++)
+			for (j = 0; j < enemies.length; j++)
 			{
-				characterLayer.addChild(enemies[j]);
+				if(enemies[j] != null)
+					characterLayer.addChild(enemies[j]);
 			}
 		}
 		

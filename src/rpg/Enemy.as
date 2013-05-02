@@ -28,7 +28,7 @@
 		
 		private var moveTick:Timer = new Timer(1000);
 		
-		public function Enemy(aBattle:Battle, xLoc:Number, yLoc:Number, num:int, rar:int)
+		public function Enemy(aBattle:Battle, xLoc:Number, yLoc:Number, num:int, rar:int, newHealth:int = 20, newAttack:int = 20)
 		{
 			super(aBattle, xLoc, yLoc);
 			
