@@ -31,7 +31,7 @@ package managers
 		public static const THEME_HILLS:String 		= "Hills";
 		public static const THEME_MOUNTAINS:String 	= "Mountains";
 		public static const THEME_PLAINS:String 	= "Plains";
-		public static const THEME_SAVANNAH:String 	= "Savannah";
+		public static const THEME_SAVANNAH:String 	= "Savanna";
 		public static const THEME_WETLANDS:String 	= "Wetlands";
 		
 		public function ShapesManager() 
@@ -73,7 +73,7 @@ package managers
 		{
 			var aFormat:TextFormat = new TextFormat();
 				aFormat.size = 32;
-				aFormat.color = 0xFFCC00;
+				aFormat.color = 0x000000;// 0xFFCC00;
 				aFormat.align = "center";
 				aFormat.font = "Pixelton";
 				//aFormat.bold = true;

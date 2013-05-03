@@ -123,8 +123,8 @@ package gps {
 				writeMessage("Error: Geolocation is not supported on this device!");
 			}
 		}
-		private function onGeoLocationUpdate(e:GeolocationEvent):void
-		{
+		public function onGeoLocationUpdate(e:GeolocationEvent):void
+		{			
 			var str:String = "(" + e.longitude + ", " + e.latitude + ")";
 			writeMessage("new location = " + str);	
 			
@@ -134,9 +134,10 @@ package gps {
 			currentSpeed = e.speed;
 			
 			//update when the next time we should update
-			var secondsToWait:Number = 60;
-			pGeolocation.setRequestedUpdateInterval((secondsToWait / currentSpeed) * 1000); //interval is in milliseconds
-
+			//var secondsToWait:Number = 60;
+			//pGeolocation.setRequestedUpdateInterval((secondsToWait / currentSpeed) * 1000); //interval is in milliseconds
+			pGeolocation.setRequestedUpdateInterval(1000); // debug interval
+			
 			//check online where we are
 			var url:String = "http://itreallyiskyler.com/games/GPSRPG/database/getCurrentBiome.php?";
 			url += "lat=" + e.latitude.toString();
@@ -149,10 +150,6 @@ package gps {
 			loader.addEventListener(Event.COMPLETE, loadComplete);
 			loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, error);
 			loader.load(aRequest);
-			
-			
-			//throw an event to know something has changed
-			dispatchEvent(new Event(Event.CHANGE));
 		}
 		private function onGeoStatusChange(e:StatusEvent):void 
 		{
@@ -217,7 +214,6 @@ package gps {
 		}
 		private function addMonstersToArray(e:SQLEvent):void //callback function for the database
 		{
-			
 			searchedEnemies ++;
 			appendMessage("-adding monster #" + searchedEnemies + " information to array");
 						  
@@ -251,9 +247,6 @@ package gps {
 						{
 							appendMessage("\t-" + internalValue + ": " + row[internalValue]);	
 							trace("\t-" + internalValue + ":\t" + row[internalValue]);
-							//*******
-							//parse an enemy's information out here
-							//********
 						}
 					}
 					
@@ -268,6 +261,10 @@ package gps {
 				//we now have an array with all the database information
 				//time to create the biome
 				createBiome();
+				
+				trace("New biome is ready");
+				//throw an event to let everyone know that the biome has changed
+				dispatchEvent(new Event(Event.CHANGE));
 			}
 			
 
