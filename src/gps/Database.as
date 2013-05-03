@@ -16,12 +16,13 @@
 		//GLOBAL VARIABLES
 		private var txtOut:TextField;
 		private var tablesLoadedFromServer:int;
-		
+		private var latestDBVersion:Object;
+		private var localDBVersion:Object;
 		
 		//SQL stuff
 		private var db_file:File;
 		private var db_connection:SQLConnection;
-		
+		//public const NUM_TABLES:int = 10;
 		
 		//SQL Statement information
 		private var dbVersionDataNames:Array;		private var dbVersionDataTypes:Array;
@@ -37,7 +38,6 @@
 		
 		private var tableNames:Array;
 		private var currentDBVersion:String;
-		
 		
 		//accessors
 		public function get TableNames():Array 			{ return tableNames; }
@@ -324,7 +324,7 @@
 			appendMessage("Checking Database Version");
 			var statement:SQLStatement = new SQLStatement();
 			statement.sqlConnection = db_connection;
-			statement.text = "SELECT * FROM DBVersion ORDER BY date ASC LIMIT 1";
+			statement.text = "SELECT * FROM DBVersion ORDER BY id DESC LIMIT 1";
 			
 			appendMessage("\t-" + statement.text);
 			statement.addEventListener(SQLEvent.RESULT, getLocalDBVersion);
@@ -357,8 +357,13 @@
 			else
 			{
 				//trace("The Database result: " + result.data.toString());
+				//for (var i:int = 0; i < result.data.length; i++)
+				//{
+				//	trace("Local DB Version #" + i + ".\tID: " + result.data[i].id.toString() + ".\tNAME: " + result.data[i].name.toString() + ".\tDATE: " + result.data[i].date.toString());
+				//}
 				if(result.data[0] != null)
 				{
+					
 					var entry:Object = result.data[0];
 					var versionID:String = entry.id.toString();
 					var versionName:String = entry.name.toString();
@@ -368,6 +373,7 @@
 					appendMessage("\t-Date:" + versionDate);
 					currentDBVersion = versionName;
 					
+					localDBVersion = entry;
 				}
 			}
 			
@@ -382,6 +388,8 @@
 			//callback function to urlloader
 			appendMessage("Comparing database version to local version");
 			appendMessage("Local = " + currentDBVersion + ". Server = " + e.target.data);
+			trace("Comparing database version to local version");
+			trace("Local = " + currentDBVersion + ". Server = " + e.target.data);
 			//trace(e.target.data);
 			
 			//make sure our current dbVersion = the server version
@@ -487,8 +495,12 @@
 			
 			
 			tablesLoadedFromServer ++;
+			trace(tablesLoadedFromServer + " tables loaded out of " + tableNames.length);
 			if (tablesLoadedFromServer == tableNames.length)
 			{
+				//update our local database version
+				
+				
 				//throw an event to show that we are done loading the database
 				var completedEvent:Event = new Event(Event.COMPLETE);
 				//completedEvent.target = this;
@@ -569,12 +581,14 @@
 		{
 			//trace("AddData function...");
 			appendMessage("AddData function..." + tblName);
+			//trace("AddData function..." + tblName);
 			var i:int;
 			
 			if (tblValueNames.length != tblValues.length)
 			{
 				//trace("-input value array length error");
 				appendMessage("-input value array length error. Expected: " + tblValueNames.length + ". Received: " + tblValues.length);
+				trace("-input value array length error. Expected: " + tblValueNames.length + ". Received: " + tblValues.length);
 				return;				
 			}
 			var statement:SQLStatement = new SQLStatement();
@@ -607,7 +621,7 @@
 			//assign our completed request to our SQL connection statement
 			statement.text = strInsert;
 			statement.execute();
-			//trace("-sql insert statement: " + strInsert);
+			trace("-sql insert statement: " + strInsert);
 			appendMessage("-sql insert statement: " + strInsert + "\n");
 			
 		}

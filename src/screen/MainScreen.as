@@ -11,6 +11,7 @@
 	import flash.net.URLRequest;
 	import flash.net.URLRequestMethod;
 	import flash.net.URLVariables;
+	import flash.text.TextField;
 	import managers.ImageManager;
 	import managers.ShapesManager;
 	
@@ -37,6 +38,10 @@
 		public var quests_btn:MovieClip;
 		public var castle_btn:MovieClip;
 		
+		//debug stuff
+		private var lblDebugBackground:MovieClip;
+		private var txtDebugMessage:TextField;
+		
 		private var backgroundImg:Bitmap;
 		public function get GetBackground():Bitmap {return backgroundImg;}
 		
@@ -46,35 +51,26 @@
 			
 			//USE SOME LOGIC TO FIGURE OUT WHICH IMAGE TO DRAW
 			
-			trace("Current Biome Type: " + manage.device.CurrentBiome.Type);
-			if (manage.device.IsReady)
-			{
-				trace("We are currently in a " + manage.device.CurrentBiome.Type + " biome");
-				switch(manage.device.CurrentBiome.Type)
-				{
-					//initialize the background image here
-					
-					
-					default:
-						backgroundImg = ImageManager.BackgroundCavern();
-						break;
-				}
-			}
-			else {	backgroundImg = ImageManager.BackgroundCavern(); }
-			
-			manage.biomeBackground = backgroundImg;
+			backgroundImg = new Bitmap();
 			backgroundImg.x = 0;
 			backgroundImg.y = 0;
 			
 
 			character_btn = new MovieClip();
-			character_btn.addChild(ShapesManager.drawImage("iconWizard.png", -200, -130, 80, 130, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM));
+			character_btn.addChild(ShapesManager.drawImage("iconWizard.png", -250, -130, 80, 130, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM));
 			
 			quests_btn = 	new MovieClip();
-			quests_btn.addChild(ShapesManager.drawImage("iconScroll.png", 0, -100, 110, 100, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM));
+			quests_btn.addChild(ShapesManager.drawImage("iconScroll.png", -50, -100, 110, 100, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM));
 			
 			castle_btn = 	new MovieClip();
-			castle_btn.addChild(ShapesManager.drawImage("iconCastle.png", 200, -150, 150, 150, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM));
+			castle_btn.addChild(ShapesManager.drawImage("iconCastle.png", 150, -150, 150, 150, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM));
+			
+			//consider drawing a loading screen for now
+			lblDebugBackground = ShapesManager.drawLabel("", -100, 0, 150, 100, ShapesManager.JUSTIFY_RIGHT, ShapesManager.JUSTIFY_TOP);
+			txtDebugMessage = new TextField();
+			txtDebugMessage.width = 150;
+			txtDebugMessage.height = 100;
+			
 		}
 		
 		public override function bringIn():void
@@ -82,14 +78,9 @@
 			super.bringIn();
 			
 			//initialize our theme
-			
-			encounter_btn =	ShapesManager.drawButton(0,   0, 200, 100, "Encounter", manage.device.CurrentBiome.Type);
-			explore_btn =	ShapesManager.drawButton(0, 100, 200, 100, "Explore", manage.device.CurrentBiome.Type);
-			exit_btn = 		ShapesManager.drawButton(0, 200, 200, 100, "Exit", manage.device.CurrentBiome.Type);
+			initWithProperBiome();
 			
 			//format the background image
-			backgroundImg.width = stage.stageWidth;
-			backgroundImg.height = stage.stageHeight;
 			this.addChild(backgroundImg);
 			
 			//add everything to the stage
@@ -107,15 +98,70 @@
 			character_btn.addEventListener(MouseEvent.CLICK, onCharacter);
 			quests_btn.addEventListener(MouseEvent.CLICK, onQuests);
 			castle_btn.addEventListener(MouseEvent.CLICK, onCastle);
+			
+			//attach an eventListener to the device to check when we change locations
+			manage.device.addEventListener(Event.CHANGE, updateHomeTheme);
+			
+			
+			//add some debug stuff
+			this.addChild(lblDebugBackground);
+			this.addChild(txtDebugMessage);
+			txtDebugMessage.x = lblDebugBackground.x;
+			txtDebugMessage.y = lblDebugBackground.y;
+			updateHomeTheme(new Event(Event.CHANGE));
 		}
 		
 		private function initWithProperBiome():void
 		{
+			trace("Current Biome Type: " + manage.device.CurrentBiome.Type);
+			
+			encounter_btn =	ShapesManager.drawButton(-100, -75, 200, 75, "Encounter", 	manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_CENTER_Y);
+			explore_btn =	ShapesManager.drawButton(-100,   0, 200, 75, "Explore", 	manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_CENTER_Y);
+			exit_btn = 		ShapesManager.drawButton(-100,  75, 200, 75, "Exit",		manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_CENTER_Y);
+			
+			if (manage.device.IsReady)
+			{
+				//trace("We are currently in a " + manage.device.CurrentBiome.Type + " biome");
+				switch(manage.device.CurrentBiome.Type)
+				{
+					//initialize the background image here
+					case (ShapesManager.THEME_CANYON):		backgroundImg = ImageManager.BackgroundCanyon();	break;
+					case (ShapesManager.THEME_CAVERN):		backgroundImg = ImageManager.BackgroundCavern();	break;
+					case (ShapesManager.THEME_DESERT):		backgroundImg = ImageManager.BackgroundDesert();	break;
+					case (ShapesManager.THEME_FOREST):		backgroundImg = ImageManager.BackgroundForest();	break;
+					case (ShapesManager.THEME_HILLS):		backgroundImg = ImageManager.BackgroundHills();		break;
+					case (ShapesManager.THEME_MOUNTAINS): 	backgroundImg = ImageManager.BackgroundMountains();	break;
+					case (ShapesManager.THEME_PLAINS): 		backgroundImg = ImageManager.BackgroundPlains();	break;
+					case (ShapesManager.THEME_SAVANNAH): 	backgroundImg = ImageManager.BackgroundSavannah();	break;
+					case (ShapesManager.THEME_WETLANDS): 	backgroundImg = ImageManager.BackgroundWetlands();	break;
+					
+					default:
+						backgroundImg = ImageManager.BackgroundCavern();
+						break;
+				}
+			}
+			else {	backgroundImg = ImageManager.BackgroundCavern(); }
 			
 			
+			backgroundImg.width = stage.stageWidth;
+			backgroundImg.height = stage.stageHeight;
+			
+			//assign it the the manager alpha value
+			manage.biomeBackground = backgroundImg;
 		}
 		
-		
+		private function updateHomeTheme(e:Event):void
+		{
+			var message:String = "";
+			message += "Lat:\t" + manage.device.CurrentLatitude + "\n";
+			message += "Long:\t" + manage.device.CurrentLongitude + "\n";
+			message += "Type:\t" + manage.device.CurrentBiome.Type;
+			txtDebugMessage.text = message;
+			trace(message);
+			
+			//when we enter a new biome, change the background to reflect it
+			initWithProperBiome();
+		}
 		
 		private function onEncounter(e:MouseEvent):void
 		{
@@ -167,6 +213,9 @@
 			character_btn.removeEventListener(MouseEvent.CLICK, onCharacter);
 			quests_btn.removeEventListener(MouseEvent.CLICK, onQuests);
 			castle_btn.removeEventListener(MouseEvent.CLICK, onCastle);
+			
+			//attach an eventListener to the device to check when we change locations
+			manage.device.removeEventListener(Event.CHANGE, updateHomeTheme);
 			
 			//make sure everything gets cleaned up
 			super.cleanUp();

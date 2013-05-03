@@ -2,6 +2,7 @@ package screen
 {
 	import flash.display.Bitmap;
 	import flash.display.SimpleButton;
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import managers.ImageManager;
 	import managers.ShapesManager;
@@ -41,6 +42,8 @@ package screen
 			//add the play button
 			this.addChild(play_btn);
 			play_btn.addEventListener(MouseEvent.CLICK, onPlay);
+			
+			
 		}
 		
 		private function onPlay(e:MouseEvent):void

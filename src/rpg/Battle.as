@@ -197,14 +197,14 @@
 					
 				}
 				
-				trace(newEnemyIs[0]["name"]);
+				trace(newEnemyIs["name"]);
 				
 				var placedEnemy:Boolean = false;
 				
 				while(placedEnemy == false)
 				{
 					var randLoc:int = (Math.random() * 8);
-					var rar = 3;
+					var rar:int = 3;
 					
 					if(enemies[randLoc] == null)
 					{
@@ -613,7 +613,10 @@
 							enemies[i + 4] = null;
 							enemies[i].moveForward = true;
 							
-							while (!enemies[i].moveUp());
+							while (!enemies[i].moveUp())
+							{
+								
+							}
 							
 							for (var j:int = i; j <= enemies.length; j++)
 							{

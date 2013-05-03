@@ -297,7 +297,7 @@ package gps {
 		
 		
 		//ANDROID helper functions
-		private function closeAllConnections(e:Event):void
+		public function closeAllConnections(e:Event):void
 		{
 			trace("closing");
 			

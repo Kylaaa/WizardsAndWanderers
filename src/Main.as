@@ -46,6 +46,7 @@ package
 		{
 			// auto-close
 			//NativeApplication.nativeApplication.exit();
+			theGame.device.closeAllConnections(e);
 		}
 		
 		public static function exitGame():void

@@ -115,7 +115,7 @@
 					
 					
 					//draw it to the screen too
-					try
+					/*try
 					{
 						device.CurrentBiome.drawEnemy(this.stage, i, 15 + (i * 70), 5);
 					}
@@ -123,7 +123,7 @@
 					{
 						txtErrorMessage.text = "Error Loading " + device.CurrentBiome.Enemies[i]["name"].toString() + "\'s image.\n";
 						txtErrorMessage.appendText(err.getStackTrace());		
-					}
+					}*/
 				}
 				//txtBiomeMonsters.text = enemyNames;
 			}
