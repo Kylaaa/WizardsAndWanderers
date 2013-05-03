@@ -154,10 +154,6 @@
 					rareEnemies.push(allEnemies[i]);
 				}
 				
-				trace(commonEnemies.length);
-				trace(uncommonEnemies.length);
-				trace(rareEnemies.length);
-				
 				/*values include:
 				-enemies[i]["health"]		//int but must be parsed from string
 				-enemies[i]["speed"]
@@ -173,38 +169,37 @@
 				*/
 			}
 				
-			var randGen:int = (Math.random() * 8) + 1; // randomizer variable
-			randGen = 8;
-			for(i = 0; i < randGen; i++)
+			var enemyAmount = (Math.random() * 8) + 1;
+			
+			for(i = 0; i < enemyAmount; i++)
 			{
 				// Used to determine which enemy you're fighting
 				var newEnemyIs:Object;
 				
-				randGen = Math.random() * 100;
+				var randGen:int = 25;//Math.random() * 100;
+				var whichEnemy:int;
 				
 				if (randGen < 50)
 				{
-						randGen = Math.random() * commonEnemies.length;
-						
-						newEnemyIs = commonEnemies[randGen];
+					whichEnemy = Math.random() * commonEnemies.length;
+					newEnemyIs = commonEnemies[whichEnemy];
 				}
 				else if (randGen < 90)
 				{
-					
+					whichEnemy = Math.random() * uncommonEnemies.length;
+					newEnemyIs = uncommonEnemies[whichEnemy];
 				}
 				else
 				{
-					
+					whichEnemy = Math.random() * rareEnemies.length;
+					newEnemyIs = rareEnemies[whichEnemy];
 				}
-				
-				trace(newEnemyIs["name"]);
 				
 				var placedEnemy:Boolean = false;
 				
 				while(placedEnemy == false)
 				{
 					var randLoc:int = (Math.random() * 8);
-					var rar:int = 3;
 					
 					if(enemies[randLoc] == null)
 					{
@@ -218,7 +213,7 @@
 								staggering = 400;
 							}
 							
-							enemyCreator = new Enemy(this, manage.stage.stageWidth - staggering, (randLoc * 70) + 85, randLoc,rar);
+							enemyCreator = new Enemy(this, manage.stage.stageWidth - staggering, (randLoc * 70) + 85, randLoc);
 						}
 						else
 						{
@@ -228,9 +223,10 @@
 								staggering = 200;
 							}
 							
-							enemyCreator = new Enemy(this, manage.stage.stageWidth - staggering, ((randLoc - 4) * 70) + 85, randLoc,rar);
+							enemyCreator = new Enemy(this, manage.stage.stageWidth - staggering, ((randLoc - 4) * 70) + 85, randLoc);
 						}
 						
+						enemyCreator.setupEnemy(newEnemyIs);
 						enemies[randLoc] = enemyCreator;
 						
 						placedEnemy = true;

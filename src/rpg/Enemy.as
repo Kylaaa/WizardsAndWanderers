@@ -28,13 +28,17 @@
 		
 		private var moveTick:Timer = new Timer(1000);
 		
-		public function Enemy(aBattle:Battle, xLoc:Number, yLoc:Number, num:int, rar:int, newHealth:int = 20, newAttack:int = 20)
+		public function Enemy(aBattle:Battle, xLoc:Number, yLoc:Number, num:int)
 		{
 			super(aBattle, xLoc, yLoc);
 			
 			addEventListener(MouseEvent.CLICK, theChosen);
 			
-			setupEnemy(xLoc, yLoc, num, rar);
+			//setupEnemy();
+			enemyNum = num;
+			
+			startX = xLoc;
+			startY = yLoc;
 			
 			txt_health = new TextField();
 			txt_health.setTextFormat(ShapesManager.textFormat);
@@ -46,25 +50,25 @@
 			y = yLoc;
 		}
 		
-		public function setupEnemy(xLoc:Number, yLoc:Number, num:int, rar:int):void
+		public function setupEnemy(enemyStats:Object):void
 		{
-			startX = xLoc;
-			startY = yLoc;
-			
-			myImage = ImageManager.EnemyCanyonCommonSandGoblinSpearman();
+			myImage = ImageManager.getImageByName(enemyStats["imagePath"]);//;
 			myImage.width = 150;
 			myImage.height = 150;
 			addChild(myImage);
 			
-			enemyNum = num;
-			
 			selected = false;
 			
-			maxHealth = 25;
-			health = 25;
-			atkPwr = 0;
-			speed = 10;
-			rarity = rar;
+			maxHealth = parseInt(enemyStats["health"]);
+			health = maxHealth;
+			
+			atkPwr = parseInt(enemyStats["attack"]);
+			speed = parseInt(enemyStats["speed"]);
+			//rarity = enemyStats["rarity"];;
+			trace("Name: " + enemyStats["name"]);
+			trace("Health: " + health);
+			trace("Attack: " + atkPwr);
+			trace("Speed: " + speed);
 			
 			/*
 			call the database
