@@ -48,6 +48,19 @@
 		private var txtErrorMessage:TextField;
 		private var loadingMessage:MovieClip;
 		
+		// spell stuff
+		public var threeHourSpellOne:Timer = new Timer(1000, 60);
+		public var threeHourSpellTwo:Timer = new Timer(1000, 60);
+		public var threeHourSpellThree:Timer = new Timer(1000, 60);
+		
+		public var dailySpell:Timer = new Timer(1000, 300);
+		
+		public var spellOne:Boolean = true;
+		public var spellTwo:Boolean = true;
+		public var spellThree:Boolean = true;
+		
+		public var spellDaily:Boolean = true;
+		
 		//CONSTRUCTOR
 		public function ManagerAlpha()
 		{
@@ -72,7 +85,20 @@
 			database.addEventListener(Event.COMPLETE, dbLoaded)
 			
 			createPlayer();
+			
+			// spell stuff
+			threeHourSpellOne.addEventListener(TimerEvent.TIMER_COMPLETE, activateOne);
+			threeHourSpellTwo.addEventListener(TimerEvent.TIMER_COMPLETE, activateTwo);
+			threeHourSpellThree.addEventListener(TimerEvent.TIMER_COMPLETE, activateThree);
+			
+			dailySpell.addEventListener(TimerEvent.TIMER_COMPLETE, activateDaily);
 		}
+		
+		// spell stuff
+		public function activateOne():void {	spellOne = true;	}
+		public function activateTwo():void {	spellTwo = true;	}
+		public function activateThree():void {	spellThree = true;	}
+		public function activateDaily():void {	spellDaily = true;	}
 		
 		public function createPlayer():void
 		{

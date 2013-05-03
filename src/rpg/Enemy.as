@@ -2,6 +2,7 @@
 {
 	import flash.display.Bitmap;
 	import flash.events.MouseEvent;
+	import flash.events.TimerEvent;
 	import flash.text.TextField;
 	import flash.utils.Timer;
 	import managers.ImageManager;
@@ -27,6 +28,7 @@
 		private var startY:int;
 		
 		private var moveTick:Timer = new Timer(1000);
+		private var flashTimer:Timer = new Timer(250, 1);
 		
 		public function Enemy(aBattle:Battle, xLoc:Number, yLoc:Number, num:int)
 		{
@@ -42,6 +44,8 @@
 			
 			txt_health = new TextField();
 			txt_health.setTextFormat(ShapesManager.textFormat);
+			
+			flashTimer.addEventListener(TimerEvent.TIMER_COMPLETE, reappear);
 		}
 		
 		public function rearrangeLocation(xLoc:Number, yLoc:Number):void
@@ -64,32 +68,26 @@
 			
 			atkPwr = parseInt(enemyStats["attack"]);
 			speed = parseInt(enemyStats["speed"]);
-			//rarity = enemyStats["rarity"];;
+			//rarity = enemyStats["rarity"];
 			trace("Name: " + enemyStats["name"]);
 			trace("Health: " + health);
 			trace("Attack: " + atkPwr);
 			trace("Speed: " + speed);
-			
-			/*
-			call the database
-			
-			level = database.level
-			
-			hSpells = database.numHourSpells
-			hourlySpells = database.hourSpells
-			
-			dSpells = database.numDaySpells
-			dailySpells = database.daySpells
-			
-			health = database.maxHealth
-			curHealth = database.health
-			
-			exp = database.exp
-			expTilNext = database.ExpTilNextLevel
-			
-			atkPwr = database.attack
-			*/
 		} 
+		
+		public function flashing():void
+		{
+			// Using a work around for the timer right now because it's crunch time and I need to continue
+			
+			flashTimer.start();
+			this.alpha = 0;
+		}
+		
+		private function reappear(e:TimerEvent):void
+		{
+			flashTimer.reset();
+			this.alpha = 1;
+		}
 		
 		public function theChosen(e:MouseEvent):void
 		{

@@ -78,12 +78,12 @@
 			}
 			else
 			{
-				health = 350;
+				health = 325;
 				atkPwr = 35;
 			}
 			
 			curHealth = health;
-			speed = 10;
+			speed = 3;
 
 			esscencesBiomeArray = new Array(4);
 			esscencesBiomeArray[0] = [1,2,3,0];//lesser

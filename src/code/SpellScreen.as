@@ -3,13 +3,14 @@
 
 	import flash.display.MovieClip;
 	import flash.display.SimpleButton;
+	import flash.events.TimerEvent;
+	import flash.utils.Timer;
 	import managers.ShapesManager;
 	import rpg.Battle;
 	import flash.events.MouseEvent;	
 
 	public class SpellScreen extends MovieClip
 	{
-
 		private var bMan:Battle;
 		private var btn_cC:SimpleButton;
 		private var btn_lS:SimpleButton;
@@ -28,7 +29,7 @@
 			btn_cC.addEventListener(MouseEvent.CLICK, spellDemoButton15);
 			btn_lS.addEventListener(MouseEvent.CLICK, spellDemoButton14);
 		}
-
+		
 		private function spellDemoButton15(event:MouseEvent):void
 		{
 			bMan.spellAtk(15);

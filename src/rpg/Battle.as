@@ -1,7 +1,9 @@
 ﻿package rpg
 {
 	import flash.display.SimpleButton;
+	import flash.events.TimerEvent;
 	import flash.text.TextField;
+	import flash.utils.Timer;
 	import managers.ImageManager;
 	import managers.ShapesManager;
 	import mx.core.ButtonAsset;
@@ -169,7 +171,7 @@
 				*/
 			}
 				
-			var enemyAmount = (Math.random() * 8) + 1;
+			var enemyAmount:int = (Math.random() * 8) + 1;
 			
 			for(i = 0; i < enemyAmount; i++)
 			{
@@ -372,6 +374,8 @@
 					if(atkType < 10)
 					{
 						selectedEnemy.health -= damageDealt; // damages the clicked upon enemy
+						
+						selectedEnemy.flashing();
 						
 						if(critAttack || spellCrit)
 							selectedEnemy.effectUnder = currentCritEffect;
@@ -607,11 +611,11 @@
 						if (i <= 3 && enemies[i + 4] != null)
 						{ 	enemies[i] = enemies[i + 4];
 							enemies[i + 4] = null;
-							enemies[i].moveForward = true;
 							
-							while (!enemies[i].moveUp())
+							enemies[i].moveForward = true;
+							while (enemies[i].moveForward)
 							{
-								
+								enemies[i].moveUp();
 							}
 							
 							for (var j:int = i; j <= enemies.length; j++)
