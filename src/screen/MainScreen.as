@@ -199,13 +199,13 @@
 		public override function cleanUp():void
 		{
 			//remove everything to the stage
-			this.removeChild(encounter_btn);
+			/*this.removeChild(encounter_btn);
 			this.removeChild(explore_btn);
 			this.removeChild(exit_btn);
 			this.removeChild(character_btn);
 			this.removeChild(quests_btn);
 			this.removeChild(castle_btn);
-			
+			*/
 			//remove the event listeners from the stage
 			encounter_btn.removeEventListener(MouseEvent.CLICK, onEncounter);
 			explore_btn.removeEventListener(MouseEvent.CLICK, onExplore);

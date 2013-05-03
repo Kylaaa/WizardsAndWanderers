@@ -6,6 +6,9 @@
 	import flash.text.engine.Kerning;
 	import flash.display.SimpleButton;
 	import flash.events.MouseEvent;
+	import managers.ShapesManager;
+	import flash.display.Sprite;
+	import managers.ImageManager;
 	//import flash.notifications.NotificationStyle;
 	
 	import ManagerAlpha;
@@ -16,22 +19,34 @@
 	{
 		public var manager:ManagerAlpha;
 		
-		private var btn_defaultItems:SimpleButton;
-		private var btn_Essences:SimpleButton;
-		private var btn_Stats:SimpleButton;
-		private var btn_back:SimpleButton;
+		//private var btn_defaultItems:SimpleButton;
+		//private var btn_Essences:SimpleButton;
+		//private var btn_Stats:SimpleButton;
+		//private var btn_back:SimpleButton;
+		public var exit_btn:SimpleButton;
+		public var backgroundLayer:Sprite = new Sprite();	// background images
+		
+		private var cePanel:Sprite = new Sprite();
+		private var cpPanel:Sprite = new Sprite();
+		private var csPanel:Sprite = new Sprite();
 		
 		public function Manager(newManager:ManagerAlpha)
 		{
 			super(newManager);
 			manager = newManager;
 			// constructor code
+			addChild(backgroundLayer);
+			backgroundLayer.addChild(manage.biomeBackground);
+			exit_btn = ShapesManager.drawButton(0, -100, 200, 100, "Back", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_LEFT, ShapesManager.JUSTIFY_BOTTOM);
+			
+			//foregroundLayer.addChild(attackBtn);
 			
 			//Set the default weapon
 			var tempWeapon:Weapon = new Weapon(manager,1,true,2,"Wooden Staff",true,15,1.75,0);
 			addChild(tempWeapon);
 			tempWeapon.x = 205;
 			tempWeapon.y = 95;
+
 			
 			//Set the default armor
 			var tempStatArray:Array;
@@ -43,15 +58,59 @@
 			tempArmor.x = 330;
 			tempArmor.y = 95;
 			
-
-			btn_defaultItems.addEventListener(MouseEvent.CLICK, dItemButton);
-			btn_Essences.addEventListener(MouseEvent.CLICK, essencesButton);
-			btn_Stats.addEventListener(MouseEvent.CLICK, statsButton);
+			//btn_defaultItems.addEventListener(MouseEvent.CLICK, dItemButton);
+			//btn_Essences.addEventListener(MouseEvent.CLICK, essencesButton);
+			//btn_Stats.addEventListener(MouseEvent.CLICK, statsButton);
 			
-			btn_back.addEventListener(MouseEvent.CLICK, backToMenu);
+			//btn_back.addEventListener(MouseEvent.CLICK, backToMenu);
 		}
 		
-		private function essencesButton(event:MouseEvent):void
+		public override function bringIn():void
+		{
+			super.bringIn();
+			this.addChild(exit_btn);
+			exit_btn.addEventListener(MouseEvent.CLICK, onExit);
+			panels();
+		}
+		
+		private function onExit(e:MouseEvent)
+		{
+			manage.displayScreen(MainScreen);
+		}
+		
+		public override function cleanUp():void
+		{
+			exit_btn.removeEventListener(MouseEvent.CLICK, onExit);
+			super.cleanUp();
+		}
+		
+		private function panels():void
+		{
+			this.addChild(cePanel);
+			cePanel.addChild(ImageManager.CharacterEssencePanel());
+			cePanel.x = 225; //use relative to center and stuff
+			cePanel.y = 100; //use relative to center and stuff
+			cePanel.width *= 2.5;
+			cePanel.height *= 2.5;
+			
+			this.addChild(cpPanel);
+			cpPanel.addChild(ImageManager.CharacterPlayerPanel());
+			cpPanel.x = 20; //use relative to center and stuff
+			cpPanel.y = 100; //use relative to center and stuff
+			cpPanel.width *= 2.5;
+			cpPanel.height *= 2.5;
+				
+			this.addChild(csPanel);
+			csPanel.addChild(ImageManager.CharacterSmallPanel());
+			csPanel.x = 225; //use relative to center and stuff
+			csPanel.y = 225; //use relative to center and stuff
+			csPanel.width *= 2.5;
+			csPanel.height *= 2.5;
+			
+		}
+		
+		//buttons should be on screens now for example Character
+		/*private function essencesButton(event:MouseEvent):void
 		{
 			var eScreen:EssencesScreen = new EssencesScreen(manager);
 			manager.addChild(eScreen);
@@ -66,10 +125,10 @@
 		{
 			var statsScreen:CharacterStatsScreen = new CharacterStatsScreen(manage);
 			manage.addChild(statsScreen);
-		}
+		}*/
 		
 		//makes some pre-set recipes and items for testing
-		private function dItemButton(event:MouseEvent):void
+		/*private function dItemButton(event:MouseEvent):void
 		{
 			var tempWeapon2:Weapon = new Weapon(manager,2,true,3,"Magic Wand",true,20,12,3);
 			manager.populateWeaponArray(tempWeapon2);
@@ -115,7 +174,7 @@
 			var tempRecipe2:Recipe = new Recipe(manager,3,true,1,"Foe Shatterer",true,0,tempStatArray,tempStatEffectArray,7.5,150,0,costArray);
 			manager.populateRecipeArray(tempRecipe2);
 
-		}
+		}*/
 
 		//Legacy
 		/*
