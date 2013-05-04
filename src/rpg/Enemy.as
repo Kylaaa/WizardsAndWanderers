@@ -70,10 +70,10 @@
 			atkPwr = parseInt(enemyStats["attack"]);
 			speed = parseInt(enemyStats["speed"]);
 			//rarity = enemyStats["rarity"];
-			trace("Name: " + enemyStats["name"]);
-			trace("Health: " + health);
-			trace("Attack: " + atkPwr);
-			trace("Speed: " + speed);
+			trace("Setup Enemy- Name: " + enemyStats["name"]);
+			//trace("Health: " + health);
+			//trace("Attack: " + atkPwr);
+			//trace("Speed: " + speed);
 			
 			var textStyle:TextFormat = new TextFormat(null, 24, 0xFF0000, null, null, null, null, null, "center");
 			txt_health = new TextField();
@@ -204,8 +204,13 @@
 			}
 		}
 		
-		public function moveUp():Boolean
+		public function moveUp():void
 		{
+			Tweener.addTween(this, { x: startX-200, time: 1.0 } );
+			moveForward = false;
+			enemyNum = enemyNum - 4;
+			
+			/*
 			if (!moveTick.running)
 				moveTick.start();
 				
@@ -229,6 +234,7 @@
 					x -= 3;
 				return false;
 			}
+			*/
 		}
 		
 		public function checkDeath():void
@@ -263,14 +269,6 @@
 			
 			if(!dead)
 			{
-				if(moveForward)
-				{
-					Tweener.addTween(this, {x:startX, time:1.0, transition:"linear"} );
-					while (moveForward)
-					{
-						//moveUp();
-					}
-				}
 				
 				if(battle.player != null)
 				{

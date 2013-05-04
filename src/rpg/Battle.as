@@ -1,5 +1,6 @@
 ﻿package rpg
 {
+	import caurina.transitions.Tweener;
 	import flash.display.SimpleButton;
 	import flash.events.TimerEvent;
 	import flash.text.TextField;
@@ -78,7 +79,7 @@
 		public function Battle(newManager:ManagerAlpha)
 		{
 			super(newManager);
-			
+			trace("New Battle");
 			specAtk = new SpecialAttacks(this, newManager);
 			addEventListener(Event.ENTER_FRAME, update);
 			
@@ -92,6 +93,7 @@
 		}
 		public function initialize():void
 		{			
+			trace("Battle init");
 			// adds multiple drawing layers
 			addChild(backgroundLayer);
 			addChild(characterLayer);
@@ -238,10 +240,12 @@
 				if(enemies[i] != null && enemies[i - 4] == null)
 				{
 					// make this 'walk' later
-					enemies[i].moveForward = true;
+					//enemies[i].moveForward = true;
 					
-					while(enemies[i].moveForward)
-						enemies[i].update();
+					//while(enemies[i].moveForward)
+					//	enemies[i].update();
+					//Tweener.addTween(enemies[i], { x: -200, time: 1.0 } );
+					enemies[i].moveUp();
 				}
 			}
 			
@@ -577,6 +581,7 @@
 			if(player != null && health <= 0)	// if the player is dead then clean up the game
 			{
 				endBattle();
+				return;
 			}
 			
 			var currEnemyAmount:int = 0;
@@ -599,11 +604,11 @@
 						{ 	enemies[i] = enemies[i + 4];
 							enemies[i + 4] = null;
 							
-							enemies[i].moveForward = true;
-							while (enemies[i].moveForward)
-							{
+							//enemies[i].moveForward = true;
+							//while (enemies[i].moveForward)
+							//{
 								enemies[i].moveUp();
-							}
+							//}
 							
 							for (var j:int = i; j <= enemies.length; j++)
 							{
@@ -623,6 +628,7 @@
 			if(currEnemyAmount <= 0)
 			{
 				endBattle();
+				return;
 			}
 		}
 		
@@ -634,6 +640,7 @@
 			if(randGen == 1)
 			{
 				endBattle();
+				return;
 			}
 			
 			fleeing = false;
@@ -713,10 +720,10 @@
 				}
 				
 				// makes sure everything is dead if it should be
-				while(checkDeath() == true)
-				{
-					checkDeath();
-				}
+				//while(checkDeath() == true)
+				//{
+				checkDeath();
+				//}
 			}
 			else		// if it's the enemies turn remove the ability to click buttons
 			{
@@ -738,10 +745,10 @@
 				}
 				
 				// makes sure everything is dead if it should be
-				while(checkDeath() == true)
-				{
+				//while(checkDeath() == true)
+				//{
 					checkDeath();
-				}
+				//}
 				
 				playerTurn = true;
 			}

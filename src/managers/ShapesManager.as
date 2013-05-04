@@ -105,6 +105,8 @@ package managers
 				case (THEME_SWAMP):		backgroundImage = ImageManager.LargeButtonSwamp();		break;
 				case (THEME_WETLANDS):	backgroundImage = ImageManager.LargeButtonWetlands();	break;
 				case ("exit"):			backgroundImage = ImageManager.IconExit();				break;
+				case ("wizard"):		backgroundImage = ImageManager.CharacterWizard();		break;
+				case ("druid"):			backgroundImage = ImageManager.CharacterDruid();		break;
 				default:				backgroundImage = ImageManager.CharacterEssencePanel();	break;
 			}
 				backgroundImage.x = 0;
@@ -151,6 +153,8 @@ package managers
 				case (THEME_SWAMP):		backgroundImage = ImageManager.LargeButtonSwamp();		break;
 				case (THEME_WETLANDS):	backgroundImage = ImageManager.LargeButtonWetlands();	break;
 				case ("exit"):			backgroundImage = ImageManager.IconExit();				break;
+				case ("wizard"):		backgroundImage = ImageManager.CharacterWizard();		break;
+				case ("druid"):			backgroundImage = ImageManager.CharacterDruid();		break;
 				default:				backgroundImage = ImageManager.CharacterEssencePanel();	break;
 			}
 				backgroundImage.x = 0;
@@ -198,6 +202,8 @@ package managers
 				case (THEME_SWAMP):		backgroundImage = ImageManager.LargeButtonSwamp();		break;
 				case (THEME_WETLANDS):	backgroundImage = ImageManager.LargeButtonWetlands();	break;
 				case ("exit"):			backgroundImage = ImageManager.IconExit();				break;
+				case ("wizard"):		backgroundImage = ImageManager.CharacterWizard();		break;
+				case ("druid"):			backgroundImage = ImageManager.CharacterDruid();		break;
 				default:				backgroundImage = ImageManager.CharacterEssencePanel();		break;
 			}
 				backgroundImage.x = 0;

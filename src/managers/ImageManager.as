@@ -43,6 +43,8 @@ package managers
 		[Embed(source = "../../lib/sprites/navigation/panels/characterPlayerPanel.png", 		mimeType = "image/png")] 	private static var ImgCharacterPlayerPanel:Class;
 		[Embed(source = "../../lib/sprites/navigation/panels/characterSmallPanel.png", 			mimeType = "image/png")] 	private static var ImgCharacterSmallPanel:Class;
 		[Embed(source = "../../lib/sprites/navigation/panels/exitIcon.png", 					mimeType = "image/png")] 	private static var ImgIconExit:Class;
+		[Embed(source = "../../lib/sprites/navigation/panels/characterSelectPanel1.png", 		mimeType = "image/png")] 	private static var ImgCharacter1:Class;
+		[Embed(source = "../../lib/sprites/navigation/panels/characterSelectPanel2.png", 		mimeType = "image/png")] 	private static var ImgCharacter2:Class;
 		
 		//ENEMIES
 		//canyon
@@ -313,6 +315,11 @@ package managers
 		public static function EnemyWetlandsUncommonDrakkonHonorGuard():Bitmap		{ return new ImgWetlandsUncommonDrakkonHonorGuard(); }
 		public static function EnemyWetlandsUncommonHobtaFighter():Bitmap			{ return new ImgWetlandsUncommonHobtaFighter(); }
 		public static function EnemyWetlandsUncommonWolfAlphaWhite():Bitmap			{ return new ImgWetlandsUncommonWolfAlphaWhite(); }
+		
+		// defaults
+		public static function CharacterWizard():Bitmap								{ return new ImgCharacter2(); }
+		public static function CharacterDruid():Bitmap								{ return new ImgCharacter1(); }
+		
 		
 		//body
 		public static function WizardBody1():Bitmap									{ return new ImgWizardBody1(); }

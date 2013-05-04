@@ -47,6 +47,7 @@
 		private var lblDebugBackground:MovieClip;
 		private var txtDebugMessage:TextField;
 		private var btnDebugChangeLocation:SimpleButton;
+		private var btnDebugHealth:SimpleButton;
 		
 		private var backgroundImg:Bitmap;
 		public function get GetBackground():Bitmap {return backgroundImg;}
@@ -77,7 +78,8 @@
 			txtDebugMessage = new TextField();
 			txtDebugMessage.width = 150;
 			txtDebugMessage.height = 100;
-			btnDebugChangeLocation = ShapesManager.drawButton(-100, 100, 150, 100, "Change Location", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_RIGHT, ShapesManager.JUSTIFY_TOP);
+			btnDebugChangeLocation = ShapesManager.drawButton( -100, 100, 150, 100, "Change Location", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_RIGHT, ShapesManager.JUSTIFY_TOP);
+			btnDebugHealth = ShapesManager.drawButton(-100, 205, 150, 100, "Full Health", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_RIGHT, ShapesManager.JUSTIFY_TOP);
 		}
 		
 		public override function bringIn():void
@@ -114,10 +116,17 @@
 			backgroundLayer.addChild(lblDebugBackground);
 			backgroundLayer.addChild(txtDebugMessage);
 			backgroundLayer.addChild(btnDebugChangeLocation);
+			backgroundLayer.addChild(btnDebugHealth);
 			txtDebugMessage.x = lblDebugBackground.x;
 			txtDebugMessage.y = lblDebugBackground.y;
 			btnDebugChangeLocation.addEventListener(MouseEvent.CLICK, fireChangeLocationEvent);
+			btnDebugHealth.addEventListener(MouseEvent.CLICK, fullHealth);
 			//updateHomeTheme(new Event(Event.CHANGE));
+		}
+		
+		private function fullHealth(e:MouseEvent)
+		{
+			manage.player.curHealth = manage.player.health;
 		}
 		
 		private function initWithProperBiome():void
