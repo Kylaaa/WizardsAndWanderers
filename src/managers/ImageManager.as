@@ -40,6 +40,7 @@ package managers
 		[Embed(source = "../../lib/sprites/navigation/panels/backgroundWetlands.png", 			mimeType = "image/png")] 	private static var ImgBackgroundWetlands:Class; 
 		[Embed(source = "../../lib/sprites/navigation/panels/titleScreen.png", 					mimeType = "image/png")] 	private static var ImgTitleScreen:Class; 
 		[Embed(source = "../../lib/sprites/navigation/panels/characterEssencePanel.png", 		mimeType = "image/png")] 	private static var ImgCharacterEssencePanel:Class;
+		[Embed(source = "../../lib/sprites/navigation/panels/essenceDemoPanel.png", 			mimeType = "image/png")] 	private static var ImgEssenceDemoPanel:Class;
 		[Embed(source = "../../lib/sprites/navigation/panels/characterPlayerPanel.png", 		mimeType = "image/png")] 	private static var ImgCharacterPlayerPanel:Class;
 		[Embed(source = "../../lib/sprites/navigation/panels/characterSmallPanel.png", 			mimeType = "image/png")] 	private static var ImgCharacterSmallPanel:Class;
 		[Embed(source = "../../lib/sprites/navigation/panels/exitIcon.png", 					mimeType = "image/png")] 	private static var ImgIconExit:Class;
@@ -194,6 +195,7 @@ package managers
 		
 		public static function TitleScreen():Bitmap									{ return new ImgTitleScreen(); }
 		public static function CharacterEssencePanel():Bitmap						{ return new ImgCharacterEssencePanel(); }
+		public static function EssenceDemoPanel():Bitmap							{ return new ImgEssenceDemoPanel(); }
 		public static function CharacterPlayerPanel():Bitmap						{ return new ImgCharacterPlayerPanel(); }
 		public static function CharacterSmallPanel():Bitmap							{ return new ImgCharacterSmallPanel(); }
 		public static function IconCastle():Bitmap 									{ return new ImgIconCastle(); }				//navigation icons
@@ -352,6 +354,7 @@ package managers
 			images["backgroundWetlands.png"]	= BackgroundWetlands;
 			images["titleScreen.png"]			= TitleScreen;
 			images["characterEssencePanel.png"] = CharacterEssencePanel;
+			images["essenceDemoPanel.png"] 		= EssenceDemoPanel;
 			images["characterPlayerPanel.png"]	= CharacterPlayerPanel;
 			images["characterSmallPanel.png"]	= CharacterSmallPanel;
 			

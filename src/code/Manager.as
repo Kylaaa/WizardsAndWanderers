@@ -221,11 +221,17 @@
 			var equipmentScale:int = 1.75;
 			
 			this.addChild(cePanel);
-			cePanel.addChild(ImageManager.CharacterEssencePanel());
+			/*cePanel.addChild(ImageManager.CharacterEssencePanel());
 			cePanel.x = 225; //use relative to center and stuff
 			cePanel.y = characterPanelPosition; //use relative to center and stuff
 			cePanel.width *= 2.75;
-			cePanel.height *= 2.5;
+			cePanel.height *= 2.5;*/
+			
+			cePanel.addChild(ImageManager.EssenceDemoPanel());
+			cePanel.x = 225; //use relative to center and stuff
+			cePanel.y = characterPanelPosition; //use relative to center and stuff
+			cePanel.width *= 1.35;
+			//cePanel.height *= 2.5;
 			
 			this.addChild(cpPanel);
 			cpPanel.addChild(ImageManager.CharacterPlayerPanel());
