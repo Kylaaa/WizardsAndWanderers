@@ -22,11 +22,13 @@
 		public function bringIn():void
 		{
 			trace("bringing in: " + this);
+			Tweener.addTween(this, { alpha:1.0, time:1.0, transition:"linear"} );
 		}
 		
 		public function bringOut():void
 		{
-			cleanUp();
+			Tweener.addTween(this, { alpha:0.0, time:1.0, transition:"linear", onComplete:cleanUp } );
+			//cleanUp();
 		}
 		
 		public function cleanUp():void

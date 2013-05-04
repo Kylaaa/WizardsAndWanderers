@@ -84,7 +84,11 @@
 			txt_health = new TextField();
 			txt_health.setTextFormat(ShapesManager.textFormat);
 		}
-		
+		override public function bringIn():void 
+		{
+			super.bringIn();
+			initialize();
+		}
 		public function initialize():void
 		{			
 			// adds multiple drawing layers

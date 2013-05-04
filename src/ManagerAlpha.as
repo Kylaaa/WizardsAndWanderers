@@ -3,8 +3,10 @@
 	import code.*;
 	import flash.display.Bitmap;
 	import flash.display.MovieClip;
+	import flash.events.TimerEvent;
 	import flash.filesystem.File;
 	import flash.text.TextField;
+	import flash.utils.Timer;
 	import gps.Database;
 	import gps.Mobile;
 	import managers.ImageManager;
@@ -196,20 +198,12 @@
 				currentScreen.bringOut();
 			}
 			
-			if(screenClass == Battle)
-			{
-				battle = new Battle(this);
-				currentScreen = battle;
-				addChild(battle);
-				battle.bringIn();
-				battle.initialize();
-			} 
-			else 
-			{
-				currentScreen = new screenClass(this);
-				addChild(currentScreen);
-				currentScreen.bringIn();
-			}
+		
+			currentScreen = new screenClass(this);
+			currentScreen.alpha = 0.0;
+			addChild(currentScreen);
+			currentScreen.bringIn();
+			
 			
 		}
 		public function CreateNotification(notification:String):void
