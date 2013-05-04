@@ -161,6 +161,20 @@ package managers
 		
 		//HEROES
 		//need to import the heroes here
+		[Embed(source = "../../lib/sprites/heroes/characters/wizardBody1.png", 					mimeType = "image/png")] 	private static var ImgWizardBody1:Class; 
+		[Embed(source = "../../lib/sprites/heroes/characters/wizardBody2.png", 					mimeType = "image/png")] 	private static var ImgWizardBody2:Class; 
+		[Embed(source = "../../lib/sprites/heroes/characters/druidBody1.png", 					mimeType = "image/png")] 	private static var ImgDruidBody1:Class;
+		//armor
+		[Embed(source = "../../lib/sprites/heroes/armor/wizardGarb1.png", 						mimeType = "image/png")] 	private static var ImgWizardGarb1:Class; 
+		[Embed(source = "../../lib/sprites/heroes/armor/wizardGarb2.png", 						mimeType = "image/png")] 	private static var ImgWizardGarb2:Class; 
+		[Embed(source = "../../lib/sprites/heroes/armor/druidGarb1.png", 						mimeType = "image/png")] 	private static var ImgDruidGarb1:Class;
+		//weapons
+		[Embed(source = "../../lib/sprites/heroes/weapons/wizardStaff.png", 					mimeType = "image/png")] 	private static var ImgWizardStaff:Class;
+		[Embed(source = "../../lib/sprites/heroes/weapons/wizardStaff2.png", 					mimeType = "image/png")] 	private static var ImgWizardStaff2:Class; 
+		[Embed(source = "../../lib/sprites/heroes/weapons/druidStaff1.png", 					mimeType = "image/png")] 	private static var ImgDruidStaff1:Class;
+		//other
+		[Embed(source = "../../lib/sprites/heroes/other/purpleOrb.png", 						mimeType = "image/png")] 	private static var ImgPurpleOrb:Class; 
+		[Embed(source = "../../lib/sprites/heroes/other/raven.png", 							mimeType = "image/png")] 	private static var ImgRaven:Class;
 		
 		//accessors
 		public static function Nothing():Bitmap										{ return new Bitmap(); }					//debug graphics
@@ -195,7 +209,7 @@ package managers
 		public static function LargeButtonSwamp():Bitmap 							{ return new ImgButtonLargeSwamp(); }
 		public static function LargeButtonWetlands():Bitmap 						{ return new ImgButtonLargeWetlands(); }
 		
-		
+		//enemies
 		public static function EnemyCanyonBossRagenFyre():Bitmap					{ return new ImgCanyonBossRagenFyre(); }	//enemies
 		public static function EnemyCanyonBossRagenFyre2():Bitmap					{ return new ImgCanyonBossRagenFyre2(); }
 		public static function EnemyCanyonCommonBurrower():Bitmap					{ return new ImgCanyonCommonBurrower(); }
@@ -300,10 +314,22 @@ package managers
 		public static function EnemyWetlandsUncommonHobtaFighter():Bitmap			{ return new ImgWetlandsUncommonHobtaFighter(); }
 		public static function EnemyWetlandsUncommonWolfAlphaWhite():Bitmap			{ return new ImgWetlandsUncommonWolfAlphaWhite(); }
 		
-		
-		
-		
-		
+		//body
+		public static function WizardBody1():Bitmap									{ return new ImgWizardBody1(); }
+		public static function WizardBody2():Bitmap									{ return new ImgWizardBody2(); }
+		public static function DruidBody1():Bitmap									{ return new ImgDruidBody1(); }
+		//armor
+		public static function WizardGarb1():Bitmap									{ return new ImgWizardGarb1(); }
+		public static function WizardGarb2():Bitmap									{ return new ImgWizardGarb2(); }
+		public static function DruidGarb1():Bitmap									{ return new ImgDruidGarb1(); }		
+		//weapon
+		public static function WizardStaff():Bitmap									{ return new ImgWizardStaff(); }
+		public static function WizardStaff2():Bitmap								{ return new ImgWizardStaff2(); }
+		public static function DruidStaff1():Bitmap									{ return new ImgDruidStaff1(); }
+		//other
+		public static function PurpleOrb():Bitmap									{ return new ImgPurpleOrb(); }
+		public static function Raven():Bitmap										{ return new ImgRaven(); }
+				
 		private static var images:Object = new Array();
 			images["nothing"]					= Nothing;				//debug
 			images["traffic-cones.png"] 		= MissingImage;
@@ -319,10 +345,32 @@ package managers
 			images["backgroundWetlands.png"]	= BackgroundWetlands;
 			images["titleScreen.png"]			= TitleScreen;
 			images["characterEssencePanel.png"] = CharacterEssencePanel;
+			images["characterPlayerPanel.png"]	= CharacterPlayerPanel;
+			images["characterSmallPanel.png"]	= CharacterSmallPanel;
+			
+			//character
+			images["wizardBody1.png"] 			= WizardBody1;
+			images["wizardBody2.png"]			= WizardBody2;
+			images["druidBody1.png"]			= DruidBody1;
+			
+			//armor
+			images["wizardGarb1.png"] 			= WizardGarb1;
+			images["wizardGarb2.png"]			= WizardGarb2;
+			images["druidGarb1.png"]			= DruidGarb1;
+			
+			//weapon
+			images["wizardStaff.png"] 			= WizardStaff;
+			images["wizardStaff2.png"]			= WizardStaff2;
+			images["druidStaff1.png"]			= DruidStaff1;
+			//other
+			images["purpleOrb.png"]				= PurpleOrb;
+			images["raven.png"]					= Raven;
+			
 			images["iconCastle.png"]			= IconCastle;           //navigation icons
 			images["iconScroll.png"]			= IconScroll;
 			images["iconWizard.png"]			= IconWizard;
 			
+			//enemies
 			images["canyon/boss/ragenfyreFLAMEON.png"]				= EnemyCanyonBossRagenFyre;					//enemies
 			images["canyon/boss/ragenfyreTheImmortal.png"] 			= EnemyCanyonBossRagenFyre2;				//NAMING FORMAT NEEDS TO MATCH 
 			images["canyon/common/burrower.png"] 					= EnemyCanyonCommonBurrower;				// 	ONLINE DATABASE IMAGE PATH
@@ -426,7 +474,6 @@ package managers
 			images["wetlands/uncommon/drakkonHonorGuard.png"] 		= EnemyWetlandsUncommonDrakkonHonorGuard;	
 			images["wetlands/uncommon/hobtaFighter.png"] 			= EnemyWetlandsUncommonHobtaFighter;	
 			images["wetlands/uncommon/wolfAlphaWhite.png"] 			= EnemyWetlandsUncommonWolfAlphaWhite;	
-				
 			
 			
 		public static function getImageByName(fileName:String):Bitmap

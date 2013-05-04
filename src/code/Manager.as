@@ -1,6 +1,7 @@
 ﻿package code
 {
 
+	import flash.display.Bitmap;
 	import flash.display.MovieClip;
 	import flash.events.KeyboardEvent;
 	import flash.text.engine.Kerning;
@@ -23,12 +24,38 @@
 		//private var btn_Essences:SimpleButton;
 		//private var btn_Stats:SimpleButton;
 		//private var btn_back:SimpleButton;
+		
 		public var exit_btn:SimpleButton;
+		private var btn_inventoryWeapon:SimpleButton;
+		private var btn_inventoryGarb:SimpleButton;
+		
 		public var backgroundLayer:Sprite = new Sprite();	// background images
 		
+		public var characterBody:Sprite = new Sprite();
+		public var characterBodyImage:Bitmap = new Bitmap();
+		//public var characterArmor:Sprite = new Sprite();
+		//public var ArmorImage:Bitmap = new Bitmap();
+		public var characterWeapon:Sprite = new Sprite();
+		public var characterWeaponImage:Bitmap = new Bitmap();
+		public var characterOther:Sprite = new Sprite();
+		public var characterOtherImage:Bitmap = new Bitmap();
+		
+		public var armor:Sprite = new Sprite();
+		public var ArmorImage:Bitmap = new Bitmap();
+		public var weapon:Sprite = new Sprite();
+		public var weaponImage:Bitmap = new Bitmap();
+		public var other:Sprite = new Sprite();
+		public var otherImage:Bitmap = new Bitmap();
+		
+		private var smallPanel:Sprite = new Sprite(); //use for the width and height
 		private var cePanel:Sprite = new Sprite();
 		private var cpPanel:Sprite = new Sprite();
-		private var csPanel:Sprite = new Sprite();
+		private var csPanel_weapon:SimpleButton= new SimpleButton();
+		private var csPanel_garb:Sprite = new Sprite();
+		private var csPanel_other:Sprite = new Sprite();
+		
+		private var characterPanelPosition:int = 100;
+		private var characterOffset:int = 50;
 		
 		public function Manager(newManager:ManagerAlpha)
 		{
@@ -37,16 +64,18 @@
 			// constructor code
 			addChild(backgroundLayer);
 			backgroundLayer.addChild(manage.biomeBackground);
-			exit_btn = ShapesManager.drawButton(0, -100, 200, 100, "Back", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_LEFT, ShapesManager.JUSTIFY_BOTTOM);
 			
-			//foregroundLayer.addChild(attackBtn);
+			exit_btn = ShapesManager.drawButton(0, -100, 200, 100, "Back", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_LEFT, ShapesManager.JUSTIFY_BOTTOM);
+			var scale = .75;
+			//var scale = .5;
+			//btn_inventoryWeapon = ShapesManager.drawButtonFromImage(225, -150, 200 * scale, 100 * scale, "Weapons", "characterSmallPanel.png", ShapesManager.JUSTIFY_LEFT, ShapesManager.JUSTIFY_BOTTOM);
+			btn_inventoryGarb = ShapesManager.drawButton(350, -150, 200 * scale, 100 * scale, "Garbs", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_LEFT, ShapesManager.JUSTIFY_BOTTOM);
 			
 			//Set the default weapon
 			var tempWeapon:Weapon = new Weapon(manager,1,true,2,"Wooden Staff",true,15,1.75,0);
 			addChild(tempWeapon);
 			tempWeapon.x = 205;
 			tempWeapon.y = 95;
-
 			
 			//Set the default armor
 			var tempStatArray:Array;
@@ -68,14 +97,29 @@
 		public override function bringIn():void
 		{
 			super.bringIn();
+			bringIn_Panels();
+			
 			this.addChild(exit_btn);
 			exit_btn.addEventListener(MouseEvent.CLICK, onExit);
-			panels();
+			
+			csPanel_weapon.addEventListener(MouseEvent.CLICK, onWeapon);
+			
+			csPanel_weapon.addEventListener(MouseEvent.CLICK, onWeapon);
+			this.addChild(btn_inventoryGarb);
+			
+			bringIn_Character();
+			
 		}
 		
 		private function onExit(e:MouseEvent):void
 		{
 			manage.displayScreen(MainScreen);
+		}
+		
+		private function onWeapon(e:MouseEvent)
+		{
+			var weaponInventory = new InventoryScreen(manager, "weapon"); 
+			manage.addChild(weaponInventory);
 		}
 		
 		public override function cleanUp():void
@@ -84,29 +128,112 @@
 			super.cleanUp();
 		}
 		
-		private function panels():void
+		private function bringIn_Character()
 		{
+			var scale = 3;
+			var x = 20;
+			
+			this.addChild(characterBody);
+			characterBodyImage = ImageManager.WizardBody1();
+			characterBody.addChild(characterBodyImage);
+			characterBodyImage.x = x;
+			characterBodyImage.y = characterPanelPosition + characterOffset;
+			characterBodyImage.width *= scale;
+			characterBodyImage.height *= scale;
+			
+			this.addChild(characterWeapon);
+			characterWeaponImage = ImageManager.WizardStaff();
+			characterWeapon.addChild(characterWeaponImage);
+			characterWeaponImage.x = x;
+			characterWeaponImage.y = characterPanelPosition + characterOffset;
+			characterWeaponImage.width *= scale;
+			characterWeaponImage.height *= scale;
+			
+			this.addChild(characterOther);
+			characterOtherImage = ImageManager.PurpleOrb();
+			characterOther.addChild(characterOtherImage);
+			characterOtherImage.x = x;
+			characterOtherImage.y = characterPanelPosition + characterOffset;
+			characterOtherImage.width *= scale;
+			characterOtherImage.height *= scale;
+		}
+		
+		private function bringIn_Panels():void
+		{
+			var panelScale:int = 2.5;
+			var equipmentScale:int = 1.75;
+			
 			this.addChild(cePanel);
 			cePanel.addChild(ImageManager.CharacterEssencePanel());
 			cePanel.x = 225; //use relative to center and stuff
-			cePanel.y = 100; //use relative to center and stuff
-			cePanel.width *= 2.5;
+			cePanel.y = characterPanelPosition; //use relative to center and stuff
+			cePanel.width *= 2.75;
 			cePanel.height *= 2.5;
 			
 			this.addChild(cpPanel);
 			cpPanel.addChild(ImageManager.CharacterPlayerPanel());
 			cpPanel.x = 20; //use relative to center and stuff
-			cpPanel.y = 100; //use relative to center and stuff
+			cpPanel.y = characterPanelPosition; //use relative to center and stuff
 			cpPanel.width *= 2.5;
 			cpPanel.height *= 2.5;
-				
-			this.addChild(csPanel);
-			csPanel.addChild(ImageManager.CharacterSmallPanel());
-			csPanel.x = 225; //use relative to center and stuff
-			csPanel.y = 225; //use relative to center and stuff
-			csPanel.width *= 2.5;
-			csPanel.height *= 2.5;
 			
+			var smallPanelY:int = 225;
+			//this.addChild(csPanel_weapon);
+			//csPanel_weapon.addChild(ImageManager.CharacterSmallPanel());
+			//csPanel_weapon.x = 225; //use relative to center and stuff
+			//csPanel_weapon.y = smallPanelY; //use relative to center and stuff
+			//csPanel_weapon.width *= 2.5;
+			//csPanel_weapon.height *= 2.5;
+			
+			this.addChild(smallPanel);
+			smallPanel.addChild(ImageManager.CharacterSmallPanel());
+			//smallPanel.x = 225; //use relative to center and stuff
+			//smallPanel.y = smallPanelY; //use relative to center and stuff
+			smallPanel.width *= 2.5;
+			smallPanel.height *= 2.5;
+			
+			csPanel_weapon = ShapesManager.drawButtonFromImage(225, smallPanelY, smallPanel.width, smallPanel.height, "Weapons", "characterSmallPanel.png");
+			//csPanel_weapon = ShapesManager.drawButton(225, -150, 200 * scale, 100 * scale, "Weapons", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_LEFT, ShapesManager.JUSTIFY_BOTTOM);
+			this.addChild(csPanel_weapon);
+			
+			this.addChild(weapon);
+			weaponImage = ImageManager.WizardStaff();
+			weapon.addChild(weaponImage);
+			weapon.x = 200; //use relative to center and stuff
+			weapon.y = 220; //use relative to center and stuff
+			weapon.width *= 1.75;
+			weapon.height *= 1.75;
+			weapon.mouseEnabled = false;
+			
+			this.addChild(csPanel_garb);
+			csPanel_garb.addChild(ImageManager.CharacterSmallPanel());
+			csPanel_garb.x = 350; //use relative to center and stuff
+			csPanel_garb.y = smallPanelY; //use relative to center and stuff
+			csPanel_garb.width *= 2.5;
+			csPanel_garb.height *= 2.5;
+			
+			this.addChild(armor);
+			ArmorImage = ImageManager.WizardGarb1();
+			armor.addChild(ArmorImage);
+			armor.x = 355; //use relative to center and stuff
+			armor.y = 235; //use relative to center and stuff
+			armor.width *= 1.75;
+			armor.height *= 1.75;
+			
+			this.addChild(csPanel_other);
+			csPanel_other.addChild(ImageManager.CharacterSmallPanel());
+			csPanel_other.x = 475; //use relative to center and stuff
+			csPanel_other.y = smallPanelY; //use relative to center and stuff
+			csPanel_other.width *= 2.5;
+			csPanel_other.height *= 2.5;
+			
+			this.addChild(other);
+			otherImage = ImageManager.PurpleOrb();
+			other.addChild(otherImage);
+			other.x = 500; //use relative to center and stuff
+			other.y = 235; //use relative to center and stuff
+			other.width *= 1.75;
+			other.height *= 1.75;
 		}
 		
 		//buttons should be on screens now for example Character
