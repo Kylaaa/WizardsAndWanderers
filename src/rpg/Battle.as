@@ -76,6 +76,8 @@
 		
 		private var spellCrit:Boolean = false;
 		
+		private var gameOver:Boolean;
+		
 		public function Battle(newManager:ManagerAlpha)
 		{
 			super(newManager);
@@ -85,6 +87,8 @@
 			
 			txt_health = new TextField();
 			txt_health.setTextFormat(ShapesManager.textFormat);
+			
+			gameOver = false;
 		}
 		override public function bringIn():void 
 		{
@@ -601,7 +605,10 @@
 						enemies[i] = null;
 						
 						if (i <= 3 && enemies[i + 4] != null)
-						{ 	enemies[i] = enemies[i + 4];
+						{ 	
+							enemies[i] = enemies[i + 4];
+							// have to increment now or the last enemy isnt seen
+							currEnemyAmount++;
 							enemies[i + 4] = null;
 							
 							//enemies[i].moveForward = true;
@@ -698,61 +705,63 @@
 			
 			var movingEnemies:Boolean = false; // used to not allow the player to go if an enemy is moving forward
 			
-			// following is what can happen during the players turn
-			if(playerTurn)
+			if (!gameOver)
 			{
-				if(!listening)
+				// following is what can happen during the players turn
+				if(playerTurn)
 				{
-					listening = true;
-					
-					attackBtn.addEventListener(MouseEvent.CLICK, onAttack);
-					magicBtn.addEventListener(MouseEvent.CLICK, onMagic);
-					fleeBtn.addEventListener(MouseEvent.CLICK, onFlee);
-				}
-				
-				if(attacking || casting)	// if you're fighting then damage enemies with attacks
-				{
-					damagingEnemies();
-				}
-				else if(fleeing)			// otherwise run away
-				{
-					runningAway();
-				}
-				
-				// makes sure everything is dead if it should be
-				//while(checkDeath() == true)
-				//{
-				checkDeath();
-				//}
-			}
-			else		// if it's the enemies turn remove the ability to click buttons
-			{
-				if(listening)
-				{
-					listening = false;
-					attackBtn.removeEventListener(MouseEvent.CLICK, onAttack);
-					magicBtn.removeEventListener(MouseEvent.CLICK, onMagic);
-					fleeBtn.removeEventListener(MouseEvent.CLICK, onFlee);
-				}
-				
-				// checks to see if any back enemies need to move forward
-				for(i = 0; i < enemies.length; i++)
-				{
-					if(enemies[i] != null)
+					if(!listening)
 					{
-						enemies[i].update();
+						listening = true;
+						
+						attackBtn.addEventListener(MouseEvent.CLICK, onAttack);
+						magicBtn.addEventListener(MouseEvent.CLICK, onMagic);
+						fleeBtn.addEventListener(MouseEvent.CLICK, onFlee);
 					}
-				}
-				
-				// makes sure everything is dead if it should be
-				//while(checkDeath() == true)
-				//{
+					
+					if(attacking || casting)	// if you're fighting then damage enemies with attacks
+					{
+						damagingEnemies();
+					}
+					else if(fleeing)			// otherwise run away
+					{
+						runningAway();
+					}
+					
+					// makes sure everything is dead if it should be
+					//while(checkDeath() == true)
+					//{
 					checkDeath();
-				//}
-				
-				playerTurn = true;
+					//}
+				}
+				else		// if it's the enemies turn remove the ability to click buttons
+				{
+					if(listening)
+					{
+						listening = false;
+						attackBtn.removeEventListener(MouseEvent.CLICK, onAttack);
+						magicBtn.removeEventListener(MouseEvent.CLICK, onMagic);
+						fleeBtn.removeEventListener(MouseEvent.CLICK, onFlee);
+					}
+					
+					// checks to see if any back enemies need to move forward
+					for(i = 0; i < enemies.length; i++)
+					{
+						if(enemies[i] != null)
+						{
+							enemies[i].update();
+						}
+					}
+					
+					// makes sure everything is dead if it should be
+					//while(checkDeath() == true)
+					//{
+						checkDeath();
+					//}
+					
+					playerTurn = true;
+				}
 			}
-			
 		}
 		
 		// Destroys everything in the battle screen
@@ -782,6 +791,7 @@
 		
 		public function endBattle():void
 		{
+			gameOver = true;
 			manage.displayScreen(MainScreen);
 		}
 		
