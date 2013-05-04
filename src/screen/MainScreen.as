@@ -1,5 +1,6 @@
 ﻿package screen
 {
+	import caurina.transitions.Tweener;
 	import flash.display.Bitmap;
 	import flash.display.MovieClip;
 	import flash.events.GeolocationEvent;
@@ -126,16 +127,33 @@
 		
 		private function initWithProperBiome():void
 		{
-			if (backgroundLayer.contains(backgroundImg)){	backgroundLayer.removeChild(backgroundImg); }
-			if (buttonLayer.contains(encounter_btn)) 	{	buttonLayer.removeChild(encounter_btn);	encounter_btn.removeEventListener(MouseEvent.CLICK, onEncounter); }
-			if (buttonLayer.contains(explore_btn))		{	buttonLayer.removeChild(explore_btn);	explore_btn.removeEventListener(MouseEvent.CLICK, onExplore);	}
-			if (buttonLayer.contains(exit_btn))			{	buttonLayer.removeChild(exit_btn);		exit_btn.removeEventListener(MouseEvent.CLICK, onExit);			}
-			
+			//fade out the background
+			if (backgroundLayer.contains(backgroundImg))	{	Tweener.addTween(backgroundImg, { 	alpha: 0.0, time: 0.5, onComplete: cleanUpBackgroundImage 	} );	}
+			if (buttonLayer.contains(encounter_btn)) 		{	Tweener.addTween(encounter_btn, { 	alpha: 0.0, time: 0.5, onComplete: cleanUpButtonEncounter 	} );	}
+			if (buttonLayer.contains(explore_btn))			{	Tweener.addTween(explore_btn, 	{ 	alpha: 0.0, time: 0.5, onComplete: cleanUpButtonExplore   	} ); 	}
+			if (buttonLayer.contains(exit_btn))				{	Tweener.addTween(exit_btn, 		{ 	alpha: 0.0, time: 0.5, onComplete: cleanUpButtonExit 		} );	}
+			else
+			{
+				fadeInNewBiome();
+			}
+		}
+		
+		private function cleanUpBackgroundImage():void	{	backgroundLayer.removeChild(backgroundImg);	}
+		private function cleanUpButtonEncounter():void	{	buttonLayer.removeChild(encounter_btn);	encounter_btn.removeEventListener(MouseEvent.CLICK, onEncounter); 						}
+		private function cleanUpButtonExplore():void	{	buttonLayer.removeChild(explore_btn);	explore_btn.removeEventListener(MouseEvent.CLICK, 	onExplore); 						}
+		private function cleanUpButtonExit():void		{	buttonLayer.removeChild(exit_btn);		exit_btn.removeEventListener(MouseEvent.CLICK, 		onExit);		fadeInNewBiome();	}
+
+		private function fadeInNewBiome():void
+		{
 			trace("Current Biome Type: " + manage.device.CurrentBiome.Type);
 			
 			encounter_btn =	ShapesManager.drawButton(-100, -75, 200, 75, "Encounter", 	manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_CENTER_Y);
 			explore_btn =	ShapesManager.drawButton(-100,   0, 200, 75, "Explore", 	manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_CENTER_Y);
 			exit_btn = 		ShapesManager.drawButton(-100,  75, 200, 75, "Exit",		manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_CENTER_Y);
+			
+			encounter_btn.alpha = 0.0;
+			explore_btn.alpha = 0.0;
+			exit_btn.alpha = 0.0;
 			
 			if (manage.device.IsReady)
 			{
@@ -160,7 +178,7 @@
 			}
 			else {	backgroundImg = ImageManager.BackgroundCavern(); }
 			
-			
+			backgroundImg.alpha = 0.0;
 			backgroundImg.width = stage.stageWidth;
 			backgroundImg.height = stage.stageHeight;
 			
@@ -172,6 +190,12 @@
 			buttonLayer.addChild(encounter_btn);
 			buttonLayer.addChild(explore_btn);
 			buttonLayer.addChild(exit_btn);
+			
+			//fade it in nicely
+			Tweener.addTween(backgroundImg, { delay: 1.0, time: 0.5, alpha:1.0 } );
+			Tweener.addTween(encounter_btn, { delay: 1.0, time: 0.5, alpha:1.0 } );
+			Tweener.addTween(explore_btn, 	{ delay: 1.0, time: 0.5, alpha:1.0 } );
+			Tweener.addTween(exit_btn, 		{ delay: 1.0, time: 0.5, alpha:1.0 } );
 			
 			encounter_btn.addEventListener(MouseEvent.CLICK, onEncounter);
 			explore_btn.addEventListener(MouseEvent.CLICK, onExplore);

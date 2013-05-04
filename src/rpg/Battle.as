@@ -750,7 +750,7 @@
 		{	
 			var i:int;
 			
-			characterLayer.removeChild(player);
+			if (characterLayer.contains(player)) characterLayer.removeChild(player);
 			
 			// removes enemies
 			for(i = 0; i < enemies.length; i++)

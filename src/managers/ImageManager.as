@@ -23,6 +23,7 @@ package managers
 		[Embed(source = "../../lib/sprites/navigation/buttons/buttonLargeMountain.png", 		mimeType = "image/png")] 	private static var ImgButtonLargeMountains:Class; 
 		[Embed(source = "../../lib/sprites/navigation/buttons/buttonLargePlains.png", 			mimeType = "image/png")] 	private static var ImgButtonLargePlains:Class; 
 		[Embed(source = "../../lib/sprites/navigation/buttons/buttonLargeSavannah.png", 		mimeType = "image/png")] 	private static var ImgButtonLargeSavannah:Class; 
+		[Embed(source = "../../lib/sprites/navigation/buttons/buttonLargeSwamp.png", 			mimeType = "image/png")] 	private static var ImgButtonLargeSwamp:Class; 
 		[Embed(source = "../../lib/sprites/navigation/buttons/buttonLargeWetlands.png", 		mimeType = "image/png")] 	private static var ImgButtonLargeWetlands:Class; 
 		[Embed(source = "../../lib/sprites/navigation/buttons/iconCastle.png", 					mimeType = "image/png")] 	private static var ImgIconCastle:Class; 
 		[Embed(source = "../../lib/sprites/navigation/buttons/iconScroll.png", 					mimeType = "image/png")] 	private static var ImgIconScroll:Class; 
@@ -35,6 +36,7 @@ package managers
 		[Embed(source = "../../lib/sprites/navigation/panels/backgroundMountain.png", 			mimeType = "image/png")] 	private static var ImgBackgroundMountain:Class; 
 		[Embed(source = "../../lib/sprites/navigation/panels/backgroundPlains.png", 			mimeType = "image/png")] 	private static var ImgBackgroundPlains:Class; 
 		[Embed(source = "../../lib/sprites/navigation/panels/backgroundSavannah.png", 			mimeType = "image/png")] 	private static var ImgBackgroundSavannah:Class; 
+		[Embed(source = "../../lib/sprites/navigation/panels/backgroundSwamp.png",	 			mimeType = "image/png")] 	private static var ImgBackgroundSwamp:Class; 
 		[Embed(source = "../../lib/sprites/navigation/panels/backgroundWetlands.png", 			mimeType = "image/png")] 	private static var ImgBackgroundWetlands:Class; 
 		[Embed(source = "../../lib/sprites/navigation/panels/titleScreen.png", 					mimeType = "image/png")] 	private static var ImgTitleScreen:Class; 
 		[Embed(source = "../../lib/sprites/navigation/panels/characterEssencePanel.png", 		mimeType = "image/png")] 	private static var ImgCharacterEssencePanel:Class;
@@ -171,6 +173,7 @@ package managers
 		public static function BackgroundMountains():Bitmap							{ return new ImgBackgroundMountain(); }
 		public static function BackgroundPlains():Bitmap							{ return new ImgBackgroundPlains(); }
 		public static function BackgroundSavannah():Bitmap							{ return new ImgBackgroundSavannah(); }
+		public static function BackgroundSwamp():Bitmap								{ return new ImgBackgroundSwamp(); }
 		public static function BackgroundWetlands():Bitmap							{ return new ImgBackgroundWetlands(); }
 		
 		public static function TitleScreen():Bitmap									{ return new ImgTitleScreen(); }
@@ -189,6 +192,7 @@ package managers
 		public static function LargeButtonMountains():Bitmap 						{ return new ImgButtonLargeMountains(); }
 		public static function LargeButtonPlains():Bitmap 							{ return new ImgButtonLargePlains(); }
 		public static function LargeButtonSavannah():Bitmap 						{ return new ImgButtonLargeSavannah(); }
+		public static function LargeButtonSwamp():Bitmap 							{ return new ImgButtonLargeSwamp(); }
 		public static function LargeButtonWetlands():Bitmap 						{ return new ImgButtonLargeWetlands(); }
 		
 		
@@ -311,6 +315,7 @@ package managers
 			images["backgroundMountains.png"]	= BackgroundMountains;
 			images["backgroundPlains.png"]		= BackgroundPlains;
 			images["backgroundSavannah.png"]	= BackgroundSavannah;
+			images["backgroundSwamp.png"]		= BackgroundSwamp;
 			images["backgroundWetlands.png"]	= BackgroundWetlands;
 			images["titleScreen.png"]			= TitleScreen;
 			images["characterEssencePanel.png"] = CharacterEssencePanel;

@@ -32,6 +32,7 @@ package managers
 		public static const THEME_MOUNTAINS:String 	= "Mountains";
 		public static const THEME_PLAINS:String 	= "Plains";
 		public static const THEME_SAVANNAH:String 	= "Savanna";
+		public static const THEME_SWAMP:String   	= "Swamp";
 		public static const THEME_WETLANDS:String 	= "Wetlands";
 		
 		public function ShapesManager() 
@@ -101,9 +102,10 @@ package managers
 				case (THEME_MOUNTAINS):	backgroundImage = ImageManager.LargeButtonMountains();	break;
 				case (THEME_PLAINS):	backgroundImage = ImageManager.LargeButtonPlains();		break;
 				case (THEME_SAVANNAH):	backgroundImage = ImageManager.LargeButtonSavannah();	break;
+				case (THEME_SWAMP):		backgroundImage = ImageManager.LargeButtonSwamp();		break;
 				case (THEME_WETLANDS):	backgroundImage = ImageManager.LargeButtonWetlands();	break;
 				case ("exit"):			backgroundImage = ImageManager.IconExit();				break;
-				default:				backgroundImage = ImageManager.CharacterEssencePanel();		break;
+				default:				backgroundImage = ImageManager.CharacterEssencePanel();	break;
 			}
 				backgroundImage.x = 0;
 				backgroundImage.y = 0;
@@ -146,6 +148,7 @@ package managers
 				case (THEME_MOUNTAINS):	backgroundImage = ImageManager.LargeButtonMountains();	break;
 				case (THEME_PLAINS):	backgroundImage = ImageManager.LargeButtonPlains();		break;
 				case (THEME_SAVANNAH):	backgroundImage = ImageManager.LargeButtonSavannah();	break;
+				case (THEME_SWAMP):		backgroundImage = ImageManager.LargeButtonSwamp();		break;
 				case (THEME_WETLANDS):	backgroundImage = ImageManager.LargeButtonWetlands();	break;
 				case ("exit"):			backgroundImage = ImageManager.IconExit();				break;
 				default:				backgroundImage = ImageManager.CharacterEssencePanel();	break;
@@ -191,6 +194,7 @@ package managers
 				case (THEME_MOUNTAINS):	backgroundImage = ImageManager.LargeButtonMountains();	break;
 				case (THEME_PLAINS):	backgroundImage = ImageManager.LargeButtonPlains();		break;
 				case (THEME_SAVANNAH):	backgroundImage = ImageManager.LargeButtonSavannah();	break;
+				case (THEME_SWAMP):		backgroundImage = ImageManager.LargeButtonSwamp();		break;
 				case (THEME_WETLANDS):	backgroundImage = ImageManager.LargeButtonWetlands();	break;
 				case ("exit"):			backgroundImage = ImageManager.IconExit();				break;
 				default:				backgroundImage = ImageManager.CharacterEssencePanel();		break;
@@ -240,6 +244,21 @@ package managers
 			return aButton;
 		}
 		
+		public static function drawButtonFromImage(posX:Number, posY:Number, w:Number, h:Number, caption:String = null, imageSRC:String = "traffic-cones.png", xJustify:String = JUSTIFY_LEFT, yJustify:String = JUSTIFY_TOP):MovieClip
+		{
+			var theImage:Bitmap = ImageManager.getImageByName(imageSRC);
+				theImage.x = 0;
+				theImage.y = 0;
+				theImage.width = w;
+				theImage.height = h;
+			var aButton:MovieClip = new MovieClip();
+				aButton.addChild(theImage);
+				aButton.x = getJustifyAmount(xJustify) + posX;
+				aButton.y = getJustifyAmount(yJustify) + posY;
+				aButton.visible = true;
+			
+			return aButton;
+		}
 		public static function drawText(caption:String, posX:Number, posY:Number, w:Number, h:Number , xJustify:String = JUSTIFY_LEFT, yJustify:String = JUSTIFY_TOP, verticalAlign:Boolean = false):TextField
 		{
 			var someText:TextField = new TextField();
