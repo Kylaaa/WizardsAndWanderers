@@ -246,14 +246,30 @@ package managers
 			return aButton;
 		}
 		
-		public static function drawButtonFromImage(posX:Number, posY:Number, w:Number, h:Number, caption:String = null, imageSRC:String = "traffic-cones.png", xJustify:String = JUSTIFY_LEFT, yJustify:String = JUSTIFY_TOP):MovieClip
+		public static function drawButtonFromImage(posX:Number, posY:Number, w:Number, h:Number, caption:String = null, imageSRC:String = "traffic-cones.png", xJustify:String = JUSTIFY_LEFT, yJustify:String = JUSTIFY_TOP):SimpleButton
 		{
+			//image stuff
 			var theImage:Bitmap = ImageManager.getImageByName(imageSRC);
 				theImage.x = 0;
 				theImage.y = 0;
 				theImage.width = w;
 				theImage.height = h;
-			var aButton:MovieClip = new MovieClip();
+			var shading:MovieClip = new MovieClip();
+				shading.graphics.beginFill ( 0x000000, 0.25 );
+				shading.graphics.drawRect(0, 0, w, h);
+				shading.graphics.endFill();
+				
+			//button stuff
+			var normalState:MovieClip = new MovieClip();
+				normalState.addChild(new Bitmap(theImage.bitmapData));
+			var overState:MovieClip = new MovieClip();
+				overState.addChild(new Bitmap(theImage.bitmapData));
+			var hitState:MovieClip = new MovieClip();
+				hitState.addChild(new Bitmap(theImage.bitmapData));
+				hitState.addChild(shading);
+			
+			//construct the button	
+			var aButton:SimpleButton = new SimpleButton(normalState, overState, hitState, normalState);
 				aButton.addChild(theImage); 
 				aButton.x = getJustifyAmount(xJustify) + posX;
 				aButton.y = getJustifyAmount(yJustify) + posY;
