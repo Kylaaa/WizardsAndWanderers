@@ -116,7 +116,7 @@
 			backgroundLayer.addChild(btnDebugChangeLocation);
 			txtDebugMessage.x = lblDebugBackground.x;
 			txtDebugMessage.y = lblDebugBackground.y;
-			this.addEventListener(MouseEvent.CLICK, fireChangeLocationEvent);
+			btnDebugChangeLocation.addEventListener(MouseEvent.CLICK, fireChangeLocationEvent);
 			//updateHomeTheme(new Event(Event.CHANGE));
 		}
 		
