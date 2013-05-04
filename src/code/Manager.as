@@ -73,7 +73,7 @@
 			panels();
 		}
 		
-		private function onExit(e:MouseEvent)
+		private function onExit(e:MouseEvent):void
 		{
 			manage.displayScreen(MainScreen);
 		}

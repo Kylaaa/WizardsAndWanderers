@@ -34,9 +34,9 @@
 		public var encounter_btn:SimpleButton;
 		public var explore_btn:SimpleButton;
 		public var exit_btn:SimpleButton;
-		public var character_btn:MovieClip;
-		public var quests_btn:MovieClip;
-		public var castle_btn:MovieClip;
+		public var character_btn:SimpleButton;
+		public var quests_btn:SimpleButton;
+		public var castle_btn:SimpleButton;
 		
 		//draw layers
 		private var backgroundLayer:MovieClip;
@@ -64,14 +64,9 @@
 			backgroundImg.y = 0;
 			
 
-			character_btn = new MovieClip();
-			character_btn.addChild(ShapesManager.drawImage("iconWizard.png", -250, -130, 80, 130, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM));
-			
-			quests_btn = 	new MovieClip();
-			quests_btn.addChild(ShapesManager.drawImage("iconScroll.png", -50, -100, 110, 100, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM));
-			
-			castle_btn = 	new MovieClip();
-			castle_btn.addChild(ShapesManager.drawImage("iconCastle.png", 150, -150, 150, 150, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM));
+			character_btn = ShapesManager.drawButtonFromImage( -250, -130,  80, 130, "", "iconWizard.png", ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM);
+			quests_btn = 	ShapesManager.drawButtonFromImage(  -50, -100, 110, 100, "", "iconScroll.png", ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM);
+			castle_btn = 	ShapesManager.drawButtonFromImage(  150, -150, 150, 150, "", "iconCastle.png",ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM);
 			
 			encounter_btn =	ShapesManager.drawButton(-100, -75, 200, 75, "Encounter", 	manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_CENTER_Y);
 			explore_btn =	ShapesManager.drawButton(-100,   0, 200, 75, "Explore", 	manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_CENTER_Y);

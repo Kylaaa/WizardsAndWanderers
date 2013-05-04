@@ -262,15 +262,24 @@ package managers
 			//button stuff
 			var normalState:MovieClip = new MovieClip();
 				normalState.addChild(new Bitmap(theImage.bitmapData));
+				normalState.width = w;
+				normalState.height = h;
 			var overState:MovieClip = new MovieClip();
 				overState.addChild(new Bitmap(theImage.bitmapData));
+				overState.width = w;
+				overState.height = h;
 			var hitState:MovieClip = new MovieClip();
 				hitState.addChild(new Bitmap(theImage.bitmapData));
+				shading.width = hitState.width;
+				shading.height = hitState.height;
 				hitState.addChild(shading);
+				hitState.width = w;
+				hitState.height = h;
+				
+				
 			
 			//construct the button	
 			var aButton:SimpleButton = new SimpleButton(normalState, overState, hitState, normalState);
-				aButton.addChild(theImage); 
 				aButton.x = getJustifyAmount(xJustify) + posX;
 				aButton.y = getJustifyAmount(yJustify) + posY;
 				aButton.visible = true;
