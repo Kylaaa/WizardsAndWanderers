@@ -169,6 +169,7 @@
 					case (ShapesManager.THEME_MOUNTAINS): 	backgroundImg = ImageManager.BackgroundMountains();	break;
 					case (ShapesManager.THEME_PLAINS): 		backgroundImg = ImageManager.BackgroundPlains();	break;
 					case (ShapesManager.THEME_SAVANNAH): 	backgroundImg = ImageManager.BackgroundSavannah();	break;
+					case (ShapesManager.THEME_SWAMP):		backgroundImg = ImageManager.BackgroundSwamp();		break;
 					case (ShapesManager.THEME_WETLANDS): 	backgroundImg = ImageManager.BackgroundWetlands();	break;
 					
 					default:
@@ -208,7 +209,8 @@
 			var message:String = "";
 			message += "Lat:\t" + manage.device.CurrentLatitude + "\n";
 			message += "Long:\t" + manage.device.CurrentLongitude + "\n";
-			message += "Type:\t" + manage.device.CurrentBiome.Type;
+			message += "Type:\t" + manage.device.CurrentBiome.Type + "\n";
+			message += "Biome ID:\t" + manage.device.CurrentBiome.ID;
 			txtDebugMessage.text = message;
 			trace(message);
 			

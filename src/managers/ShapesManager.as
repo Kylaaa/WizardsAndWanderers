@@ -179,9 +179,10 @@ package managers
 		private static function buttonDownState(w:Number, h:Number, text:String = null, theme:String = THEME_CAVERN):MovieClip
 		{
 			var bds:MovieClip = new MovieClip();
-			/*	bds.graphics.beginFill ( 0x000000 );
-				bds.graphics.drawRect(0, 0, w, h);
-				bds.graphics.endFill();*/
+			var shading:MovieClip = new MovieClip();
+				shading.graphics.beginFill ( 0x000000, 0.25 );
+				shading.graphics.drawRect(0, 0, w, h);
+				shading.graphics.endFill();
 				
 			var backgroundImage:Bitmap;
 			switch (theme)
@@ -204,7 +205,8 @@ package managers
 				backgroundImage.width = w;
 				backgroundImage.height = h;
 			bds.addChild(backgroundImage);
-				
+			bds.addChild(shading);
+			
 			if (text != null)
 			{
 				var margin:int = 3;
@@ -252,7 +254,7 @@ package managers
 				theImage.width = w;
 				theImage.height = h;
 			var aButton:MovieClip = new MovieClip();
-				aButton.addChild(theImage);
+				aButton.addChild(theImage); 
 				aButton.x = getJustifyAmount(xJustify) + posX;
 				aButton.y = getJustifyAmount(yJustify) + posY;
 				aButton.visible = true;
