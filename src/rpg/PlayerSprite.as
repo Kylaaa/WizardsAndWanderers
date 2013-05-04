@@ -16,9 +16,10 @@ package rpg
 		
 		public var txt_health:TextField;
 		
-		public function PlayerSprite(xLoc:int, yLoc:int)
+		public function PlayerSprite(playerLevel:int, xLoc:int, yLoc:int)
 		{
 			//super();
+			
 			myImage = ImageManager.MissingImage();
 			myImage.x = xLoc;
 			myImage.y = yLoc;

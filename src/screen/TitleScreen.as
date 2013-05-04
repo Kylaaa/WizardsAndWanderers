@@ -33,6 +33,7 @@ package screen
 		override public function bringIn():void 
 		{
 			super.bringIn();
+			trace("");
 			
 			//format the logo image
 			background.width = stage.stageWidth;
