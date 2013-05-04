@@ -204,7 +204,7 @@ package managers
 				case ("exit"):			backgroundImage = ImageManager.IconExit();				break;
 				case ("wizard"):		backgroundImage = ImageManager.CharacterWizard();		break;
 				case ("druid"):			backgroundImage = ImageManager.CharacterDruid();		break;
-				default:				backgroundImage = ImageManager.CharacterEssencePanel();		break;
+				default:				backgroundImage = ImageManager.CharacterEssencePanel();	break;
 			}
 				backgroundImage.x = 0;
 				backgroundImage.y = 0;

@@ -106,7 +106,7 @@
 			
 			generateEnemies();
 			
-			player = new PlayerSprite(50, manage.stage.stageHeight / 2);
+			player = new PlayerSprite(manage.player.level, 50, manage.stage.stageHeight / 2 - 50);
 			characterLayer.addChild(player);
 			
 			health = manage.player.curHealth;

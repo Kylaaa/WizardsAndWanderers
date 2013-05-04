@@ -19,12 +19,19 @@ package rpg
 		public function PlayerSprite(playerLevel:int, xLoc:int, yLoc:int)
 		{
 			//super();
+			if (playerLevel == 1)
+			{
+				myImage = ImageManager.WizardBody1();
+			}
+			else
+			{
+				myImage = ImageManager.WizardBody2();
+			}
 			
-			myImage = ImageManager.MissingImage();
 			myImage.x = xLoc;
 			myImage.y = yLoc;
-			myImage.width = 50;
-			myImage.height = 50;
+			myImage.width = 150;
+			myImage.height = 150;
 			addChild(myImage);
 			
 			var textStyle:TextFormat = new TextFormat(null, 24, 0xFF0000, null, null, null, null, null, "center");
@@ -36,8 +43,8 @@ package rpg
 			txt_health.borderColor = 000000;
 			txt_health.width = 50;
 			txt_health.height = 25;
-			txt_health.x = this.width / 2;
-			txt_health.y = this.height / 2;
+			txt_health.x = xLoc + txt_health.width - 10;
+			txt_health.y = yLoc - 20;
 			txt_health.setTextFormat(ShapesManager.textFormat);
 			txt_health.setTextFormat(textStyle);
 			addChild(txt_health);

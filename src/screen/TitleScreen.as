@@ -14,6 +14,10 @@ package screen
 	public class TitleScreen extends Screen
 	{
 		public var play_btn:SimpleButton;
+		
+		private var wizBtn:SimpleButton;
+		private var druBtn:SimpleButton;
+		
 		private var background:Bitmap;
 		
 		public function TitleScreen(newManager:ManagerAlpha)
@@ -49,6 +53,24 @@ package screen
 		
 		private function onPlay(e:MouseEvent):void
 		{
+			wizBtn = ShapesManager.drawButton(0, 0, stage.stageWidth / 2, stage.stageHeight, null, "wizard");
+			wizBtn.addEventListener(MouseEvent.CLICK, wizardChoice);
+			addChild(wizBtn);
+			
+			druBtn = ShapesManager.drawButton(stage.stageWidth / 2, 0, stage.stageWidth / 2, stage.stageHeight, null, "druid");
+			druBtn.addEventListener(MouseEvent.CLICK, druidChoice);
+			addChild(druBtn);
+		}
+		
+		private function wizardChoice(e:MouseEvent):void
+		{
+			manage.player.level = 1;
+			manage.displayScreen(MainScreen);
+		}
+		
+		private function druidChoice(e:MouseEvent):void
+		{
+			manage.player.level = 10;
 			manage.displayScreen(MainScreen);
 		}
 		
