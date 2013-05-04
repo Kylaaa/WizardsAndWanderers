@@ -16,6 +16,7 @@ package rpg
 		public function doubleHit(doubleEnemyHeld:Enemy, damageDealt:int):void
 		{
 			doubleEnemyHeld.health -= damageDealt;
+			doubleEnemyHeld.flashing();
 			
 			if(battle.critAttack)
 				doubleEnemyHeld.effectUnder = battle.currentCritEffect;
@@ -34,6 +35,7 @@ package rpg
 					if(j <= 3 || battle.enemies[j - 4] == null)
 					{
 						battle.enemies[j].health -= damageDealt;
+						battle.enemies[j].flashing();
 						
 						if(battle.critAttack)
 							battle.enemies[j].effectUnder = battle.currentCritEffect;
@@ -76,6 +78,7 @@ package rpg
 				if(enemyBehind != null)
 				{
 					enemyBehind.health -= damageDealt;
+					enemyBehind.flashing();
 					
 					if(battle.critAttack)
 						enemyBehind.effectUnder = battle.currentCritEffect;
@@ -91,6 +94,7 @@ package rpg
 			if(battle.enemies[selectedEnemy.enemyNum + 4] != null)
 			{
 				battle.enemies[selectedEnemy.enemyNum + 4].health -= damageDealt;
+				battle.enemies[selectedEnemy.enemyNum + 4].flashing();
 				
 				if(battle.critAttack)
 					battle.enemies[selectedEnemy.enemyNum + 4].effectUnder = battle.currentCritEffect;
@@ -99,6 +103,7 @@ package rpg
 			if(battle.enemies[secondEnemy.enemyNum + 4] != null)
 			{
 				battle.enemies[secondEnemy.enemyNum + 4].health -= damageDealt;
+				battle.enemies[secondEnemy.enemyNum + 4].flashing();
 				
 				if(battle.critAttack)
 					battle.enemies[secondEnemy.enemyNum + 4].effectUnder = battle.currentCritEffect;
@@ -131,6 +136,7 @@ package rpg
 				if(battle.enemies[i] != null)
 				{
 					battle.enemies[i].health -= damageDealt;
+					battle.enemies[i].flashing();
 					
 					if(battle.critAttack)
 						battle.enemies[i].effectUnder = battle.currentCritEffect;
@@ -151,6 +157,7 @@ package rpg
 				if(battle.enemies[randGen] != null)
 				{
 					battle.enemies[randGen].health -= damageDealt;
+					battle.enemies[randGen].flashing();
 					
 					if(battle.critAttack)
 						battle.enemies[randGen].effectUnder = battle.currentCritEffect;
@@ -214,6 +221,7 @@ package rpg
 			if(tempLeft != null)
 			{
 				tempLeft.health -= damageDealt;
+				tempLeft.flashing();
 				
 				if(battle.critAttack)
 					battle.enemies[tempLeft].effectUnder = battle.currentCritEffect;
@@ -222,6 +230,7 @@ package rpg
 			if(tempRight != null)
 			{
 				tempRight.health -= damageDealt;
+				tempRight.flashing();
 				
 				if(battle.critAttack)
 					battle.enemies[tempRight].effectUnder = battle.currentCritEffect;

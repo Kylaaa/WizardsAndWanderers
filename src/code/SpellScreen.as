@@ -12,34 +12,102 @@
 	public class SpellScreen extends MovieClip
 	{
 		private var bMan:Battle;
-		private var btn_cC:SimpleButton;
-		private var btn_lS:SimpleButton;
+		
+		private var exit:SimpleButton;
+		
+		private var spellOne:SimpleButton;
+		private var spellTwo:SimpleButton;
+		private var spellThree:SimpleButton;
 		
 		public function SpellScreen(baMa:Battle)
 		{
 			// constructor code
 			bMan = baMa;
 			
-			btn_cC = ShapesManager.drawButton(0,   0, 200, 100, "Creeping Cold");
-			btn_lS = ShapesManager.drawButton(0, 100, 200, 100, "Lightning Strike");
+			if (bMan.manage.player.level == 1)
+			{
+				spellOne = ShapesManager.drawButton(bMan.manage.stage.stageWidth / 2 - 100,   150, 200, 100, "Arcane Missles - 3h", "spell");
+				spellOne.addEventListener(MouseEvent.CLICK, spellDemoButton14);
+				this.addChild(spellOne);
+				
+				exit = ShapesManager.drawButton(bMan.manage.stage.stageWidth / 2 - 100,   150, 200, 100, null, "exit");
+				this.addChild(exit);
+			}
+			else
+			{
+				spellOne = ShapesManager.drawButton(bMan.manage.stage.stageWidth / 2 - 205,   75, 200, 100, "Fury of the Wild - 3h", "spell");
+				spellTwo = ShapesManager.drawButton(bMan.manage.stage.stageWidth / 2 + 5,   75, 200, 100, "Nature's Grasp - 3h", "spell");
+				spellThree = ShapesManager.drawButton(bMan.manage.stage.stageWidth / 2 - 100,   175, 200, 100, "Rampant Vines - D", "spell");
+				
+				spellOne.addEventListener(MouseEvent.CLICK, spellDemoButton14);
+				spellTwo.addEventListener(MouseEvent.CLICK, spellDemoButton15);
+				spellThree.addEventListener(MouseEvent.CLICK, spellDemoButton16);
+				
+				exit = ShapesManager.drawButton(bMan.manage.stage.stageWidth / 2 + 210,   70, 50, 50, null, "exit");
+				this.addChild(exit);
+				
+				this.addChild(spellOne);
+				this.addChild(spellTwo);
+				this.addChild(spellThree);
+			}
 			
-			this.addChild(btn_cC);
-			this.addChild(btn_lS);
-			
-			btn_cC.addEventListener(MouseEvent.CLICK, spellDemoButton15);
-			btn_lS.addEventListener(MouseEvent.CLICK, spellDemoButton14);
+			exit.addEventListener(MouseEvent.CLICK, quit);
 		}
 		
-		private function spellDemoButton15(event:MouseEvent):void
+		private function quit(event:MouseEvent):void
 		{
-			bMan.spellAtk(15);
 			bMan.removeChild(this);
 		}
+		
 		private function spellDemoButton14(event:MouseEvent):void
 		{
-			bMan.spellAtk(14);
-			bMan.removeChild(this);
+			if (bMan.manage.spellOne)
+			{
+				if (bMan.manage.player.level == 1)
+				{
+					bMan.spellAtk(1);
+				}
+				else
+				{
+					bMan.spellAtk(16);
+				}
+				
+				bMan.manage.spellOne = false;
+				bMan.manage.threeHourSpellOne.start();
+				
+				bMan.casting = true;
+				bMan.removeChild(this);
+			}
 		}
+		private function spellDemoButton15(event:MouseEvent):void
+		{
+			if (bMan.manage.spellTwo)
+			{
+				bMan.spellAtk(17);
+				bMan.removeChild(this);
+				
+				bMan.manage.spellTwo = false;
+				bMan.manage.threeHourSpellTwo.start();
+				
+				bMan.casting = true;
+			}
+		}
+		
+		private function spellDemoButton16(event:MouseEvent):void
+		{
+			if (bMan.manage.spellDaily)
+			{
+				bMan.spellAtk(18);
+				bMan.removeChild(this);
+				
+				bMan.manage.spellDaily = false;
+				bMan.manage.dailySpell.start();
+				
+				bMan.casting = true;
+			}
+		}
+		
+		
 	}
 
 }

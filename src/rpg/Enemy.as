@@ -8,6 +8,8 @@
 	import managers.ImageManager;
 	import managers.ShapesManager;
 	
+	import caurina.transitions.Tweener;
+	
 	public class Enemy extends GameEntity
 	{
 		public var selected:Boolean;
@@ -246,9 +248,10 @@
 			{
 				if(moveForward)
 				{
+					Tweener.addTween(this, {x:startX, time:1.0, transition:"linear"} );
 					while (moveForward)
 					{
-						moveUp();
+						//moveUp();
 					}
 				}
 				

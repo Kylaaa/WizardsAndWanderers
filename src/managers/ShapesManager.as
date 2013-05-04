@@ -102,7 +102,8 @@ package managers
 				case (THEME_PLAINS):	backgroundImage = ImageManager.LargeButtonPlains();		break;
 				case (THEME_SAVANNAH):	backgroundImage = ImageManager.LargeButtonSavannah();	break;
 				case (THEME_WETLANDS):	backgroundImage = ImageManager.LargeButtonWetlands();	break;
-				default:				backgroundImage = ImageManager.LargeButtonCavern();		break;
+				case ("exit"):			backgroundImage = ImageManager.IconExit();				break;
+				default:				backgroundImage = ImageManager.CharacterEssencePanel();		break;
 			}
 				backgroundImage.x = 0;
 				backgroundImage.y = 0;
@@ -146,7 +147,8 @@ package managers
 				case (THEME_PLAINS):	backgroundImage = ImageManager.LargeButtonPlains();		break;
 				case (THEME_SAVANNAH):	backgroundImage = ImageManager.LargeButtonSavannah();	break;
 				case (THEME_WETLANDS):	backgroundImage = ImageManager.LargeButtonWetlands();	break;
-				default:				backgroundImage = ImageManager.LargeButtonCavern();		break;
+				case ("exit"):			backgroundImage = ImageManager.IconExit();				break;
+				default:				backgroundImage = ImageManager.CharacterEssencePanel();	break;
 			}
 				backgroundImage.x = 0;
 				backgroundImage.y = 0;
@@ -190,7 +192,8 @@ package managers
 				case (THEME_PLAINS):	backgroundImage = ImageManager.LargeButtonPlains();		break;
 				case (THEME_SAVANNAH):	backgroundImage = ImageManager.LargeButtonSavannah();	break;
 				case (THEME_WETLANDS):	backgroundImage = ImageManager.LargeButtonWetlands();	break;
-				default:				backgroundImage = ImageManager.LargeButtonCavern();		break;
+				case ("exit"):			backgroundImage = ImageManager.IconExit();				break;
+				default:				backgroundImage = ImageManager.CharacterEssencePanel();		break;
 			}
 				backgroundImage.x = 0;
 				backgroundImage.y = 0;

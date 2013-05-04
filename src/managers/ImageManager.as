@@ -40,6 +40,7 @@ package managers
 		[Embed(source = "../../lib/sprites/navigation/panels/characterEssencePanel.png", 		mimeType = "image/png")] 	private static var ImgCharacterEssencePanel:Class;
 		[Embed(source = "../../lib/sprites/navigation/panels/characterPlayerPanel.png", 		mimeType = "image/png")] 	private static var ImgCharacterPlayerPanel:Class;
 		[Embed(source = "../../lib/sprites/navigation/panels/characterSmallPanel.png", 			mimeType = "image/png")] 	private static var ImgCharacterSmallPanel:Class;
+		[Embed(source = "../../lib/sprites/navigation/panels/exitIcon.png", 					mimeType = "image/png")] 	private static var ImgIconExit:Class;
 		
 		//ENEMIES
 		//canyon
@@ -179,6 +180,7 @@ package managers
 		public static function IconCastle():Bitmap 									{ return new ImgIconCastle(); }				//navigation icons
 		public static function IconScroll():Bitmap 									{ return new ImgIconScroll(); }
 		public static function IconWizard():Bitmap 									{ return new ImgIconWizard(); }
+		public static function IconExit():Bitmap 									{ return new ImgIconExit(); }
 		public static function LargeButtonCanyon():Bitmap 							{ return new ImgButtonLargeCanyon(); }		//button Themes
 		public static function LargeButtonCavern():Bitmap 							{ return new ImgButtonLargeCavern(); }
 		public static function LargeButtonDesert():Bitmap 							{ return new ImgButtonLargeDesert(); }

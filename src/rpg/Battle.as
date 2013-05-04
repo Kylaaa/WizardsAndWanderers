@@ -31,9 +31,10 @@
 		
 		// button variables
 		private var buttonArray:Array = new Array();
-		private var attackBtn:Sprite;
-		private var magicBtn:Sprite;
-		private var fleeBtn:Sprite;
+		private var attackBtn:SimpleButton;
+		private var magicBtn:SimpleButton;
+		private var fleeBtn:SimpleButton;
+		private var itemBtn:SimpleButton;
 		private var listening:Boolean;
 		
 		// turn variable
@@ -125,12 +126,7 @@
 			var enemyCreator:Enemy;
 			
 			//read in from our current biome to make some enemies
-				
 			var allEnemies:Array = manage.device.CurrentBiome.Enemies; //array of database Objects
-			//trace("-row[" + i + "] = " + row);
-			//t
-			//appendMessage("\t-row[" + i + "] = " + row);
-			//appendMessage("\t-Enemy Name: " + row["id"]);
 			
 			// seperate enemies based upon rarity
 			var commonEnemies:Array = new Array();
@@ -139,13 +135,6 @@
 				
 			for (i = 0; i < allEnemies.length; i ++)
 			{
-				/*
-				trace("\t-Enemy Name: " + allEnemies[i]["id"]);
-				for (var internalValue:Object in allEnemies[i])
-				{
-					trace("\t-" + internalValue + ":\t" + allEnemies[i][internalValue]);
-				}
-				*/
 				
 				if (allEnemies[i]["rarity"] == "COMMON")
 				{
@@ -176,7 +165,7 @@
 			}
 				
 			var enemyAmount:int = (Math.random() * 8) + 1;
-			
+			enemyAmount = 8;
 			for(i = 0; i < enemyAmount; i++)
 			{
 				// Used to determine which enemy you're fighting
@@ -270,28 +259,24 @@
 			
 			// Attack Button
 			
-			attackBtn = new Sprite();
-			attackBtn.addChild(ImageManager.IconCastle());
-			attackBtn.x = (attackBtn.width * 0) + seperationDist;
-			attackBtn.y = (manage.stage.stageHeight - attackBtn.height / 2) - 10;
+			attackBtn = ShapesManager.drawButton(-stage.stageWidth / 2 + 25, -125, 150, 50, "Attack", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM);
 			foregroundLayer.addChild(attackBtn);
 			buttonArray.push(attackBtn);
 			
 			// Magic Button
-			magicBtn = new Sprite();
-			magicBtn.addChild(ImageManager.IconWizard());
-			magicBtn.x = (attackBtn.width * 1) + seperationDist;
-			magicBtn.y = (manage.stage.stageHeight - magicBtn.height / 2) - 10;
+			magicBtn = ShapesManager.drawButton(-stage.stageWidth / 2 + 185, -125, 150, 50, "Spells", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM);
 			foregroundLayer.addChild(magicBtn);
 			buttonArray.push(magicBtn);
 			
 			// Flee Button
-			fleeBtn = new Sprite();
-			fleeBtn.addChild(ImageManager.IconScroll());
-			fleeBtn.x = (attackBtn.width * 2) + seperationDist;
-			fleeBtn.y = (manage.stage.stageHeight - fleeBtn.height / 2) - 10;
+			fleeBtn = ShapesManager.drawButton(-stage.stageWidth / 2 + 185, -65, 150, 50, "Flee", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM);
 			foregroundLayer.addChild(fleeBtn);
 			buttonArray.push(fleeBtn);
+			
+			// Item Button
+			itemBtn = ShapesManager.drawButton(-stage.stageWidth / 2 + 25, -65, 150, 50, "Items", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM);
+			foregroundLayer.addChild(itemBtn);
+			buttonArray.push(itemBtn);
 		}
 		
 		// When the player goes to attack, this sets it up as well as what kind
@@ -316,9 +301,6 @@
 		{
 			//spawns or makes visible both buttons
 			addChild(spScreen);
-			
-			// opens up a menu of spells that the player has and continues when one is selected
-			casting = true;
 		}
 		
 		// Allows the player to run away
