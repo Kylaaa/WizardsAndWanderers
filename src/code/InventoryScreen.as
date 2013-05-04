@@ -98,16 +98,57 @@ package code {
 			
 			btn_left = ShapesManager.drawButton(50, -200, 200, 100, "<---", manager.device.CurrentBiome.Type, ShapesManager.JUSTIFY_LEFT, ShapesManager.JUSTIFY_BOTTOM);
 			this.addChild(btn_left);
-			btn_left.addEventListener(MouseEvent.CLICK, onBack); //switch to onLeft
+			btn_left.addEventListener(MouseEvent.CLICK, onLeft); //switch to onLeft
 			
 			btn_right = ShapesManager.drawButton(-250, -200, 200, 100, "--->", manager.device.CurrentBiome.Type, ShapesManager.JUSTIFY_RIGHT, ShapesManager.JUSTIFY_BOTTOM);
 			this.addChild(btn_right); 
-			btn_right.addEventListener(MouseEvent.CLICK, onBack); //switch to onRight
+			btn_right.addEventListener(MouseEvent.CLICK, onRight); //switch to onRight
 		}
 		
 		private function onBack(e:MouseEvent)
 		{
 			manager.removeChild(this);
+		}
+
+		private function onLeft(e:MouseEvent)
+		{
+			tempFunction();
+		}
+		private function onRight(e:MouseEvent)
+		{
+			tempFunction();
+		}
+		private function tempFunction()
+		{
+			if (!weapon)
+			{
+			if (manager.equippedArmorId == 1)
+			{
+				manager.equippedArmorId == 2;
+				//change armor
+			}
+			else
+			{
+				manager.equippedArmorId == 1;
+				//change armor
+			}
+			//manager.equippedArmorId = tempArmor.idNumber;
+			}
+			else
+			{
+			if (manager.equippedWeaponId == 1)
+			{
+				manager.equippedWeaponId == 2;
+				//change weapon
+				//manager.weaponImage = ImageManager.
+			}
+			else
+			{
+				manager.equippedArmorId == 1;
+				//change armor
+			}
+			//manager.equippedArmorId = tempArmor.idNumber;
+			}
 		}
 		
 		/*

@@ -81,6 +81,17 @@ package managers
 				
 			return aFormat;
 		}
+		public static function get textFormat_uncentered():TextFormat
+		{
+			var aFormat:TextFormat = new TextFormat();
+				aFormat.size = 32;
+				aFormat.color = 0x000000;// 0xFFCC00;
+				aFormat.align = "left";
+				aFormat.font = "Pixelton";
+				//aFormat.bold = true;
+				
+			return aFormat;
+		}
 		
 		
 		//button stuff
@@ -292,7 +303,7 @@ package managers
 			
 			return aButton;
 		}
-		public static function drawText(caption:String, posX:Number, posY:Number, w:Number, h:Number , xJustify:String = JUSTIFY_LEFT, yJustify:String = JUSTIFY_TOP, verticalAlign:Boolean = false):TextField
+		public static function drawText(caption:String, posX:Number, posY:Number, w:Number, h:Number , xJustify:String = JUSTIFY_LEFT, yJustify:String = JUSTIFY_TOP, verticalAlign:Boolean = false, centerAlign:Boolean = true):TextField
 		{
 			var someText:TextField = new TextField();
 				someText.x = getJustifyAmount(xJustify) + posX;
@@ -302,7 +313,8 @@ package managers
 				someText.text = caption;
 				someText.wordWrap = true;
 				someText.visible = true;
-				someText.setTextFormat(textFormat);
+				if (centerAlign) 	someText.setTextFormat(textFormat);
+				else 				someText.setTextFormat(textFormat_uncentered);
 			
 			if (verticalAlign) verticalAlignTextField(someText);
 				

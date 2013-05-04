@@ -38,6 +38,8 @@
 		public var weaponArray:Array;
 		public var recipeArray:Array;
 		
+		public var weaponImage:Bitmap = new Bitmap();
+		
 		//background
 		public var biomeBackground:Bitmap;
 		

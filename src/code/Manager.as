@@ -7,6 +7,7 @@
 	import flash.text.engine.Kerning;
 	import flash.display.SimpleButton;
 	import flash.events.MouseEvent;
+	import flash.text.TextField;
 	import managers.ShapesManager;
 	import flash.display.Sprite;
 	import managers.ImageManager;
@@ -43,7 +44,6 @@
 		public var armor:Sprite = new Sprite();
 		public var ArmorImage:Bitmap = new Bitmap();
 		public var weapon:Sprite = new Sprite();
-		public var weaponImage:Bitmap = new Bitmap();
 		public var other:Sprite = new Sprite();
 		public var otherImage:Bitmap = new Bitmap();
 		
@@ -55,37 +55,62 @@
 		private var csPanel_other:Sprite = new Sprite();
 		
 		private var characterPanelPosition:int = 100;
-		private var characterOffset:int = 50;
+		private var characterOffset:int = 53;
+		
+		private var characterName:String = "";
+		private var characterNameText:TextField = new TextField();
+		
+		private var characterClass:String = "";
+		private var characterClassText:TextField = new TextField();
+		
+		private var wizard:Boolean;
 		
 		public function Manager(newManager:ManagerAlpha)
 		{
 			super(newManager);
 			manager = newManager;
+			
+			if (manager.player.level == 1)
+			{
+				characterClass = "Wizard";
+				characterName = "Shane";
+				wizard = true;
+			}
+			else
+			{
+				characterClass = "Druid";
+				characterName = "Issac";
+				wizard = false;
+			}
+			
 			// constructor code
 			addChild(backgroundLayer);
 			backgroundLayer.addChild(manage.biomeBackground);
 			
 			exit_btn = ShapesManager.drawButton(0, -100, 200, 100, "Back", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_LEFT, ShapesManager.JUSTIFY_BOTTOM);
-			var scale = .75;
+			var scale:int = .75;
 			//var scale = .5;
 			//btn_inventoryWeapon = ShapesManager.drawButtonFromImage(225, -150, 200 * scale, 100 * scale, "Weapons", "characterSmallPanel.png", ShapesManager.JUSTIFY_LEFT, ShapesManager.JUSTIFY_BOTTOM);
-			btn_inventoryGarb = ShapesManager.drawButton(350, -150, 200 * scale, 100 * scale, "Garbs", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_LEFT, ShapesManager.JUSTIFY_BOTTOM);
+			//btn_inventoryGarb = ShapesManager.drawButton(350, -150, 200 * scale, 100 * scale, "Garbs", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_LEFT, ShapesManager.JUSTIFY_BOTTOM);
 			
 			//Set the default weapon
-			var tempWeapon:Weapon = new Weapon(manager,1,true,2,"Wooden Staff",true,15,1.75,0);
-			addChild(tempWeapon);
-			tempWeapon.x = 205;
-			tempWeapon.y = 95;
+			//var tempWeapon:Weapon = new Weapon(manager,1,true,2,"Wooden Staff",true,15,1.75,0);
+			//addChild(tempWeapon);
+			//tempWeapon.x = 205;
+			//tempWeapon.y = 95;
 			
 			//Set the default armor
-			var tempStatArray:Array;
+			/*var tempStatArray:Array;
 			var tempStatEffectArray:Array
 			var tempArmor:Armor = new Armor(manager,0,true,1,"Basic Robes",false,0,tempStatArray,tempStatEffectArray);
 			manager.player.equippedArmor = tempArmor;
-			manager.equippedArmorId = tempArmor.idNumber; 
-			addChild(tempArmor);
-			tempArmor.x = 330;
-			tempArmor.y = 95;
+			manager.equippedArmorId = tempArmor.idNumber;*/
+			//addChild(tempArmor);
+			//tempArmor.x = 330;
+			//tempArmor.y = 95;
+			
+			manager.equippedWeaponId = 1;
+			manager.equippedArmorId = 1;
 			
 			//btn_defaultItems.addEventListener(MouseEvent.CLICK, dItemButton);
 			//btn_Essences.addEventListener(MouseEvent.CLICK, essencesButton);
@@ -102,10 +127,12 @@
 			this.addChild(exit_btn);
 			exit_btn.addEventListener(MouseEvent.CLICK, onExit);
 			
-			csPanel_weapon.addEventListener(MouseEvent.CLICK, onWeapon);
+			if (characterClass == "Wizard")
+			{
+				//csPanel_weapon.addEventListener(MouseEvent.CLICK, onWeapon); //uncomment to turn on the start of inventory
+			}
 			
-			csPanel_weapon.addEventListener(MouseEvent.CLICK, onWeapon);
-			this.addChild(btn_inventoryGarb);
+			//this.addChild(btn_inventoryGarb);
 			
 			bringIn_Character();
 			
@@ -128,13 +155,20 @@
 			super.cleanUp();
 		}
 		
-		private function bringIn_Character()
+		private function bringIn_Character():void
 		{
-			var scale = 3;
-			var x = 20;
+			var scale:int = 3;
+			var x:int = 20;
 			
 			this.addChild(characterBody);
-			characterBodyImage = ImageManager.WizardBody1();
+			if (wizard)
+			{
+				characterBodyImage = ImageManager.WizardBody1();
+			}
+			else
+			{
+				characterBodyImage = ImageManager.DruidBody1();
+			}
 			characterBody.addChild(characterBodyImage);
 			characterBodyImage.x = x;
 			characterBodyImage.y = characterPanelPosition + characterOffset;
@@ -142,7 +176,14 @@
 			characterBodyImage.height *= scale;
 			
 			this.addChild(characterWeapon);
-			characterWeaponImage = ImageManager.WizardStaff();
+			if (wizard)
+			{
+				characterWeaponImage = ImageManager.WizardStaff();
+			}
+			else
+			{
+				characterWeaponImage = ImageManager.DruidStaff1();
+			}
 			characterWeapon.addChild(characterWeaponImage);
 			characterWeaponImage.x = x;
 			characterWeaponImage.y = characterPanelPosition + characterOffset;
@@ -150,12 +191,28 @@
 			characterWeaponImage.height *= scale;
 			
 			this.addChild(characterOther);
-			characterOtherImage = ImageManager.PurpleOrb();
+			if (wizard)
+			{
+				characterOtherImage = ImageManager.PurpleOrb();
+			}
+			else
+			{
+				characterOtherImage = ImageManager.Raven();
+			}
 			characterOther.addChild(characterOtherImage);
 			characterOtherImage.x = x;
 			characterOtherImage.y = characterPanelPosition + characterOffset;
 			characterOtherImage.width *= scale;
 			characterOtherImage.height *= scale;
+			
+			//ShapesManager.drawText(characterName, x, 200,100, 100);
+			characterNameText = ShapesManager.drawText(characterName, x + 5, 100, 200, 100, ShapesManager.JUSTIFY_LEFT, ShapesManager.JUSTIFY_TOP,false, false);
+			this.addChild(characterNameText);
+			
+			characterClassText = ShapesManager.drawText("the " + characterClass, x + 15, 125, 200, 100, ShapesManager.JUSTIFY_LEFT, ShapesManager.JUSTIFY_TOP, false, false);
+			this.addChild(characterClassText);
+			
+			
 		}
 		
 		private function bringIn_Panels():void
@@ -189,6 +246,7 @@
 			smallPanel.addChild(ImageManager.CharacterSmallPanel());
 			//smallPanel.x = 225; //use relative to center and stuff
 			//smallPanel.y = smallPanelY; //use relative to center and stuff
+			smallPanel.visible = false; //we don't need to see it, only to access it's width and height
 			smallPanel.width *= 2.5;
 			smallPanel.height *= 2.5;
 			
@@ -197,8 +255,15 @@
 			this.addChild(csPanel_weapon);
 			
 			this.addChild(weapon);
-			weaponImage = ImageManager.WizardStaff();
-			weapon.addChild(weaponImage);
+			if (wizard)
+			{
+				manager.weaponImage = ImageManager.WizardStaff();
+			}
+			else
+			{
+				manager.weaponImage = ImageManager.DruidStaff1();
+			}
+			weapon.addChild(manager.weaponImage);
 			weapon.x = 200; //use relative to center and stuff
 			weapon.y = 220; //use relative to center and stuff
 			weapon.width *= 1.75;
@@ -213,7 +278,14 @@
 			csPanel_garb.height *= 2.5;
 			
 			this.addChild(armor);
-			ArmorImage = ImageManager.WizardGarb1();
+			if (wizard)
+			{
+				ArmorImage = ImageManager.WizardGarb1();
+			}
+			else
+			{
+				ArmorImage = ImageManager.DruidGarb1();
+			}
 			armor.addChild(ArmorImage);
 			armor.x = 355; //use relative to center and stuff
 			armor.y = 235; //use relative to center and stuff
@@ -228,7 +300,15 @@
 			csPanel_other.height *= 2.5;
 			
 			this.addChild(other);
-			otherImage = ImageManager.PurpleOrb();
+			
+			if (wizard)
+			{
+				otherImage = ImageManager.PurpleOrb();
+			}
+			else
+			{
+				otherImage = ImageManager.Raven();
+			}
 			other.addChild(otherImage);
 			other.x = 500; //use relative to center and stuff
 			other.y = 235; //use relative to center and stuff
