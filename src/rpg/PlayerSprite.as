@@ -25,7 +25,7 @@ package rpg
 			}
 			else
 			{
-				myImage = ImageManager.WizardBody2();
+				myImage = ImageManager.DruidBody1();
 			}
 			
 			myImage.x = xLoc;

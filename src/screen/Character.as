@@ -15,7 +15,7 @@ package screen
 		public function Character(newManager:ManagerAlpha)
 		{
 			super(newManager);
-			exit_btn = ShapesManager.drawButton(25, 25, 200, 100, "exit");
+			exit_btn = ShapesManager.drawButton(0, -100, 200, 100, "Back", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_LEFT, ShapesManager.JUSTIFY_BOTTOM);
 			
 		}
 		

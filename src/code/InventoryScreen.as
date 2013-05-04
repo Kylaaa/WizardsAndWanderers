@@ -90,7 +90,7 @@ package code {
 			panel.height *= 5;
 		}
 		
-		private function buttonSetUp()
+		private function buttonSetUp():void
 		{
 			btn_back = ShapesManager.drawButton(0, -100, 200, 100, "Back", manager.device.CurrentBiome.Type, ShapesManager.JUSTIFY_LEFT, ShapesManager.JUSTIFY_BOTTOM);
 			this.addChild(btn_back);
@@ -105,20 +105,20 @@ package code {
 			btn_right.addEventListener(MouseEvent.CLICK, onRight); //switch to onRight
 		}
 		
-		private function onBack(e:MouseEvent)
+		private function onBack(e:MouseEvent):void
 		{
 			manager.removeChild(this);
 		}
 
-		private function onLeft(e:MouseEvent)
+		private function onLeft(e:MouseEvent):void
 		{
 			tempFunction();
 		}
-		private function onRight(e:MouseEvent)
+		private function onRight(e:MouseEvent):void
 		{
 			tempFunction();
 		}
-		private function tempFunction()
+		private function tempFunction():void
 		{
 			if (!weapon)
 			{

@@ -69,17 +69,17 @@
 			quests_btn = 	ShapesManager.drawButtonFromImage(  -50, -100, 110, 100, "", "iconScroll.png", ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM);
 			castle_btn = 	ShapesManager.drawButtonFromImage(  150, -150, 150, 150, "", "iconCastle.png",ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM);
 			
-			encounter_btn =	ShapesManager.drawButton(-100, -75, 200, 75, "Encounter", 	manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_CENTER_Y);
-			explore_btn =	ShapesManager.drawButton(-100,   0, 200, 75, "Explore", 	manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_CENTER_Y);
-			exit_btn = 		ShapesManager.drawButton(-100,  75, 200, 75, "Exit",		manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_CENTER_Y);
+			encounter_btn =	ShapesManager.drawButton(-100, -75, 200, 50, "Encounter", 	manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_CENTER_Y);
+			explore_btn =	ShapesManager.drawButton(-100,   0, 200, 50, "Explore", 	manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_CENTER_Y);
+			exit_btn = 		ShapesManager.drawButton(-100,  75, 200, 50, "Exit",		manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_CENTER_Y);
 			
 			//consider drawing a loading screen for now
 			lblDebugBackground = ShapesManager.drawLabel("", -100, 0, 150, 100, ShapesManager.JUSTIFY_RIGHT, ShapesManager.JUSTIFY_TOP);
 			txtDebugMessage = new TextField();
 			txtDebugMessage.width = 150;
 			txtDebugMessage.height = 100;
-			btnDebugChangeLocation = ShapesManager.drawButton( -100, 100, 150, 100, "Change Location", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_RIGHT, ShapesManager.JUSTIFY_TOP);
-			btnDebugHealth = ShapesManager.drawButton(-100, 205, 150, 100, "Full Health", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_RIGHT, ShapesManager.JUSTIFY_TOP);
+			btnDebugChangeLocation = ShapesManager.drawButton( -150, 110, 150, 100, "Change Location", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_RIGHT, ShapesManager.JUSTIFY_TOP);
+			btnDebugHealth = ShapesManager.drawButton(-150, 0, 150, 100, "Full Health", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_RIGHT, ShapesManager.JUSTIFY_TOP);
 		}
 		
 		public override function bringIn():void
@@ -113,18 +113,19 @@
 			
 			
 			//add some debug stuff
-			backgroundLayer.addChild(lblDebugBackground);
+			/*backgroundLayer.addChild(lblDebugBackground);
 			backgroundLayer.addChild(txtDebugMessage);
 			backgroundLayer.addChild(btnDebugChangeLocation);
-			backgroundLayer.addChild(btnDebugHealth);
+			
 			txtDebugMessage.x = lblDebugBackground.x;
 			txtDebugMessage.y = lblDebugBackground.y;
 			btnDebugChangeLocation.addEventListener(MouseEvent.CLICK, fireChangeLocationEvent);
+			//updateHomeTheme(new Event(Event.CHANGE)); */
+			backgroundLayer.addChild(btnDebugHealth);
 			btnDebugHealth.addEventListener(MouseEvent.CLICK, fullHealth);
-			//updateHomeTheme(new Event(Event.CHANGE));
 		}
 		
-		private function fullHealth(e:MouseEvent)
+		private function fullHealth(e:MouseEvent):void
 		{
 			manage.player.curHealth = manage.player.health;
 		}
@@ -230,7 +231,7 @@
 		
 		private function onExplore(e:MouseEvent):void
 		{
-			manage.exploring.Explore();
+			//manage.exploring.Explore();
 			manage.displayScreen(Explore);
 		}
 		

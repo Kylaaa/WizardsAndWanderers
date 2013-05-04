@@ -2,6 +2,7 @@ package screen
 {
 	import flash.display.SimpleButton;
 	import flash.events.MouseEvent;
+	import managers.ImageManager;
 	import managers.ShapesManager;
 	
 	import ManagerAlpha;
@@ -14,12 +15,18 @@ package screen
 		public function Castle(newManager:ManagerAlpha)
 		{
 			super(newManager);
-			exit_btn = ShapesManager.drawButton(0, 0, 200, 100, "Return", manage.device.CurrentBiome.Type);
+			exit_btn = ShapesManager.drawButton(0, -100, 200, 100, "Back", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_LEFT, ShapesManager.JUSTIFY_BOTTOM);
+			
+			
 		}
 		
 		public override function bringIn():void
 		{
 			super.bringIn();
+			
+			this.addChild(manage.biomeBackground);
+			this.addChild(ShapesManager.drawImage("under-construction.png", -250, -200, 500, 400, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_CENTER_Y));
+			this.addChild(ShapesManager.drawText("Customize Home Castle", -250, -190, 500, 200, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_CENTER_Y));
 			this.addChild(exit_btn);
 			exit_btn.addEventListener(MouseEvent.CLICK, onExit);
 		}

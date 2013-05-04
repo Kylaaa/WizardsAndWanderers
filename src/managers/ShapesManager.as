@@ -4,9 +4,11 @@ package managers
 	import flash.display.MovieClip;
 	import flash.display.SimpleButton;
 	import flash.system.Capabilities;
+	import flash.text.AntiAliasType;
 	import flash.text.Font;
 	import flash.text.FontType;
 	import flash.text.TextField;
+	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
 	/**
 	 * ...
@@ -14,7 +16,14 @@ package managers
 	 */
 	public class ShapesManager extends Manager 
 	{	
-		[Embed(source = '../../lib/fonts/pixelton.ttf', fontName="Pixelton", fontWeight="normal", advancedAntiAliasing="true", mimeType = "application/x-font")] private static var FontPixelton:Class;
+		[Embed(	source = '../../lib/fonts/pixelton.ttf', 
+				fontFamily	= 'Pixelton', 
+				fontWeight	= 'normal', 
+				fontStyle	= 'normal',
+				advancedAntiAliasing = 'true', 
+				mimeType 	= 'application/x-font', 
+				embedAsCFF 	= 'false'					)] 
+		private static var FontPixelton:Class;
 		
 		
 		public static const JUSTIFY_LEFT:String 	= "left";
@@ -65,7 +74,7 @@ package managers
 				aFormat.size = 28;
 				aFormat.color = 0x333333;
 				aFormat.align = "center";
-				aFormat.font = "Pixelton";
+				aFormat.font = "Voxels"; // "Pixelton";
 				//aFormat.bold = true;
 				
 			return aFormat;
@@ -74,9 +83,9 @@ package managers
 		{
 			var aFormat:TextFormat = new TextFormat();
 				aFormat.size = 32;
-				aFormat.color = 0x000000;// 0xFFCC00;
+				aFormat.color = 0x000000; // 0xFFCC00;
 				aFormat.align = "center";
-				aFormat.font = "Pixelton";
+				aFormat.font = "Voxels"; //"Pixelton";
 				//aFormat.bold = true;
 				
 			return aFormat;
@@ -306,8 +315,11 @@ package managers
 		public static function drawText(caption:String, posX:Number, posY:Number, w:Number, h:Number , xJustify:String = JUSTIFY_LEFT, yJustify:String = JUSTIFY_TOP, verticalAlign:Boolean = false, centerAlign:Boolean = true):TextField
 		{
 			var someText:TextField = new TextField();
+				//someText.antiAliasType = AntiAliasType.ADVANCED;
+				//someText.autoSize = TextFieldAutoSize.CENTER;
+				//someText.embedFonts = true;
 				someText.x = getJustifyAmount(xJustify) + posX;
-				someText.y = getJustifyAmount(yJustify) + posY;
+				someText.y = getJustifyAmount(yJustify) + posY; // + (0.6 * h);
 				someText.width = w;
 				someText.height = h;
 				someText.text = caption;

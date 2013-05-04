@@ -46,6 +46,7 @@ package managers
 		[Embed(source = "../../lib/sprites/navigation/panels/exitIcon.png", 					mimeType = "image/png")] 	private static var ImgIconExit:Class;
 		[Embed(source = "../../lib/sprites/navigation/panels/characterSelectPanel1.png", 		mimeType = "image/png")] 	private static var ImgCharacter1:Class;
 		[Embed(source = "../../lib/sprites/navigation/panels/characterSelectPanel2.png", 		mimeType = "image/png")] 	private static var ImgCharacter2:Class;
+		[Embed(source = "../../lib/sprites/navigation/panels/underConstructionPanel.png", 		mimeType = "image/png")] 	private static var ImgUnderConstructionPanel:Class;
 		
 		//ENEMIES
 		//canyon
@@ -192,6 +193,8 @@ package managers
 		public static function BackgroundSavannah():Bitmap							{ return new ImgBackgroundSavannah(); }
 		public static function BackgroundSwamp():Bitmap								{ return new ImgBackgroundSwamp(); }
 		public static function BackgroundWetlands():Bitmap							{ return new ImgBackgroundWetlands(); }
+		public static function UnderConstruction():Bitmap							{ return new ImgUnderConstructionPanel(); }
+		
 		
 		public static function TitleScreen():Bitmap									{ return new ImgTitleScreen(); }
 		public static function CharacterEssencePanel():Bitmap						{ return new ImgCharacterEssencePanel(); }
@@ -342,6 +345,7 @@ package managers
 		private static var images:Object = new Array();
 			images["nothing"]					= Nothing;				//debug
 			images["traffic-cones.png"] 		= MissingImage;
+			images["under-construction.png"]	= UnderConstruction;
 			images["backgroundCanyon.png"]		= BackgroundCanyon;		//background images
 			images["backgroundCavern.png"]		= BackgroundCavern;
 			images["backgroundDesert.png"]		= BackgroundDesert;

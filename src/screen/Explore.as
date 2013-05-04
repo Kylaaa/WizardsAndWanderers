@@ -15,13 +15,17 @@ package screen
 		{
 			super(newManager);
 			
-			exit_btn = ShapesManager.drawButton(0, 0, 100, 100, "exit");
+			exit_btn = ShapesManager.drawButton(0, -100, 200, 100, "Back", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_LEFT, ShapesManager.JUSTIFY_BOTTOM);
 		}
 		
 		public override function bringIn():void
 		{
 			super.bringIn();
-			addChild(exit_btn);
+			
+			this.addChild(manage.biomeBackground);
+			this.addChild(ShapesManager.drawImage("under-construction.png", -250, -200, 500, 400, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_CENTER_Y));
+			this.addChild(ShapesManager.drawText("Explore", -250, -190, 500, 200, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_CENTER_Y));
+			this.addChild(exit_btn);
 			exit_btn.addEventListener(MouseEvent.CLICK, onExit);
 		}
 		

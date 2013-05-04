@@ -143,9 +143,9 @@
 			manage.displayScreen(MainScreen);
 		}
 		
-		private function onWeapon(e:MouseEvent)
+		private function onWeapon(e:MouseEvent):void
 		{
-			var weaponInventory = new InventoryScreen(manager, "weapon"); 
+			var weaponInventory:InventoryScreen = new InventoryScreen(manager, "weapon"); 
 			manage.addChild(weaponInventory);
 		}
 		
