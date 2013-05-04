@@ -122,7 +122,7 @@
 			txtDebugMessage.x = lblDebugBackground.x;
 			txtDebugMessage.y = lblDebugBackground.y;
 			this.addEventListener(MouseEvent.CLICK, fireChangeLocationEvent);
-			updateHomeTheme(new Event(Event.CHANGE));
+			//updateHomeTheme(new Event(Event.CHANGE));
 		}
 		
 		private function initWithProperBiome():void
