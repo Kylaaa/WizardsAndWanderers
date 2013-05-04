@@ -4,6 +4,7 @@
 	import flash.events.MouseEvent;
 	import flash.events.TimerEvent;
 	import flash.text.TextField;
+	import flash.text.TextFormat;
 	import flash.utils.Timer;
 	import managers.ImageManager;
 	import managers.ShapesManager;
@@ -23,6 +24,7 @@
 		protected var backPreferece:Boolean = false;
 		
 		private var txt_health:TextField;
+		private var healthBox:Bitmap;
 		
 		public var done:Boolean = false;
 		
@@ -43,9 +45,6 @@
 			
 			startX = xLoc;
 			startY = yLoc;
-			
-			txt_health = new TextField();
-			txt_health.setTextFormat(ShapesManager.textFormat);
 			
 			flashTimer.addEventListener(TimerEvent.TIMER_COMPLETE, reappear);
 		}
@@ -75,6 +74,22 @@
 			trace("Health: " + health);
 			trace("Attack: " + atkPwr);
 			trace("Speed: " + speed);
+			
+			var textStyle:TextFormat = new TextFormat(null, 24, 0xFF0000, null, null, null, null, null, "center");
+			txt_health = new TextField();
+			txt_health.defaultTextFormat = textStyle;
+			txt_health.background = true;
+			txt_health.backgroundColor = 0xFFFFFF;
+			txt_health.border = true;
+			txt_health.borderColor = 000000;
+			txt_health.width = 50;
+			txt_health.height = 25;
+			txt_health.x = this.width / 2;
+			txt_health.y = this.height / 2;
+			txt_health.text = health.toString();
+			txt_health.setTextFormat(ShapesManager.textFormat);
+			txt_health.setTextFormat(textStyle);
+			addChild(txt_health);
 		} 
 		
 		public function flashing():void
@@ -243,6 +258,8 @@
 			
 			// can have a switch to determine what status is currently happening
 			// txt_status.text = "imb";
+			
+			txt_health.text = health.toString();
 			
 			if(!dead)
 			{

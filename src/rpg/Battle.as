@@ -108,6 +108,7 @@
 			characterLayer.addChild(player);
 			
 			health = manage.player.curHealth;
+			player.changeHealth(health);
 			atkPwr = manage.player.atkPwr;
 			speed = manage.player.speed;
 			effectUnder = manage.player.effectUnder;
@@ -165,7 +166,7 @@
 			}
 				
 			var enemyAmount:int = (Math.random() * 8) + 1;
-			enemyAmount = 8;
+			
 			for(i = 0; i < enemyAmount; i++)
 			{
 				// Used to determine which enemy you're fighting
@@ -615,6 +616,8 @@
 						}
 					}
 				}
+				
+				player.changeHealth(health);
 			}
 		
 			if(currEnemyAmount <= 0)
@@ -762,7 +765,7 @@
 			// removes buttons
 			for(i = 0; i < buttonArray.length; i++)
 			{
-				if(buttonArray[i] != null)
+				if(buttonArray[i] != null && foregroundLayer.contains(buttonArray[i]))
 					foregroundLayer.removeChild(buttonArray[i]);
 			}
 			

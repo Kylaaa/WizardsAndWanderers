@@ -30,7 +30,7 @@
 				spellOne.addEventListener(MouseEvent.CLICK, spellDemoButton14);
 				this.addChild(spellOne);
 				
-				exit = ShapesManager.drawButton(bMan.manage.stage.stageWidth / 2 - 100,   150, 200, 100, null, "exit");
+				exit = ShapesManager.drawButton(bMan.manage.stage.stageWidth / 2 + 105,   150, 50, 50, null, "exit");
 				this.addChild(exit);
 			}
 			else

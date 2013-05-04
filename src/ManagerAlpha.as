@@ -97,10 +97,26 @@
 		}
 		
 		// spell stuff
-		public function activateOne():void {	spellOne = true;	}
-		public function activateTwo():void {	spellTwo = true;	}
-		public function activateThree():void {	spellThree = true;	}
-		public function activateDaily():void {	spellDaily = true;	}
+		public function activateOne(e:TimerEvent):void 
+		{	
+			spellOne = true;
+			threeHourSpellOne.reset();
+		}
+		public function activateTwo(e:TimerEvent):void 
+		{
+			spellTwo = true;
+			threeHourSpellTwo.reset();
+		}
+		public function activateThree(e:TimerEvent):void 
+		{	
+			spellThree = true;
+			threeHourSpellThree.reset();
+		}
+		public function activateDaily(e:TimerEvent):void 
+		{	
+			spellDaily = true;
+			dailySpell.reset();
+		}
 		
 		public function createPlayer():void
 		{
