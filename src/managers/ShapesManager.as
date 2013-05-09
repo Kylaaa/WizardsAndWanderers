@@ -34,7 +34,7 @@ package managers
 		public static const JUSTIFY_CENTER_Y:String = "center_y";
 		
 		public static const THEME_CANYON:String 	= "Canyon";
-		public static const THEME_CAVERN:String 	= "Cave";
+		public static const THEME_CAVERN:String 	= "Cavern";
 		public static const THEME_DESERT:String 	= "Desert";
 		public static const THEME_FOREST:String 	= "Forest";
 		public static const THEME_HILLS:String 		= "Hills";

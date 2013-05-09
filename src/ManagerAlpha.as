@@ -86,7 +86,13 @@
 			
 			//initialize the database first
 			database = new Database(txtErrorMessage);
-			database.addEventListener(Event.COMPLETE, dbLoaded)
+			database.addEventListener(Event.COMPLETE, dbLoaded);
+			
+			
+			//var image:Bitmap = ImageManager.EnemyCanyonBossRagenFyre();
+			//image.x = 1;
+			//image.y = 10;
+			//this.addChild(image);
 			
 			createPlayer();
 			

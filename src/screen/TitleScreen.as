@@ -29,7 +29,7 @@ package screen
 			background.y = 0;
 			
 			trace("Current Biome Type: " + manage.device.CurrentBiome.Type);
-			play_btn = ShapesManager.drawButton(-100, -110, 200, 100, "play", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM);
+			play_btn = ShapesManager.drawButton(-100, -110, 200, 100, "PLAY", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM);
 			
 			
 		}

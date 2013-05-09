@@ -115,12 +115,13 @@
 			//add some debug stuff
 			/*backgroundLayer.addChild(lblDebugBackground);
 			backgroundLayer.addChild(txtDebugMessage);
-			backgroundLayer.addChild(btnDebugChangeLocation);
+			
 			
 			txtDebugMessage.x = lblDebugBackground.x;
-			txtDebugMessage.y = lblDebugBackground.y;
+			txtDebugMessage.y = lblDebugBackground.y;*/
+			backgroundLayer.addChild(btnDebugChangeLocation);
 			btnDebugChangeLocation.addEventListener(MouseEvent.CLICK, fireChangeLocationEvent);
-			//updateHomeTheme(new Event(Event.CHANGE)); */
+			//updateHomeTheme(new Event(Event.CHANGE)); 
 			backgroundLayer.addChild(btnDebugHealth);
 			btnDebugHealth.addEventListener(MouseEvent.CLICK, fullHealth);
 		}
