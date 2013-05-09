@@ -8,12 +8,12 @@ package screen
 	import ManagerAlpha;
 	import screen.MainScreen;
 	
-	public class Explore extends Screen
+	public class ExploreScreen extends Screen
 	{
 		public var exit_btn:SimpleButton;
 		public var infoLabel:MovieClip;
 		
-		public function Explore(newManager:ManagerAlpha)
+		public function ExploreScreen(newManager:ManagerAlpha)
 		{
 			super(newManager);
 			

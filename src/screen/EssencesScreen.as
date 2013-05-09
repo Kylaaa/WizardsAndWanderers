@@ -1,5 +1,5 @@
 ﻿//Alex Goldberger
-package code {
+package screen {
 	
 	import flash.display.MovieClip;
 	import flash.display.SimpleButton;

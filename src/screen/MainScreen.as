@@ -20,12 +20,11 @@
 	import rpg.Battle;
 	import ManagerAlpha;
 	
-	import screen.Castle;
-	import screen.Character;
-	import screen.Explore;
+	import screen.CastleScreen;
+	import screen.CharacterScreen;
+	import screen.ExploreScreen;
 	import screen.QuestsRecipes;
 	import screen.TitleScreen;
-	import code.Manager;
 	import gps.mobileViewerScreen;
 	
 	public class MainScreen extends Screen
@@ -233,7 +232,7 @@
 		private function onExplore(e:MouseEvent):void
 		{
 			//manage.exploring.Explore();
-			manage.displayScreen(Explore);
+			manage.displayScreen(ExploreScreen);
 		}
 		
 		private function onExit(e:MouseEvent):void
@@ -244,7 +243,7 @@
 		
 		private function onCharacter(e:MouseEvent):void
 		{
-			manage.displayScreen(Manager);
+			manage.displayScreen(CharacterScreen);
 		}
 		
 		private function onQuests(e:MouseEvent):void
@@ -254,7 +253,7 @@
 		
 		private function onCastle(e:MouseEvent):void
 		{
-			manage.displayScreen(Castle);
+			manage.displayScreen(CastleScreen);
 		}
 		
 		public override function cleanUp():void

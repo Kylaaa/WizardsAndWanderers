@@ -1,6 +1,6 @@
 package rpg
 {
-	import code.Weapon;
+	import rpg.Weapon;
 	import flash.display.Bitmap;
 	
 	import flash.display.Sprite;

@@ -1,6 +1,5 @@
 ﻿package 
 {
-	import code.*;
 	import flash.display.Bitmap;
 	import flash.display.MovieClip;
 	import flash.events.TimerEvent;
@@ -11,8 +10,14 @@
 	import gps.Mobile;
 	import managers.ImageManager;
 	import managers.ShapesManager;
+	import rpg.Armor;
 	import rpg.Battle;
+	import rpg.Exploring;
 	import rpg.Player;
+	import rpg.Recipe;
+	import rpg.Weapon;
+	import screen.InventoryScreen;
+	import screen.NotificationWindow;
 	
 	import flash.display.Sprite;
 	import flash.events.Event;

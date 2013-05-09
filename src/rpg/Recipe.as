@@ -1,10 +1,10 @@
 ﻿//Alex Goldberger
-package code
+package rpg
 {
 	
 	import flash.events.MouseEvent;
 	import ManagerAlpha;
-	import code.Armor;
+	import rpg.Armor;
 	
 	public class Recipe extends Item
 	{

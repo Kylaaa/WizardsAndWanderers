@@ -1,9 +1,9 @@
 ﻿//Alex Goldberger
-package code  {
+package rpg  {
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import ManagerAlpha;
-	import code.InventoryScreen;
+	import screen.InventoryScreen;
 	
 	public class Item extends Sprite {
 		

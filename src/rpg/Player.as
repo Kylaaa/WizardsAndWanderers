@@ -1,7 +1,7 @@
 ﻿package rpg
 {
-	import code.Weapon;
-	import code.Armor;
+	import rpg.Weapon;
+	import rpg.Armor;
 	import flash.utils.ByteArray;
     import flash.net.FileReference;
     import flash.filesystem.File;

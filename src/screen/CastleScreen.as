@@ -8,11 +8,11 @@ package screen
 	import ManagerAlpha;
 	import screen.MainScreen;
 	
-	public class Castle extends Screen
+	public class CastleScreen extends Screen
 	{
 		public var exit_btn:SimpleButton;
 		
-		public function Castle(newManager:ManagerAlpha)
+		public function CastleScreen(newManager:ManagerAlpha)
 		{
 			super(newManager);
 			exit_btn = ShapesManager.drawButton(0, -100, 200, 100, "Back", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_LEFT, ShapesManager.JUSTIFY_BOTTOM);

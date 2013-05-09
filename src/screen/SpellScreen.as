@@ -1,4 +1,4 @@
-﻿package code
+﻿package screen
 {
 
 	import flash.display.MovieClip;

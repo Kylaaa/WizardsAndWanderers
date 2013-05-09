@@ -1,5 +1,5 @@
 ﻿//Alex Goldberger
-package code  {
+package rpg  {
 	
 		import flash.events.MouseEvent;
 		import ManagerAlpha;

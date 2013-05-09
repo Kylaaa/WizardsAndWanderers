@@ -1,4 +1,4 @@
-﻿package code
+package screen
 {
 
 	import flash.display.Bitmap;
@@ -17,7 +17,7 @@
 	import screen.Screen;
 	import screen.MainScreen;
 
-	public class Manager extends Screen
+	public class CharacterScreen extends Screen
 	{
 		public var manager:ManagerAlpha;
 		
@@ -65,7 +65,7 @@
 		
 		private var wizard:Boolean;
 		
-		public function Manager(newManager:ManagerAlpha)
+		public function CharacterScreen(newManager:ManagerAlpha)
 		{
 			super(newManager);
 			manager = newManager;

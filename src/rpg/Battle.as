@@ -17,7 +17,7 @@
 	
 	import screen.MainScreen;
 	import screen.Screen;
-	import code.SpellScreen;
+	import screen.SpellScreen;
 	
 	public class Battle extends Screen
 	{
