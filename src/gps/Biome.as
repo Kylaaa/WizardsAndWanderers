@@ -3,7 +3,6 @@
 	import flash.display.Bitmap;
 	import flash.errors.IOError;
 	import flash.events.IOErrorEvent;
-	import gps.Enemy;
 	import flash.display.MovieClip;
 	import flash.display.Loader;
 	import flash.net.URLRequest;

@@ -35,25 +35,31 @@
 		private var itemDataNames:Array;			private var itemDataTypes:Array;
 		private var spellDataNames:Array;			private var spellDataTypes:Array;
 		private var weaponDataNames:Array;			private var weaponDataTypes:Array;
+		//local database tables
+		private var defeatedEnemyDataNames:Array;	private var defeatedEnemyDataTypes:Array;
+		private var visitedBiomeDataNames:Array;	private var visitedBiomeDataTypes:Array;
+		
 		
 		private var tableNames:Array;
 		private var currentDBVersion:String;
 		
 		//accessors
-		public function get TableNames():Array 			{ return tableNames; }
-		public function get CurrentDBVersion():String 	{ return currentDBVersion; }
-		public function get DB_Connection():SQLConnection { return db_connection; }
+		public function get TableNames():Array 				{ return tableNames; }
+		public function get CurrentDBVersion():String 		{ return currentDBVersion; }
+		public function get DB_Connection():SQLConnection 	{ return db_connection; }
 		
-		public function get DBVersionDataNames():Array 	{ return dbVersionDataNames; }
-		public function get ArmorDataNames():Array 		{ return armorDataNames; }
-		public function get BiomeTypesDataNames():Array { return biomeTypesDataNames; }
-		public function get CraftingDataNames():Array 	{ return craftingDataNames; }
-		public function get EnchantingDataNames():Array	{ return enchantingDataNames; }
-		public function get EnemiesDataNames():Array 	{ return enemiesDataNames; }
-		public function get EnemyTypesDataNames():Array { return enemyTypesDataNames; }
-		public function get ItemDataNames():Array 		{ return itemDataNames; }
-		public function get SpellDataNames():Array 		{ return spellDataNames; }
-		public function get WeaponDataNames():Array 	{ return weaponDataNames; }
+		public function get DBVersionDataNames():Array 		{ return dbVersionDataNames; }
+		public function get ArmorDataNames():Array 			{ return armorDataNames; }
+		public function get BiomeTypesDataNames():Array 	{ return biomeTypesDataNames; }
+		public function get CraftingDataNames():Array 		{ return craftingDataNames; }
+		public function get EnchantingDataNames():Array		{ return enchantingDataNames; }
+		public function get EnemiesDataNames():Array 		{ return enemiesDataNames; }
+		public function get EnemyTypesDataNames():Array 	{ return enemyTypesDataNames; }
+		public function get ItemDataNames():Array 			{ return itemDataNames; }
+		public function get SpellDataNames():Array 			{ return spellDataNames; }
+		public function get WeaponDataNames():Array 		{ return weaponDataNames; }
+		public function get DefeatedEnemyDataNames():Array	{ return defeatedEnemyDataNames; }
+		public function get VisitedBiomeDataNames():Array	{ return visitedBiomeDataNames; }
 		
 		
 		
@@ -86,6 +92,9 @@
 			tableNames.push("Spell");
 			tableNames.push("Weapon"); //not grabbing player table either
 			
+			//add some local tables to store data about stuff that the player has done
+			tablesNames.push("DefeatedEnemy");
+			tablesNames.push("VisitedBiome");
 			
 			//INITIALIZE SQL DATA ARRAYS
 			//database version control stuff
@@ -221,6 +230,16 @@
 			weaponDataNames[8] = "splashDmgPercent";	weaponDataTypes[8] = "INT";
 			weaponDataNames[9] = "splashEffect";		weaponDataTypes[9] = "TEXT";
 			weaponDataNames[10] = "splashEffectChance";	weaponDataTypes[10] = "INT";
+			
+			
+			
+			//LOCAL TABLES
+			//defeated enemy table
+			
+			
+			
+			//visited biome
+			
 		}
 		private function initDatabase():void
 		{
@@ -316,7 +335,9 @@
 			
 			for (var i:int = 0; i < tableNames.length; i++)
 			{
-				dropTable(tableNames[i], verbose);				
+				if (i > 10)	{	dropTable(tableNames[i], verbose);	}
+				
+				//don't delete our local database tables
 			}
 		}
 		private function checkDatabaseVersion():void

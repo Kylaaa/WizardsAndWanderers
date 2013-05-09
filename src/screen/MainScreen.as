@@ -25,7 +25,6 @@
 	import screen.ExploreScreen;
 	import screen.QuestsRecipes;
 	import screen.TitleScreen;
-	import gps.mobileViewerScreen;
 	
 	public class MainScreen extends Screen
 	{
