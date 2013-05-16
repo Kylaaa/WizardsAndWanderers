@@ -93,8 +93,8 @@
 			tableNames.push("Weapon"); //not grabbing player table either
 			
 			//add some local tables to store data about stuff that the player has done
-			tablesNames.push("DefeatedEnemy");
-			tablesNames.push("VisitedBiome");
+			//tableNames.push("DefeatedEnemy");
+			//tableNames.push("VisitedBiome");
 			
 			//INITIALIZE SQL DATA ARRAYS
 			//database version control stuff

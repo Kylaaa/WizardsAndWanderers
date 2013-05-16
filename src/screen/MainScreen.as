@@ -46,6 +46,7 @@
 		private var txtDebugMessage:TextField;
 		private var btnDebugChangeLocation:SimpleButton;
 		private var btnDebugHealth:SimpleButton;
+		private var currentBiomeIndex:int;
 		
 		private var backgroundImg:Bitmap;
 		public function get GetBackground():Bitmap {return backgroundImg;}
@@ -78,6 +79,8 @@
 			txtDebugMessage.height = 100;
 			btnDebugChangeLocation = ShapesManager.drawButton( -150, 110, 150, 100, "Change Location", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_RIGHT, ShapesManager.JUSTIFY_TOP);
 			btnDebugHealth = ShapesManager.drawButton(-150, 0, 150, 100, "Full Health", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_RIGHT, ShapesManager.JUSTIFY_TOP);
+			
+			currentBiomeIndex = 0;
 		}
 		
 		public override function bringIn():void
@@ -292,16 +295,24 @@
 		{
 			//make a bunch of locations
 			var locations:Array = new Array();
-				locations.push(new GeolocationEvent(GeolocationEvent.UPDATE, false, false, 42.994, -77.680)); //1
-				locations.push(new GeolocationEvent(GeolocationEvent.UPDATE, false, false, 43.140, -77.645)); //4
-				locations.push(new GeolocationEvent(GeolocationEvent.UPDATE, false, false, 43.156, -77.770)); //5
-				locations.push(new GeolocationEvent(GeolocationEvent.UPDATE, false, false, 43.066, -77.700)); //6
-				locations.push(new GeolocationEvent(GeolocationEvent.UPDATE, false, false, 43.012, -77.752)); //9
-				locations.push(new GeolocationEvent(GeolocationEvent.UPDATE, false, false, 43.012, -77.700)); //10
+				locations.push(new GeolocationEvent(GeolocationEvent.UPDATE, false, false, 43.012, -77.770)); //1
+				
+				
+				locations.push(new GeolocationEvent(GeolocationEvent.UPDATE, false, false, 43.012, -77.734)); //4
+				locations.push(new GeolocationEvent(GeolocationEvent.UPDATE, false, false, 43.012, -77.608)); //5
+				locations.push(new GeolocationEvent(GeolocationEvent.UPDATE, false, false, 43.000, -77.662)); //6
+				
+				
+				locations.push(new GeolocationEvent(GeolocationEvent.UPDATE, false, false, 43.000, -77.765)); //9
+				//locations.push(new GeolocationEvent(GeolocationEvent.UPDATE, false, false, 43.048, -77.770)); //10
 				
 				
 			//grab a random location
-			var aRndIndex:int = Math.floor(Math.random() * locations.length);
+			currentBiomeIndex++;
+			if (currentBiomeIndex >= locations.length) { currentBiomeIndex = 0; }
+			trace("Loading current biome # " + currentBiomeIndex);
+			var aRndIndex:int = currentBiomeIndex; // Math.floor(Math.random() * locations.length);
+			
 			var aNewLocation:GeolocationEvent = locations[aRndIndex] as GeolocationEvent;
 			
 			//send the device a new location
