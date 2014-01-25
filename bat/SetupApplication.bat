@@ -39,7 +39,7 @@ set DIST_PATH=dist
 set DIST_NAME=WizardsAndWanders
 
 :: Debugging using a custom IP
-set DEBUG_IP=
+set DEBUG_IP=debugWaW
 
 
 

@@ -46,7 +46,6 @@
 		private var txtDebugMessage:TextField;
 		private var btnDebugChangeLocation:SimpleButton;
 		private var btnDebugHealth:SimpleButton;
-		private var currentBiomeIndex:int;
 		
 		private var backgroundImg:Bitmap;
 		public function get GetBackground():Bitmap {return backgroundImg;}
@@ -56,21 +55,19 @@
 		public function MainScreen(newManager:ManagerAlpha)
 		{
 			super(newManager);
-			
-			//USE SOME LOGIC TO FIGURE OUT WHICH IMAGE TO DRAW
-			
+
 			backgroundImg = new Bitmap();
 			backgroundImg.x = 0;
 			backgroundImg.y = 0;
 			
 
-			character_btn = ShapesManager.drawButtonFromImage( -250, -130,  80, 130, "", "iconWizard.png", ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM);
-			quests_btn = 	ShapesManager.drawButtonFromImage(  -50, -100, 110, 100, "", "iconScroll.png", ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM);
-			castle_btn = 	ShapesManager.drawButtonFromImage(  150, -150, 150, 150, "", "iconCastle.png",ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM);
+			character_btn = ShapesManager.drawButtonFromImage( -.66, -.25, .2, .2, "", "iconWizard.png", ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM);
+			quests_btn = 	ShapesManager.drawButtonFromImage(  .10, -.25, .2, .2, "", "iconScroll.png", ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM);
+			castle_btn = 	ShapesManager.drawButtonFromImage(  .66, -.25, .2, .2, "", "iconCastle.png",ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM);
 			
-			encounter_btn =	ShapesManager.drawButton(-100, -75, 200, 50, "Encounter", 	manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_CENTER_Y);
-			explore_btn =	ShapesManager.drawButton(-100,   0, 200, 50, "Explore", 	manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_CENTER_Y);
-			exit_btn = 		ShapesManager.drawButton(-100,  75, 200, 50, "Exit",		manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_CENTER_Y);
+			encounter_btn =	ShapesManager.drawButton(-.25, -.2, .5, .12, "Encounter", 	manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_CENTER_Y);
+			explore_btn =	ShapesManager.drawButton(-.25,   0, .5, .12, "Explore", 	manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_CENTER_Y);
+			exit_btn = 		ShapesManager.drawButton(-.25,  .2, .5, .12, "Exit",		manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_CENTER_Y);
 			
 			//consider drawing a loading screen for now
 			lblDebugBackground = ShapesManager.drawLabel("", -100, 0, 150, 100, ShapesManager.JUSTIFY_RIGHT, ShapesManager.JUSTIFY_TOP);
@@ -79,8 +76,6 @@
 			txtDebugMessage.height = 100;
 			btnDebugChangeLocation = ShapesManager.drawButton( -150, 110, 150, 100, "Change Location", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_RIGHT, ShapesManager.JUSTIFY_TOP);
 			btnDebugHealth = ShapesManager.drawButton(-150, 0, 150, 100, "Full Health", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_RIGHT, ShapesManager.JUSTIFY_TOP);
-			
-			currentBiomeIndex = 0;
 		}
 		
 		public override function bringIn():void
@@ -295,24 +290,16 @@
 		{
 			//make a bunch of locations
 			var locations:Array = new Array();
-				locations.push(new GeolocationEvent(GeolocationEvent.UPDATE, false, false, 43.012, -77.770)); //1
-				
-				
-				locations.push(new GeolocationEvent(GeolocationEvent.UPDATE, false, false, 43.012, -77.734)); //4
-				locations.push(new GeolocationEvent(GeolocationEvent.UPDATE, false, false, 43.012, -77.608)); //5
-				locations.push(new GeolocationEvent(GeolocationEvent.UPDATE, false, false, 43.000, -77.662)); //6
-				
-				
-				locations.push(new GeolocationEvent(GeolocationEvent.UPDATE, false, false, 43.000, -77.765)); //9
-				//locations.push(new GeolocationEvent(GeolocationEvent.UPDATE, false, false, 43.048, -77.770)); //10
+				locations.push(new GeolocationEvent(GeolocationEvent.UPDATE, false, false, 42.994, -77.680)); //1
+				locations.push(new GeolocationEvent(GeolocationEvent.UPDATE, false, false, 43.140, -77.645)); //4
+				locations.push(new GeolocationEvent(GeolocationEvent.UPDATE, false, false, 43.156, -77.770)); //5
+				locations.push(new GeolocationEvent(GeolocationEvent.UPDATE, false, false, 43.066, -77.700)); //6
+				locations.push(new GeolocationEvent(GeolocationEvent.UPDATE, false, false, 43.012, -77.752)); //9
+				locations.push(new GeolocationEvent(GeolocationEvent.UPDATE, false, false, 43.012, -77.700)); //10
 				
 				
 			//grab a random location
-			currentBiomeIndex++;
-			if (currentBiomeIndex >= locations.length) { currentBiomeIndex = 0; }
-			trace("Loading current biome # " + currentBiomeIndex);
-			var aRndIndex:int = currentBiomeIndex; // Math.floor(Math.random() * locations.length);
-			
+			var aRndIndex:int = Math.floor(Math.random() * locations.length);
 			var aNewLocation:GeolocationEvent = locations[aRndIndex] as GeolocationEvent;
 			
 			//send the device a new location

@@ -93,8 +93,8 @@
 			tableNames.push("Weapon"); //not grabbing player table either
 			
 			//add some local tables to store data about stuff that the player has done
-			//tableNames.push("DefeatedEnemy");
-			//tableNames.push("VisitedBiome");
+			tableNames.push("DefeatedEnemy");
+			tableNames.push("VisitedBiome");
 			
 			//INITIALIZE SQL DATA ARRAYS
 			//database version control stuff
@@ -235,10 +235,18 @@
 			
 			//LOCAL TABLES
 			//defeated enemy table
-			
-			
+			defeatedEnemyDataNames = new Array();				defeatedEnemyDataTypes = new Array();
+			defeatedEnemyDataNames[0] = "id";					defeatedEnemyDataTypes[0] = "INT PRIMARY KEY AUTOINCREMENT NOT NULL"; 
+			defeatedEnemyDataNames[1] = "enemyID";				defeatedEnemyDataTypes[1] = "INT";
+			defeatedEnemyDataNames[2] = "total";				defeatedEnemyDataTypes[2] = "INT";
 			
 			//visited biome
+			visitedBiomeDataNames = new Array();				visitedBiomeDataTypes = new Array();	
+			visitedBiomeDataNames[0] = "id";					visitedBiomeDataTypes[0] = "INT PRIMARY KEY AUTOINCREMENT NOT NULL";
+			visitedBiomeDataNames[1] = "biomeID";				visitedBiomeDataTypes[1] = "INT";
+			visitedBiomeDataNames[2] = "type";					visitedBiomeDataTypes[2] = "TEXT";
+			visitedBiomeDataNames[3] = "enemies";				visitedBiomeDataTypes[3] = "TEXT";
+			visitedBiomeDataNames[4] = "defeatedEnemies";		visitedBiomeDataTypes[4] = "TEXT";
 			
 		}
 		private function initDatabase():void
@@ -442,11 +450,14 @@
 			
 			for (var i:int = 0; i < tableNames.length; i++)
 			{
-				var url:URLRequest = new URLRequest(tableScriptURL + tableNames[i]);
-				//trace("url: " + url.url);
-				var pageLoader:URLLoader = new URLLoader();
-				pageLoader.addEventListener(Event.COMPLETE, addValuesFromServer);
-				pageLoader.load(url);
+				if (i < 10)
+				{
+					var url:URLRequest = new URLRequest(tableScriptURL + tableNames[i]);
+					//trace("url: " + url.url);
+					var pageLoader:URLLoader = new URLLoader();
+					pageLoader.addEventListener(Event.COMPLETE, addValuesFromServer);
+					pageLoader.load(url);
+				}
 			}
 		}
 		private function addValuesFromServer(e:Event):void
@@ -729,19 +740,21 @@
 		{
 			switch (nameOfTable)
 			{
-				case ("DBVersion"):		return dbVersionDataNames; break;
-				case ("Armor"): 		return armorDataNames; break;
-				case ("BiomeType"): 	return biomeTypesDataNames; break;
-				case ("Crafting"):		return craftingDataNames; break;
-				case ("Enchanting"):	return enchantingDataNames; break;
-				case ("Enemy"): 		return enemiesDataNames; break;
-				case ("EnemyType"): 	return enemyTypesDataNames; break;
-				case ("Item"):			return itemDataNames; break;
-				case ("Spell"): 		return spellDataNames; break;
-				case ("Weapon"):	 	return weaponDataNames; break;
+				case ("DBVersion"):		return dbVersionDataNames; 		break;
+				case ("Armor"): 		return armorDataNames; 			break;
+				case ("BiomeType"): 	return biomeTypesDataNames; 	break;
+				case ("Crafting"):		return craftingDataNames; 		break;
+				case ("Enchanting"):	return enchantingDataNames; 	break;
+				case ("Enemy"): 		return enemiesDataNames; 		break;
+				case ("EnemyType"): 	return enemyTypesDataNames; 	break;
+				case ("Item"):			return itemDataNames; 			break;
+				case ("Spell"): 		return spellDataNames; 			break;
+				case ("Weapon"):	 	return weaponDataNames; 		break;
+				case ("DefeatedEnemy"): return defeatedEnemyDataNames;	break;
+				case ("VisitedBiome"):	return visitedBiomeDataNames;	break;
 				
 				default: 
-					throw new Error("Array does not exist for table: " + nameOfTable);
+					throw new Error("Names Array does not exist for table: " + nameOfTable);
 			}
 			
 			return new Array();
@@ -750,19 +763,21 @@
 		{
 			switch (nameOfTable)
 			{
-				case ("DBVersion"):		return dbVersionDataTypes; break;
-				case ("Armor"): 		return armorDataTypes; break;
-				case ("BiomeType"): 	return biomeTypesDataTypes; break;
-				case ("Crafting"):		return craftingDataTypes; break;
-				case ("Enchanting"):	return enchantingDataTypes; break;
-				case ("Enemy"): 		return enemiesDataTypes; break;
-				case ("EnemyType"): 	return enemyTypesDataTypes; break;
-				case ("Item"):			return itemDataTypes; break;
-				case ("Spell"): 		return spellDataTypes; break;
-				case ("Weapon"):	 	return weaponDataTypes; break;
+				case ("DBVersion"):		return dbVersionDataTypes; 		break;
+				case ("Armor"): 		return armorDataTypes; 			break;
+				case ("BiomeType"): 	return biomeTypesDataTypes; 	break;
+				case ("Crafting"):		return craftingDataTypes; 		break;
+				case ("Enchanting"):	return enchantingDataTypes; 	break;
+				case ("Enemy"): 		return enemiesDataTypes; 		break;
+				case ("EnemyType"): 	return enemyTypesDataTypes; 	break;
+				case ("Item"):			return itemDataTypes; 			break;
+				case ("Spell"): 		return spellDataTypes; 			break;
+				case ("Weapon"):	 	return weaponDataTypes; 		break;
+				case ("DefeatedEnemy"): return defeatedEnemyDataTypes;	break;
+				case ("VisitedBiome"):	return visitedBiomeDataTypes;	break;
 				
 				default: 
-					throw new Error("Array does not exist for table: " + nameOfTable);
+					throw new Error("Type Array does not exist for table: " + nameOfTable);
 			}
 			
 			return new Array();

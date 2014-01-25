@@ -29,9 +29,7 @@ package screen
 			background.y = 0;
 			
 			trace("Current Biome Type: " + manage.device.CurrentBiome.Type);
-			play_btn = ShapesManager.drawButton(-100, -110, 200, 100, "PLAY", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM);
-			
-			
+			play_btn = ShapesManager.drawButton(-0.2, -0.21, 0.4, 0.20, "PLAY", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM);
 		}
 		
 		override public function bringIn():void 
@@ -53,11 +51,11 @@ package screen
 		
 		private function onPlay(e:MouseEvent):void
 		{
-			wizBtn = ShapesManager.drawButton(0, 0, stage.stageWidth / 2, stage.stageHeight, null, "wizard");
+			wizBtn = ShapesManager.drawButton(0.0, 0.0, 0.5, 1.0, null, "wizard");
 			wizBtn.addEventListener(MouseEvent.CLICK, wizardChoice);
 			addChild(wizBtn);
 			
-			druBtn = ShapesManager.drawButton(stage.stageWidth / 2, 0, stage.stageWidth / 2, stage.stageHeight, null, "druid");
+			druBtn = ShapesManager.drawButton(0.5, 0.0, 0.5, 1.0, null, "druid");
 			druBtn.addEventListener(MouseEvent.CLICK, druidChoice);
 			addChild(druBtn);
 		}
@@ -76,9 +74,11 @@ package screen
 		
 		override public function cleanUp():void 
 		{
-		
-			this.removeChild(play_btn);
+			//remove event listeners
 			play_btn.removeEventListener(MouseEvent.CLICK, onPlay);
+			
+			//clean up the screen
+			this.removeChild(play_btn);
 			super.cleanUp();
 		}
 	}

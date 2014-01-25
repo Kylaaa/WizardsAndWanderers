@@ -25,7 +25,6 @@ package managers
 				embedAsCFF 	= 'false'					)] 
 		private static var FontPixelton:Class;
 		
-		
 		public static const JUSTIFY_LEFT:String 	= "left";
 		public static const JUSTIFY_RIGHT:String 	= "right";
 		public static const JUSTIFY_TOP:String 		= "top";
@@ -138,16 +137,7 @@ package managers
 			
 			if (text != null)
 			{
-				var margin:int = 3;
-				var tf:TextField = drawText(text, margin, margin, w - (2 * margin), h - (2 * margin));
-				
-				var tff:TextFormat = textFormat_Button;
-				if (text.length > 10) {	tff.size = 12; }
-				if (text.length > 20) { tff.size = 6; }
-				
-				tf.setTextFormat(textFormat_Button);
-				verticalAlignTextField(tf);
-				bns.addChild(tf);
+				bns.addChild(drawCaption(text, w, h));
 			}
 				
 			return bns;
@@ -185,16 +175,7 @@ package managers
 				
 			if (text != null)
 			{
-				var margin:int = 3;
-				var tf:TextField = drawText(text, margin, margin, w - (2 * margin), h - (2 * margin));
-				
-				var tff:TextFormat = textFormat_Button;
-				if (text.length > 10) {	tff.size = 28; }
-				if (text.length > 20) { tff.size = 24; }
-				
-				tf.setTextFormat(textFormat_Button);
-				verticalAlignTextField(tf);
-				bos.addChild(tf);
+				bos.addChild(drawCaption(text, w, h));
 			}
 				
 			return bos;
@@ -235,45 +216,44 @@ package managers
 			
 			if (text != null)
 			{
-				var margin:int = 3;
-				var tf:TextField = drawText(text, margin, margin, w - (2 * margin), h - (2 * margin));
-				
-				var tff:TextFormat = textFormat_Button;
-				if (text.length > 10) {	tff.size = 12; }
-				if (text.length > 20) { tff.size = 6; }
-				
-				tf.setTextFormat(textFormat_Button);
-				verticalAlignTextField(tf);
-				bds.addChild(tf);
+				bds.addChild(drawCaption(text, w, h));
 			}
 				
 			return bds;			
 		}
-		public static function verticalAlignTextField(tf: TextField): void 
-		{
-			//snagged off the interwebs from:
-			//http://stackoverflow.com/questions/8452331/how-to-vertical-align-a-textfield-in-as3
-			tf.y += Math.round((tf.height - tf.textHeight) / 2);
-		}
+		
 		
 		//draw functions
 		public static function drawButton(posX:Number, posY:Number, w:Number, h:Number, caption:String = null, theme:String = THEME_CAVERN, xJustify:String = JUSTIFY_LEFT, yJustify:String = JUSTIFY_TOP):SimpleButton
 		{
-			var aButton:SimpleButton = new SimpleButton(buttonNormalState	(w, h, caption, theme),
-														buttonOverState		(w, h, caption, theme), 
-														buttonDownState		(w, h, caption, theme), 
-														buttonNormalState	(w, h, caption, theme));
+			//convert positions and width and height number from percentage to actual pixels
+			posX *= Main.STAGE_RIGHT;
+			posY *= Main.STAGE_BOTTOM;
+			w *= Main.STAGE_RIGHT;
+			h *= Main.STAGE_BOTTOM;
+			
+			//build the button
+			var aButton:SimpleButton = new SimpleButton(buttonNormalState(w, h, caption, theme),
+														buttonOverState	 (w, h, caption, theme), 
+														buttonDownState	 (w, h, caption, theme), 
+														buttonNormalState(w, h, caption, theme));
 				aButton.x = getJustifyAmount(xJustify) + posX;
 				aButton.y = getJustifyAmount(yJustify) + posY;
 				aButton.width = w;
 				aButton.height = h;
 				aButton.visible = true;
-			
+				
 			return aButton;
 		}
 		
 		public static function drawButtonFromImage(posX:Number, posY:Number, w:Number, h:Number, caption:String = null, imageSRC:String = "traffic-cones.png", xJustify:String = JUSTIFY_LEFT, yJustify:String = JUSTIFY_TOP):SimpleButton
 		{
+			//convert positions and width and height number from percentage to actual pixels
+			posX *= Main.STAGE_RIGHT;
+			posY *= Main.STAGE_BOTTOM;
+			w *= Main.STAGE_RIGHT;
+			h *= Main.STAGE_BOTTOM;
+			
 			//image stuff
 			var theImage:Bitmap = ImageManager.getImageByName(imageSRC);
 				theImage.x = 0;
@@ -312,8 +292,38 @@ package managers
 			
 			return aButton;
 		}
+		public static function verticalAlignTextField(tf: TextField): void 
+		{
+			//snagged off the interwebs from:
+			//http://stackoverflow.com/questions/8452331/how-to-vertical-align-a-textfield-in-as3
+			tf.y += Math.round((tf.height - tf.textHeight) / 2);
+		}
+		private static function drawCaption(caption:String, w:Number, h:Number):TextField
+		{
+			const margin:int = 3;
+			var tf:TextField = drawText(caption, 
+										margin / Main.STAGE_RIGHT, 
+										margin / Main.STAGE_BOTTOM, 
+										(w - (2 * margin)) / Main.STAGE_RIGHT, 
+										(h - (2 * margin)) / Main.STAGE_BOTTOM);
+				
+				var tff:TextFormat = textFormat_Button;
+				if (caption.length > 10) { tff.size = 28; }
+				if (caption.length > 20) { tff.size = 24; }
+				
+				tf.setTextFormat(textFormat_Button);
+				verticalAlignTextField(tf);
+				
+			return tf;
+		}
 		public static function drawText(caption:String, posX:Number, posY:Number, w:Number, h:Number , xJustify:String = JUSTIFY_LEFT, yJustify:String = JUSTIFY_TOP, verticalAlign:Boolean = false, centerAlign:Boolean = true):TextField
 		{
+			//convert positions and width and height number from percentage to actual pixels
+			posX *= Main.STAGE_RIGHT;
+			posY *= Main.STAGE_BOTTOM;
+			w *= Main.STAGE_RIGHT;
+			h *= Main.STAGE_BOTTOM;
+			
 			var someText:TextField = new TextField();
 				//someText.antiAliasType = AntiAliasType.ADVANCED;
 				//someText.autoSize = TextFieldAutoSize.CENTER;
@@ -335,6 +345,13 @@ package managers
 		}
 		public static function drawLabel(caption:String, posX:Number, posY:Number, w:Number, h:Number, xJustify:String = JUSTIFY_LEFT, yJustify:String = JUSTIFY_TOP, verticalAlign:Boolean = false):MovieClip
 		{
+			//convert positions and width and height number from percentage to actual pixels
+			posX *= Main.STAGE_RIGHT;
+			posY *= Main.STAGE_BOTTOM;
+			w *= Main.STAGE_RIGHT;
+			h *= Main.STAGE_BOTTOM;
+			
+			
 			var margin:int = 3;
 			var border:int = 5;
 			
@@ -378,6 +395,12 @@ package managers
 		
 		public static function drawImage(source:String, posX:Number, posY:Number, w:Number = -1, h:Number = -1, xJustify:String = JUSTIFY_LEFT, yJustify:String = JUSTIFY_TOP):Bitmap
 		{
+			//convert positions and width and height number from percentage to actual pixels
+			posX *= Main.STAGE_RIGHT;
+			posY *= Main.STAGE_BOTTOM;
+			w *= Main.STAGE_RIGHT;
+			h *= Main.STAGE_BOTTOM;
+			
 			var anImage:Bitmap = ImageManager.getImageByName(source);
 				anImage.x = getJustifyAmount(xJustify) + posX;
 				anImage.y = getJustifyAmount(yJustify) + posY;

@@ -239,14 +239,14 @@ package gps {
 						var row:Object = result.data[i];
 						biomeMonsters.push(row); //add it to our biome array
 						
-						//trace("-row[" + i + "] = " + row);
-						//trace("\t-Enemy Name: " + row["id"]);
+						trace("-row[" + i + "] = " + row);
+						trace("\t-Enemy Name: " + row["id"]);
 						appendMessage("\t-row[" + i + "] = " + row);
 						appendMessage("\t-Enemy Name: " + row["id"]);
 						for (var internalValue:Object in row)
 						{
 							appendMessage("\t-" + internalValue + ": " + row[internalValue]);	
-							//trace("\t-" + internalValue + ":\t" + row[internalValue]);
+							trace("\t-" + internalValue + ":\t" + row[internalValue]);
 						}
 					}
 					
