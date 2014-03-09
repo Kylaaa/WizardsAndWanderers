@@ -2,7 +2,7 @@
 package rpg  {
 	
 		import flash.events.MouseEvent;
-		import ManagerAlpha;
+		import Game;
 		
 	public class Weapon extends Item {
 		
@@ -10,7 +10,7 @@ package rpg  {
 		public var critDamageBonus:Number;
 		public var critEffect:int; //have an array of weapon effects
 		
-		public function Weapon(man:ManagerAlpha, id:int, equip:Boolean, lvl:int, iName:String, weap:Boolean, cC:int, cDB:Number, cE:int) {
+		public function Weapon(man:Game, id:int, equip:Boolean, lvl:int, iName:String, weap:Boolean, cC:int, cDB:Number, cE:int) {
 			// constructor code
 			super(man, id, equip, lvl, iName, weap);
 			critChance = cC;
@@ -29,11 +29,14 @@ package rpg  {
 			this.stopDrag();
 		}*/
 		
-		override public function SummaryString():String
+		override public function toString():String
 		{
 			return "\nItem: " + itemName + "\niLevel: " + ilevel + "\nType: " + "Weapon" + "\nCritical Hit Chance: " + critChance + "\nCritical Damage Bonus: " + critDamageBonus + " Critical Effect: " + critEffect;
 		}
-
+		public function toXML():String
+		{
+			return "<weapon></weapon>";
+		}
 	}
 	
 }

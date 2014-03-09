@@ -11,7 +11,7 @@ package screen {
 	import flash.display3D.IndexBuffer3D;
 	import flash.text.TextField;
 	import managers.ShapesManager;
-	import ManagerAlpha;
+	import Game;
 	import managers.ImageManager;
 	
 	public class InventoryScreen extends MovieClip {
@@ -20,7 +20,7 @@ package screen {
 		private var btn_left:SimpleButton;
 		private var btn_right:SimpleButton;
 		
-		protected var manager:ManagerAlpha;
+		protected var manager:Game;
 		private var currentIndex:int;
 		private var tempArray:Array;
 		private var weapon:Boolean;
@@ -33,7 +33,7 @@ package screen {
 		private var txt_iSize:TextField;
 		private var txt_index:TextField;*/
 		
-		public function InventoryScreen(man:ManagerAlpha, type:String) {
+		public function InventoryScreen(man:Game, type:String) {
 			// constructor code
 			manager = man;
 			
@@ -122,32 +122,32 @@ package screen {
 		{
 			if (!weapon)
 			{
-			if (manager.equippedArmorId == 1)
-			{
-				manager.equippedArmorId == 2;
-				//change armor
+				if (manager.player.equippedArmor.idNumber == 1)
+				{
+					manager.player.equippedArmor.idNumber == 2;
+					//change armor
+				}
+				else
+				{
+					manager.player.equippedArmor.idNumber == 1;
+					//change armor
+				}
+				//manager.equippedArmorId = tempArmor.idNumber;
 			}
 			else
 			{
-				manager.equippedArmorId == 1;
-				//change armor
-			}
-			//manager.equippedArmorId = tempArmor.idNumber;
-			}
-			else
-			{
-			if (manager.equippedWeaponId == 1)
-			{
-				manager.equippedWeaponId == 2;
-				//change weapon
-				//manager.weaponImage = ImageManager.
-			}
-			else
-			{
-				manager.equippedArmorId == 1;
-				//change armor
-			}
-			//manager.equippedArmorId = tempArmor.idNumber;
+				if (manager.player.currentWeapon.idNumber == 1)
+				{
+					manager.player.currentWeapon.idNumber == 2;
+					//change weapon
+					//manager.weaponImage = ImageManager.
+				}
+				else
+				{
+					manager.player.currentWeapon.idNumber == 1;
+					//change armor
+				}
+				//manager.equippedArmorId = tempArmor.idNumber;
 			}
 		}
 		
@@ -239,7 +239,7 @@ package screen {
 			{
 				for (var i:int = 0; i < tempArray.length; i++)
 				{
-					if(tempArray[i].idNumber == manager.equippedWeaponId)
+					if(tempArray[i].idNumber == manager.player.currentWeapon.idNumber)
 					{
 						toReturn = i;
 					}
@@ -249,7 +249,7 @@ package screen {
 			{
 				for (var j:int = 0; j < tempArray.length; j++)
 				{
-					if(tempArray[j].idNumber == manager.equippedArmorId)
+					if(tempArray[j].idNumber == manager.player.equippedArmor.idNumber)
 					{
 						toReturn = j;
 					}

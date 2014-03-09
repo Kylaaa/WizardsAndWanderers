@@ -24,47 +24,57 @@ package
 		
 		
 		//GLOBAL VARIABLES
-		private var theGame:ManagerAlpha;
+		private var theGame:Game;
 		
 		public function Main():void 
 		{
-			stage.scaleMode = StageScaleMode.NO_SCALE;
+			//initialize stage variables
+			stage.scaleMode = StageScaleMode.NO_SCALE; //This one line has given me more of a head-ache than I care to say. ~Kyler
 			stage.align = StageAlign.TOP_LEFT;
 			stage.addEventListener(Event.DEACTIVATE, deactivate);
+			stage.addEventListener(Event.RESIZE, updateStageDimensions);
+			updateStageDimensions();
 			
 			// touch or gesture?
 			Multitouch.inputMode = MultitouchInputMode.TOUCH_POINT;
 			
-			stage.addEventListener(Event.RESIZE, updateStageDimensions);
-			updateStageDimensions();
-			
 			// entry point
-			theGame = new ManagerAlpha();
+			theGame = new Game();
 			this.addChild(theGame);
 			//theGame.startUp(); //this gets called internally
 		}
 		
+		//EVENT DRIVEN FUNCTIONS
 		private function updateStageDimensions(e:Event = null):void
 		{
+			//when the stage is resized, change a few reference points
 			STAGE_CENTER_X 	= stage.stageWidth / 2;
 			STAGE_CENTER_Y	= stage.stageHeight / 2;
 			STAGE_RIGHT 	= stage.stageWidth;
 			STAGE_BOTTOM 	= stage.stageHeight;
-		}
-		
+		}	
 		private function deactivate(e:Event):void 
 		{
-			// auto-close
-			//NativeApplication.nativeApplication.exit();
+			// should the app go into the background, start to close things down
 			theGame.device.closeAllConnections(e);
-		}
+			theGame.saveProgress();
+			//NativeApplication.nativeApplication.exit();
+		}		
 		
+		//HELPER FUNCTIONS
+		public static function getCurrentTimeValue():Number
+		{
+			//it would be better to use the Julian Date instead of calculating the date, oh well
+			var curDateTime:Date = new Date(); //get the current time
+			var curTime:Number = (curDateTime.getMonth() * 30 * 24) + 
+								 (curDateTime.getDate() * 24) +
+								 (curDateTime.getHours());
+			return curTime;
+		}
 		public static function exitGame():void
 		{
-			// auto-close
 			NativeApplication.nativeApplication.exit();
 		}
-		
 	}
 	
 }

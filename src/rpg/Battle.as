@@ -78,7 +78,7 @@
 		
 		private var gameOver:Boolean;
 		
-		public function Battle(newManager:ManagerAlpha)
+		public function Battle(newManager:Game)
 		{
 			super(newManager);
 			trace("New Battle");
@@ -119,7 +119,7 @@
 			speed = manage.player.speed;
 			effectUnder = manage.player.effectUnder;
 			missChance = manage.player.missChance;
-			criticalChance = manage.currentWeapon.critChance;
+			criticalChance = manage.player.currentWeapon.critChance;
 			
 			spScreen = new SpellScreen(this);
 		}
@@ -302,7 +302,7 @@
 					doubleGoing = true;
 			}
 			
-			currentCritEffect = manage.currentWeapon.critEffect;
+			currentCritEffect = manage.player.currentWeapon.critEffect;
 		}
 		
 		// Allows the player to cast a magic spell 
@@ -357,7 +357,7 @@
 			
 			if(selected)
 			{
-				var damageDealt:int = damageDealing(criticalChance, manage.currentWeapon.critDamageBonus);	// saves how much damage the player does
+				var damageDealt:int = damageDealing(criticalChance, manage.player.currentWeapon.critDamageBonus);	// saves how much damage the player does
 				
 				damageDealt *= dmgModifier;
 

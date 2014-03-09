@@ -2,12 +2,12 @@
 package rpg  {
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
-	import ManagerAlpha;
+	import Game;
 	import screen.InventoryScreen;
 	
 	public class Item extends Sprite {
 		
-		public var manager:ManagerAlpha;
+		public var manager:Game;
 		public var idNumber:int;
 		public var equipment:Boolean;
 		public var ilevel:int;
@@ -15,7 +15,7 @@ package rpg  {
 		public var weapon:Boolean;
 		
 		//paramterized constructor
-		public function Item(man:ManagerAlpha, id:int, equip:Boolean, lvl:int, iName:String, weap:Boolean)
+		public function Item(man:Game, id:int, equip:Boolean, lvl:int, iName:String, weap:Boolean)
 		{
 			manager = man;
 			idNumber = id;
@@ -31,7 +31,7 @@ package rpg  {
 			//this.addEventListener(MouseEvent.MOUSE_UP, MouseReleased);
 		}
 		
-		public function SummaryString():String
+		override public function toString():String
 		{
 			return "\nItem: " + itemName + "iLevel: " + ilevel;
 		}

@@ -5,14 +5,14 @@ package screen
 	import managers.ImageManager;
 	import managers.ShapesManager;
 	
-	import ManagerAlpha;
+	import Game;
 	import screen.MainScreen;
 	
 	public class CastleScreen extends Screen
 	{
 		public var exit_btn:SimpleButton;
 		
-		public function CastleScreen(newManager:ManagerAlpha)
+		public function CastleScreen(newManager:Game)
 		{
 			super(newManager);
 			exit_btn = ShapesManager.drawButton(0, -100, 200, 100, "Back", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_LEFT, ShapesManager.JUSTIFY_BOTTOM);

@@ -4,7 +4,7 @@ package rpg
 	
 	import flash.events.MouseEvent;
 	
-	import ManagerAlpha;
+	import Game;
 	
 	public class Armor extends Item
 	{
@@ -13,7 +13,7 @@ package rpg
 		public var statEffected:Array;
 		public var amountStatEffected:Array;
 		
-		public function Armor(man:ManagerAlpha, id:int, equip:Boolean, lvl:int, iName:String, weap:Boolean, prof:int, sE:Array, aSE:Array)
+		public function Armor(man:Game, id:int, equip:Boolean, lvl:int, iName:String, weap:Boolean, prof:int, sE:Array, aSE:Array)
 		{
 			// constructor code
 			super(man, id, equip, lvl, iName, weap);
@@ -97,7 +97,7 @@ package rpg
 			}
 		}
 		
-		override public function SummaryString():String
+		override public function toString():String
 		{
 			var toReturn:String = "\nItem: " + itemName + "\niLevel: " + ilevel + "\nType: " + "Armor" + "\nProficiency: " + proficiency ;// + "\nStat effected: " + statEffected + "\nEffect amount: " + amountStatEffected;
 			if (statEffected !=null)
@@ -111,6 +111,17 @@ package rpg
 			return toReturn;
 		}
 		
+		public function toXML():String
+		{
+			var armorTag:String  = "<armor>";
+				armorTag += "<id>" + idNumber + "</id>";
+				armorTag += "<level>" + ilevel + "</level>";
+				armorTag += "<name>" + itemName + "</name>";
+				armorTag += "<prof>" + proficiency + "</prof>";
+				//armorTag += "<statCount>" + statEffected + "</statCount>";
+				armorTag += "</armor>";
+			return armorTag;
+		}
 	}
 	
 }

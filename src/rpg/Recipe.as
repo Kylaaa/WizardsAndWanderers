@@ -3,7 +3,7 @@ package rpg
 {
 	
 	import flash.events.MouseEvent;
-	import ManagerAlpha;
+	import Game;
 	import rpg.Armor;
 	
 	public class Recipe extends Item
@@ -22,7 +22,7 @@ package rpg
 		public var cost:Array;
 		
 		//This takes an extra 2 or 3 parameters depending on what kind of equipment the recipe is for
-		public function Recipe(man:ManagerAlpha, id:int, equip:Boolean, lvl:int, iName:String, weap:Boolean, prof:Number, sE:Array, aSE:Array, cC:int, cDB:int, cE:int, co:Array)
+		public function Recipe(man:Game, id:int, equip:Boolean, lvl:int, iName:String, weap:Boolean, prof:Number, sE:Array, aSE:Array, cC:int, cDB:int, cE:int, co:Array)
 		{
 			// constructor code
 			super(man, id, equip, lvl, iName, weap);
@@ -32,7 +32,7 @@ package rpg
 			cost = co;
 		}
 		
-		override public function SummaryString():String
+		override public function toString():String
 		{
 			var toReturn:String = "";
 			if (weapon == false)

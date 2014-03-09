@@ -2,13 +2,13 @@
 {
 	import caurina.transitions.Tweener;
 	import flash.display.Sprite;
-	import ManagerAlpha;
+	import Game;
 	
 	public class Screen extends Sprite
 	{
-		public var manage:ManagerAlpha;
+		public var manage:Game;
 		
-		public function Screen(newManager:ManagerAlpha)
+		public function Screen(newManager:Game)
 		{
 			super();
 			manage = newManager;

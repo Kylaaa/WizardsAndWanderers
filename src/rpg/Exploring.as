@@ -1,15 +1,15 @@
 ﻿//Alex Goldberger
 package rpg {
 	
-	import ManagerAlpha;
+	import Game;
 	
 	public class Exploring {
 		
-		public var manager:ManagerAlpha;
+		public var manager:Game;
 		
-		public function Exploring(man:ManagerAlpha) {
+		public function Exploring(man:Game) {
 			// constructor code
-			
+			manager = man;
 		}
 		
 		//This function will be called when the player explores and will do most of the work

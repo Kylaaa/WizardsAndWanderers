@@ -18,7 +18,7 @@
 	import managers.ShapesManager;
 	
 	import rpg.Battle;
-	import ManagerAlpha;
+	import Game;
 	
 	import screen.CastleScreen;
 	import screen.CharacterScreen;
@@ -52,7 +52,7 @@
 		
 		
 		
-		public function MainScreen(newManager:ManagerAlpha)
+		public function MainScreen(newManager:Game)
 		{
 			super(newManager);
 

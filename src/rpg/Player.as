@@ -10,142 +10,128 @@
 	import flash.net.URLRequest;
 
 	public class Player
-	{
-		//SIMPLY EMBEDDING FILES TO MAKE STUFF EASY
-		[Embed(source = "../xml/PlayerData.xml", 	mimeType = "application/octet-stream")] 	private static var xmlPlayerData:Class; 
-		public static function get XMLplayerData():XML 	{ 	var byteArray:ByteArray = new xmlPlayerData() as ByteArray; 			return new XML(byteArray.readUTFBytes(byteArray.length)); }
-	
+	{		
+		//CONSTANTS
+		public static const CLASS_DRUID:int = 0;
+		public static const CLASS_PRIEST:int= 1;
+		public static const CLASS_NECRO:int = 2;
+		public static const CLASS_WIZARD:int= 3;
+		public static const ESSENCE_FOREST:int  = 0;
+		public static const ESSENCE_WETLAND:int = 1;
+		public static const ESSENCE_MOUNTAIN:int= 2;
+		public static const ESSENCE_DESERT:int  = 3;
 		
-		public var manager:ManagerAlpha;
 		
-		public var skills:Array = new Array("slash","stab");
-
+		public var manager:Game;
+		
+		//player variables
+		public var name:String;
 		public var characterClass:String;
-
+		public var characterType:int;
+		public var skills:Array = new Array("slash", "stab");
 		public var level:int;
-
+		public var exp:int;
+		public var expTilNext:int;
+		public var gold:int;
+		
+		//spells stuff
 		public var hSpells:int;
 		public var hourlySpells:Array;
-
 		public var dSpells:int;
 		public var dailySpells:Array;
 
-		public var exp:int;
-		public var expTilNext:int;
-
+		
+		//character variables
 		public var curHealth:int;
-		public var curWeapon:Weapon;
-
-		public var gold:int;
-
 		public var health:int;
+		public var healthRegen:int;
 		public var atkPwr:int;
 		public var speed:int;
 		public var effectUnder:int;
 		public var missChance:int;
-
 		public var statusPrevention:int;//this is the chance to resist a status effect
 		public var critChance:int;//this currently will only take the armor but should also take the weapon
-		public var healthRegen:int;
+		
 		public var speedBoostChance:int;
 		public var dodgeChance:int;
-
-		public var esscencesBiomeArray:Array;//This contains the player's essences
-
+		public var lastTimePlayed:Number;
+		
+		//inventory variables
+		public var essencesBiomeArray:Array;//This contains the player's essences
 		public var equippedArmor:Armor;
+		public var currentWeapon:Weapon;
+		//public var currentWeapon:Weapon;
+		//public var equippedWeaponId:int;
+		//public var equippedArmorId:int;
+		//public var weaponImage:Bitmap = new Bitmap();
 
 		/// exploration
 		public var exploreChargesCurrent:int;
 		public var exploreChargesMax:int;
 		public var exploreRechargeTime:int;//currently 1 hour
-		///
-
-		private var xml:XML;
-		private var myData:XML;
-		
-		//var playerFile:File = File.applicationDirectory;
-		//playerFile = playerFile.resolvePath(playerFile.xml);
-		
-		// access yjr sttsu
-		public function Player(man:ManagerAlpha, playerLevel:int = 1)
+	
+		// CONSTRUCTOR AND INITIALIZATION FUNCTIONS
+		public function Player(man:Game, characterXML:XML)
 		{
 			manager = man;
 			
-			if (playerLevel == 1)
-			{
-				health = 250;
-				atkPwr = 30;
-			}
-			else
-			{
-				health = 325;
-				atkPwr = 35;
-			}
+			//TO DO: LOAD THESE IN THE GAME SO THEY CAN BE SHARED ACROSS CHARACTERS
+			essencesBiomeArray = new Array(4);
+			essencesBiomeArray[ESSENCE_FOREST]  = [1,2,3,0];//lesser
+			essencesBiomeArray[ESSENCE_WETLAND] = [2,1,2,3];//average
+			essencesBiomeArray[ESSENCE_MOUNTAIN]= [3,2,1,2];//greater
+			essencesBiomeArray[ESSENCE_DESERT]  = [0,3,2,1];//grand
 			
-			curHealth = health;
-			speed = 3;
-
-			esscencesBiomeArray = new Array(4);
-			esscencesBiomeArray[0] = [1,2,3,0];//lesser
-			esscencesBiomeArray[1] = [2,1,2,3];//average
-			esscencesBiomeArray[2] = [3,2,1,2];//greater
-			esscencesBiomeArray[3] = [0,3,2,1];//grand
-			
-			loadPlayerXML();
-			/*
-			xml = <xml>
-			<test>lol</test>
-			</xml>;*/
+			//pass a <character> tag to be parsed
+			initFromXML(characterXML);
 		}
+		private function initFromXML(characterXML:XML):void
+		{
+			//INITIALIZE THE PLAYER BASED ON PASSED IN XML
+			//trace("Player initFromXML function with: " + characterXML);
+			
+			name   			= characterXML.name[0];
+			characterType   = characterXML.type[0];
+			level			= characterXML.level[0];
+			curHealth		= characterXML.health[0];
+			health			= characterXML.maxHealth[0];
+			healthRegen		= characterXML.healthRegen[0]; // charData. @ healthRegen;
+			atkPwr 			= characterXML.name[0];// .charData. @ atkPwr;
+			speed 			= characterXML.speed[0];// charData. @ speed;
+			effectUnder 	= characterXML.statusEffects[0];// charData. @ effectUnder;
+			missChance 		= characterXML.chanceMiss[0]; // charData. @ missChance;
+			dodgeChance 	= characterXML.chanceDodge[0]; // charData. @ dodgeChance;
+			critChance 		= characterXML.chanceCrit[0];// charData. @ critChance;
+			speedBoostChance= characterXML.chanceSpeedBoost[0]; // charData. @ speedBoostChance;
+			//statusPrevention= characterXML.charData. @ statusPrevention;
+			
+			//load in the equipment
+			initWeaponFromXML(characterXML.equipment[0].weapon[0]);
+			initArmorFromXML(characterXML.equipment[0].armor[0]);
 
-		public function loadPlayerXML():void
-		{
-			//Load Code
-			/*var loader:URLLoader =  new URLLoader();
-			loader.addEventListener(Event.COMPLETE, onLoaded);
-			trace("creating urlRequest");
-			var url:URLRequest = new URLRequest("../xml/PlayerData.xml");
-			loader.load(url);*/
-			//since file is embedded, no need to load it
-			
-			
-			//POST DATABASE
-			//Store only the armor and weapon id's, both in inventory and equipped
-			//Then read them in from the database and add them to the inventory and equipped
-			//Right now the entire default armor is in the XML class
+			/* THIS IS WHERE YOU STOPPED ON THURSDAY WEEK 10 TRY TO GET IT TO LOAD ARRAYS (FIRST COMBINE MARK'S CODE AND CONSIDER DOING TO WEAPONS WHAT YOU DID TO ITEMS
+				<statArray ele1 = "0" />
+				<statEffectArray ele1 = "10" />
+			*/
+				
+			lastTimePlayed  = characterXML.lastTimePlayed[0];
 		}
-		
-		public function onLoaded(evt:Event = null):void
+		private function initWeaponFromXML(weaponXML:XML):void
 		{
-			 trace("on loaded function");
-			//maybe make it so that only some values get saved here such as health, equipped item, equipped armor, essccences, and equipped other
-			//then have the other stuff all get taken care of when they are equipped
-			//myData = new XML(evt.target.data);
-			myData 			= XMLplayerData; //load the data from the embedded xml file
-			gold 			= myData.charData. @ gold;
-			atkPwr 			= myData.charData. @ atkPwr;
-			speed 			= myData.charData. @ speed;
-			effectUnder 	= myData.charData. @ effectUnder;
-			missChance 		= myData.charData. @ missChance;
-			statusPrevention= myData.charData. @ statusPrevention;
-			healthRegen 	= myData.charData. @ healthRegen;
-			critChance 		= myData.charData. @ critChance;
-			speedBoostChance= myData.charData. @ speedBoostChance;
-			dodgeChance 	= myData.charData. @ dodgeChance;
-			
-			
+			//lol weapons whut?
+		}
+		private function initArmorFromXML(armorXML:XML):void
+		{
 			//Load the default armor
-			var id:int = myData.armorData. @ id;
-			var lvl:int = myData.armorData. @ lvl;
-			var iName:String = myData.armorData. @ iName;
-			var prof:int = myData.armorData. @ prof;
-			//var tempStatArray:Array = myData.charData. @ tempStatArray; //change this so it actually works for other items later
-			//var tempStatEffectArray:Array = myData.charData. @ tempStatEffectArray; //change this so it actually works for other items later
+			var id:int = armorXML.id[0];// .armorData. @ id;
+			var lvl:int = armorXML.level[0]; // .armorData. @ lvl;
+			var name:String = armorXML.name[0];// .armorData. @ iName;
+			var prof:int = armorXML.prof[0];// .armorData. @ prof;
 			
 			var tempStatArray:Array;
 			var tempStatEffectArray:Array;
 			
-			var statCount:int = myData.armorData. @ statCount;
+			var statCount:int =  armorXML.statCount[0];// .armorData. @ statCount;
 			if(statCount == 0)
 			{
 				tempStatArray = null;
@@ -155,193 +141,30 @@
 			{
 				//read in the values of the stat changers and set the arrays
 			}
-			var tempArmor:Armor = new Armor(manager,id,true,lvl,iName,false,prof,tempStatArray,tempStatEffectArray);
-			
-			manager.populateArmorArray(tempArmor);
-			manager.equippedArmorId = tempArmor.idNumber; //equip the default armor
-			tempArmor.onEquip(); //changes stats based on the equipped armor
-			
-			/* THIS IS WHERE YOU STOPPED ON THURSDAY WEEK 10 TRY TO GET IT TO LOAD ARRAYS (FIRST COMBINE MARK'S CODE AND CONSIDER DOING TO WEAPONS WHAT YOU DID TO ITEMS
-	<statArray ele1 = "0" />
-	<statEffectArray ele1 = "10" />
-			*/
+			equippedArmor = new Armor(manager, id, true, lvl, name, false, prof, tempStatArray, tempStatEffectArray);
+			manager.populateArmorArray(equippedArmor);
+			equippedArmor.onEquip(); //changes stats based on the equipped armor
 		}
 		
-
-		// set up the player for the game
-		public function setupPlayer():void
+		//GLOBAL FUNCTIONS
+		public function selectCharacter():void
 		{
-			missChance = 10;
-
-			/*
-			call the database
+			//this player has been selected for play...
+			//adjust health based on the last time you played this character
+			var curDateTime:Date = new Date(); //get the current time
+			var curTime:Number = Main.getCurrentTimeValue();
+			var timeDifference:Number = (curTime - lastTimePlayed) < 0 ? 0 : curTime - lastTimePlayed;
+			curHealth += timeDifference * healthRegen;
 			
-			level = database.level
-			
-			hSpells = database.numHourSpells
-			hourlySpells = database.hourSpells
-			
-			dSpells = database.numDaySpells
-			dailySpells = database.daySpells
-			
-			health = database.maxHealth
-			curHealth = database.health
-			
-			exp = database.exp
-			expTilNext = database.ExpTilNextLevel
-			
-			atkPwr = database.attack
-			*/
-			speed = 3;
+			//assign the new value
+			lastTimePlayed = curTime;
 		}
-
-		public function writeXml():void
+		
+		
+		//HELPER FUNCTIONS
+		public function toString():String
 		{
-			var ba:ByteArray = new ByteArray();
-			ba.writeUTFBytes(xml);
-			var f:File = new File();
-			f.save(ba,"TheFile.xml");
-			//var fr:FileReference = new FileReference();
-			//fr.addEventListener(Event.SELECT, _onRefSelect);
-			//fr.addEventListener(Event.CANCEL, _onRefCancel);
-	
-			//fr.save(ba, "filename.xml");
-			trace("done");
-		}
-
-		// save the player to the database
-		public function savePlayer():void
-		{
-			/*
-			database.level = level
-			
-			database.numHourSpells = hSpells
-			database.hourSpells = hourlySpells
-			
-			database.numDaySpells = dSpells
-			database.daySpells = dailySpells
-			
-			database.maxHealth = health
-			database.health = curHealth
-			
-			database.exp = exp
-			database.ExpTilNextLevel = expTilNext
-			
-			database.attack = atkPwr
-			*/
-		}
-
-		//This function will give the player exp and essence for the enemy they have killed
-		//the essence code is incomplete
-		//later this could take the distance from home to get extra exp
-		//later this could check to see if the player has never fought this enemy before, and record kill totals
-		public function onMonsterKill(en:Enemy, feared:Boolean):void
-		{
-			if (! feared)
-			{
-				var baseXP:int = 10;
-				var et:int = en.esscenceType;//1 = Forest, 2 = Wetland, 3 = Mountain 4 = Desert
-				switch (en.rarity)
-				{
-					case 1 ://common
-						exp +=  baseXP;
-						switch (et)
-						{
-							case 1 ://forest
-								//give them a common forest esscence
-								esscencesBiomeArray[0][0] = esscencesBiomeArray[0][0]++;
-								break;
-							case 2 ://wetland
-								//give them a common wetland esscence
-								esscencesBiomeArray[0][1] = esscencesBiomeArray[0][1]++;
-								break;
-							case 3 ://mountain
-								//give them a common mountain esscence
-								esscencesBiomeArray[0][2] = esscencesBiomeArray[0][2]++;
-								break;
-							case 4 ://desert
-								//give them a common desert esscence
-								esscencesBiomeArray[0][3] = esscencesBiomeArray[0][3]++;
-								break;
-						}
-						break;
-					case 2 ://uncommon
-						exp +=  baseXP * 3;
-						switch (et)
-						{
-							case 1 ://forest
-								//give them a uncommon forest esscence
-								esscencesBiomeArray[1][0] = esscencesBiomeArray[1][0]++;
-								break;
-							case 2 ://wetland
-								//give them a uncommon wetland esscence
-								esscencesBiomeArray[1][1] = esscencesBiomeArray[1][1]++;
-								break;
-							case 3 ://mountain
-								//give them a uncommon mountain esscence
-								esscencesBiomeArray[1][2] = esscencesBiomeArray[1][2]++;
-								break;
-							case 4 ://desert
-								//give them a uncommon desert esscence
-								esscencesBiomeArray[1][3] = esscencesBiomeArray[1][3]++;
-								break;
-						}
-						break;
-					case 3 ://rare
-						exp +=  baseXP * 9;
-						switch (et)
-						{
-							case 1 ://forest
-								//give them a rare forest esscence
-								esscencesBiomeArray[3][0] = esscencesBiomeArray[3][0]++;
-								break;
-							case 2 ://wetland
-								//give them a rare wetland esscence
-								esscencesBiomeArray[3][1] = esscencesBiomeArray[3][1]++;
-								break;
-							case 3 ://mountain
-								//give them a rare mountain esscence
-								esscencesBiomeArray[3][2] = esscencesBiomeArray[3][2]++;
-								break;
-							case 4 ://desert
-								//give them a rare desert esscence
-								esscencesBiomeArray[3][3] = esscencesBiomeArray[3][3]++;
-								break;
-						}
-						break;
-					case 4 ://boss
-						exp +=  baseXP * 27;
-						break;
-						switch (et)
-						{
-							case 1 ://forest
-								//give them a boss forest esscence
-								esscencesBiomeArray[4][0] = esscencesBiomeArray[4][0]++;
-								break;
-							case 2 ://wetland
-								//give them a boss wetland esscence
-								esscencesBiomeArray[4][1] = esscencesBiomeArray[4][1]++;
-								break;
-							case 3 ://mountain
-								//give them a boss mountain esscence
-								esscencesBiomeArray[4][2] = esscencesBiomeArray[4][2]++;
-								break;
-							case 4 ://desert
-								//give them a boss desert esscence
-								esscencesBiomeArray[4][3] = esscencesBiomeArray[4][3]++;
-								break;
-						}
-				}
-			}
-		}
-		//this function is used to change values in the essences array
-		public function SetEsscencesBiomeArray(j:int,k:int,newCount:int):void
-		{
-			esscencesBiomeArray[j][k] = newCount;
-		}
-
-		public function SummaryString():String
-		{
+			//converts the character object to a string object
 			var toReturn:String = "Character Screen";
 			toReturn +=  "\nClass: " + characterClass;
 			toReturn +=  "\nLevel: " + level;
@@ -372,7 +195,146 @@
 
 			return toReturn;
 		}
+		public function toXML():String
+		{			
+			//convert the character back into an XML character tag
+			var characterTag:String = "<character>";
+				characterTag += "<type>" + characterType + "</type>";
+				characterTag += "<name>" + name + "</name>";
+				characterTag += "<level>" + level + "</level>";
+				characterTag += "<attack>" + atkPwr + "</attack>";
+				characterTag += "<speed>" + speed + "</speed>";
+				characterTag += "<health>" + curHealth + "</health>";
+				characterTag += "<healthMax>" + health + "</healthMax>";
+				characterTag += "<healthRegen>" + healthRegen + "</healthRegen>";
+				characterTag += "<statusEffects>" + statusPrevention + "</statusEffects>";
+				characterTag += "<chanceMiss>" + missChance + "</chanceMiss>";
+				characterTag += "<chanceDodge>" + dodgeChance + "</chanceDodge>";
+				characterTag += "<chanceCrit>" + critChance + "</chanceCrit>";
+				characterTag += "<chanceSpeedBoost>" + speedBoostChance + "</chanceSpeedBoost>";
+				characterTag += "<lastTimePlayed>" + lastTimePlayed + "</lastTimePlayed>";
+				characterTag += "<equipment>";
+				characterTag += currentWeapon.toXML();
+				characterTag += equippedArmor.toXML();
+				characterTag += "</equipment>";
+				characterTag += "</character>";
+			return characterTag;
+		}
+
+		//This function will give the player exp and essence for the enemy they have killed
+		//the essence code is incomplete
+		//later this could take the distance from home to get extra exp
+		//later this could check to see if the player has never fought this enemy before, and record kill totals
+		public function onMonsterKill(en:Enemy, feared:Boolean):void
+		{
+			if (! feared)
+			{
+				var baseXP:int = 10;
+				var et:int = en.esscenceType;//1 = Forest, 2 = Wetland, 3 = Mountain 4 = Desert
+				
+				essencesBiomeArray[en.rarity][en.esscenceType]++;
+				
+				//WHAT EVEN IS THIS CODE?!! WHO WROTE THIS?!!
+				/*switch (en.rarity)
+				{
+					case 1 ://common
+						exp +=  baseXP;
+						switch (et)
+						{
+							case ESSENCE_FOREST ://forest
+								//give them a common forest esscence
+								essencesBiomeArray[0][ESSENCE_FOREST] = essencesBiomeArray[0][0]++;
+								break;
+							case 2 ://wetland
+								//give them a common wetland esscence
+								essencesBiomeArray[0][ESSENCE_WETLAND] = essencesBiomeArray[0][1]++;
+								break;
+							case 3 ://mountain
+								//give them a common mountain esscence
+								essencesBiomeArray[0][ESSENCE_MOUNTAIN] = essencesBiomeArray[0][2]++;
+								break;
+							case 4 ://desert
+								//give them a common desert esscence
+								essencesBiomeArray[0][ESSEN] = essencesBiomeArray[0][3]++;
+								break;
+						}
+						break;
+					case 2 ://uncommon
+						exp +=  baseXP * 3;
+						switch (et)
+						{
+							case 1 ://forest
+								//give them a uncommon forest esscence
+								essencesBiomeArray[1][0] = essencesBiomeArray[1][0]++;
+								break;
+							case 2 ://wetland
+								//give them a uncommon wetland esscence
+								essencesBiomeArray[1][1] = essencesBiomeArray[1][1]++;
+								break;
+							case 3 ://mountain
+								//give them a uncommon mountain esscence
+								essencesBiomeArray[1][2] = essencesBiomeArray[1][2]++;
+								break;
+							case 4 ://desert
+								//give them a uncommon desert esscence
+								essencesBiomeArray[1][3] = essencesBiomeArray[1][3]++;
+								break;
+						}
+						break;
+					case 3 ://rare
+						exp +=  baseXP * 9;
+						switch (et)
+						{
+							case 1 ://forest
+								//give them a rare forest esscence
+								essencesBiomeArray[3][0] = essencesBiomeArray[3][0]++;
+								break;
+							case 2 ://wetland
+								//give them a rare wetland esscence
+								essencesBiomeArray[3][1] = essencesBiomeArray[3][1]++;
+								break;
+							case 3 ://mountain
+								//give them a rare mountain esscence
+								essencesBiomeArray[3][2] = essencesBiomeArray[3][2]++;
+								break;
+							case 4 ://desert
+								//give them a rare desert esscence
+								essencesBiomeArray[3][3] = essencesBiomeArray[3][3]++;
+								break;
+						}
+						break;
+					case 4 ://boss
+						exp +=  baseXP * 27;
+						break;
+						switch (et)
+						{
+							case 1 ://forest
+								//give them a boss forest esscence
+								essencesBiomeArray[4][0] = essencesBiomeArray[4][0]++;
+								break;
+							case 2 ://wetland
+								//give them a boss wetland esscence
+								essencesBiomeArray[4][1] = essencesBiomeArray[4][1]++;
+								break;
+							case 3 ://mountain
+								//give them a boss mountain esscence
+								essencesBiomeArray[4][2] = essencesBiomeArray[4][2]++;
+								break;
+							case 4 ://desert
+								//give them a boss desert esscence
+								essencesBiomeArray[4][3] = essencesBiomeArray[4][3]++;
+								break;
+						}
+				}*/
+			}
+		}
 		
+		//this function is used to change values in the essences array
+		public function SetEssencesBiomeArray(j:int,k:int,newCount:int):void
+		{
+			essencesBiomeArray[j][k] = newCount;
+		}
+
 		/*
 		public function update()
 		{

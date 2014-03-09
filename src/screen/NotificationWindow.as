@@ -7,15 +7,15 @@ package screen {
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	
-	import ManagerAlpha;
+	import Game;
 	
 	public class NotificationWindow extends MovieClip {
 		
-		protected var manager:ManagerAlpha;
+		protected var manager:Game;
 		private var btn_Back:SimpleButton;
 		private var txt_notification:TextField;
 		
-		public function NotificationWindow(man:ManagerAlpha, notification:String) {
+		public function NotificationWindow(man:Game, notification:String) {
 			// constructor code
 			manager = man;
 			btn_Back.addEventListener(MouseEvent.CLICK, bButton);

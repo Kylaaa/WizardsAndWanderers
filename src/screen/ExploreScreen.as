@@ -5,7 +5,7 @@ package screen
 	import flash.events.MouseEvent;
 	import managers.ShapesManager;
 	
-	import ManagerAlpha;
+	import Game;
 	import screen.MainScreen;
 	
 	public class ExploreScreen extends Screen
@@ -13,7 +13,7 @@ package screen
 		public var exit_btn:SimpleButton;
 		public var infoLabel:MovieClip;
 		
-		public function ExploreScreen(newManager:ManagerAlpha)
+		public function ExploreScreen(newManager:Game)
 		{
 			super(newManager);
 			

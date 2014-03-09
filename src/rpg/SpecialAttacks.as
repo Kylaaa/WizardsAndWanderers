@@ -4,9 +4,9 @@ package rpg
 	public class SpecialAttacks
 	{
 		private var battle:Battle;
-		private var manage:ManagerAlpha;
+		private var manage:Game;
 		
-		public function SpecialAttacks(newBattle:Battle, newManager:ManagerAlpha)
+		public function SpecialAttacks(newBattle:Battle, newManager:Game)
 		{
 			battle = newBattle;
 			manage = newManager;

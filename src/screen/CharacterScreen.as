@@ -13,64 +13,49 @@ package screen
 	import managers.ImageManager;
 	//import flash.notifications.NotificationStyle;
 	
-	import ManagerAlpha;
+	import Game;
 	import screen.Screen;
 	import screen.MainScreen;
 
 	public class CharacterScreen extends Screen
 	{
-		public var manager:ManagerAlpha;
+		public var manager:Game;
 		
-		//private var btn_defaultItems:SimpleButton;
-		//private var btn_Essences:SimpleButton;
-		//private var btn_Stats:SimpleButton;
-		//private var btn_back:SimpleButton;
-		
-		public var exit_btn:SimpleButton;
-		private var btn_inventoryWeapon:SimpleButton;
-		private var btn_inventoryGarb:SimpleButton;
-		
+		//IMAGE LAYERS
 		public var backgroundLayer:Sprite = new Sprite();	// background images
-		
 		public var characterBody:Sprite = new Sprite();
 		public var characterBodyImage:Bitmap = new Bitmap();
-		//public var characterArmor:Sprite = new Sprite();
-		//public var ArmorImage:Bitmap = new Bitmap();
 		public var characterWeapon:Sprite = new Sprite();
 		public var characterWeaponImage:Bitmap = new Bitmap();
 		public var characterOther:Sprite = new Sprite();
 		public var characterOtherImage:Bitmap = new Bitmap();
-		
 		public var armor:Sprite = new Sprite();
 		public var ArmorImage:Bitmap = new Bitmap();
 		public var weapon:Sprite = new Sprite();
 		public var other:Sprite = new Sprite();
 		public var otherImage:Bitmap = new Bitmap();
-		
 		private var smallPanel:Sprite = new Sprite(); //use for the width and height
 		private var cePanel:Sprite = new Sprite();
 		private var cpPanel:Sprite = new Sprite();
-		private var csPanel_weapon:SimpleButton= new SimpleButton();
 		private var csPanel_garb:Sprite = new Sprite();
 		private var csPanel_other:Sprite = new Sprite();
 		
-		private var characterPanelPosition:int = 100;
-		private var characterOffset:int = 53;
 		
-		private var characterName:String = "";
+		//SCREEN ELEMENTS
+		private var characterPanelPosition:Number = 10;
 		private var characterNameText:TextField = new TextField();
-		
-		private var characterClass:String = "";
 		private var characterClassText:TextField = new TextField();
+		private var csPanel_weapon:SimpleButton = new SimpleButton();
+		private var exit_btn:SimpleButton;
+		private var btn_inventoryWeapon:SimpleButton;
+		private var btn_inventoryGarb:SimpleButton;
 		
-		private var wizard:Boolean;
-		
-		public function CharacterScreen(newManager:ManagerAlpha)
+		public function CharacterScreen(newManager:Game)
 		{
 			super(newManager);
 			manager = newManager;
 			
-			if (manager.player.level == 1)
+			/*if (manager.player.level == 1)
 			{
 				characterClass = "Wizard";
 				characterName = "Shane";
@@ -81,7 +66,7 @@ package screen
 				characterClass = "Druid";
 				characterName = "Issac";
 				wizard = false;
-			}
+			}*/
 			
 			// constructor code
 			addChild(backgroundLayer);
@@ -109,8 +94,8 @@ package screen
 			//tempArmor.x = 330;
 			//tempArmor.y = 95;
 			
-			manager.equippedWeaponId = 1;
-			manager.equippedArmorId = 1;
+			//manager.equippedWeaponId = 1;
+			//manager.equippedArmorId = 1;
 			
 			//btn_defaultItems.addEventListener(MouseEvent.CLICK, dItemButton);
 			//btn_Essences.addEventListener(MouseEvent.CLICK, essencesButton);
@@ -127,7 +112,7 @@ package screen
 			this.addChild(exit_btn);
 			exit_btn.addEventListener(MouseEvent.CLICK, onExit);
 			
-			if (characterClass == "Wizard")
+			if (manager.player.characterClass == "Wizard")
 			{
 				//csPanel_weapon.addEventListener(MouseEvent.CLICK, onWeapon); //uncomment to turn on the start of inventory
 			}
@@ -161,7 +146,7 @@ package screen
 			var x:int = 20;
 			
 			this.addChild(characterBody);
-			if (wizard)
+			/*if (wizard)
 			{
 				characterBodyImage = ImageManager.WizardBody1();
 			}
@@ -173,10 +158,10 @@ package screen
 			characterBodyImage.x = x;
 			characterBodyImage.y = characterPanelPosition + characterOffset;
 			characterBodyImage.width *= scale;
-			characterBodyImage.height *= scale;
+			characterBodyImage.height *= scale;*/
 			
 			this.addChild(characterWeapon);
-			if (wizard)
+			/*if (wizard)
 			{
 				characterWeaponImage = ImageManager.WizardStaff();
 			}
@@ -188,10 +173,10 @@ package screen
 			characterWeaponImage.x = x;
 			characterWeaponImage.y = characterPanelPosition + characterOffset;
 			characterWeaponImage.width *= scale;
-			characterWeaponImage.height *= scale;
+			characterWeaponImage.height *= scale;*/
 			
 			this.addChild(characterOther);
-			if (wizard)
+			/*if (wizard)
 			{
 				characterOtherImage = ImageManager.PurpleOrb();
 			}
@@ -203,13 +188,13 @@ package screen
 			characterOtherImage.x = x;
 			characterOtherImage.y = characterPanelPosition + characterOffset;
 			characterOtherImage.width *= scale;
-			characterOtherImage.height *= scale;
+			characterOtherImage.height *= scale;*/
 			
 			//ShapesManager.drawText(characterName, x, 200,100, 100);
-			characterNameText = ShapesManager.drawText(characterName, x + 5, 100, 200, 100, ShapesManager.JUSTIFY_LEFT, ShapesManager.JUSTIFY_TOP,false, false);
+			characterNameText = ShapesManager.drawText(manager.player.name, x + 5, 100, 200, 100, ShapesManager.JUSTIFY_LEFT, ShapesManager.JUSTIFY_TOP,false, false);
 			this.addChild(characterNameText);
 			
-			characterClassText = ShapesManager.drawText("the " + characterClass, x + 15, 125, 200, 100, ShapesManager.JUSTIFY_LEFT, ShapesManager.JUSTIFY_TOP, false, false);
+			characterClassText = ShapesManager.drawText("the " + manager.player.characterClass, x + 15, 125, 200, 100, ShapesManager.JUSTIFY_LEFT, ShapesManager.JUSTIFY_TOP, false, false);
 			this.addChild(characterClassText);
 			
 			
@@ -261,7 +246,7 @@ package screen
 			this.addChild(csPanel_weapon);
 			
 			this.addChild(weapon);
-			if (wizard)
+			/*if (wizard)
 			{
 				manager.weaponImage = ImageManager.WizardStaff();
 			}
@@ -274,7 +259,7 @@ package screen
 			weapon.y = 220; //use relative to center and stuff
 			weapon.width *= 1.75;
 			weapon.height *= 1.75;
-			weapon.mouseEnabled = false;
+			weapon.mouseEnabled = false;*/
 			
 			this.addChild(csPanel_garb);
 			csPanel_garb.addChild(ImageManager.CharacterSmallPanel());
@@ -284,7 +269,7 @@ package screen
 			csPanel_garb.height *= 2.5;
 			
 			this.addChild(armor);
-			if (wizard)
+			/*if (wizard)
 			{
 				ArmorImage = ImageManager.WizardGarb1();
 			}
@@ -296,7 +281,7 @@ package screen
 			armor.x = 355; //use relative to center and stuff
 			armor.y = 235; //use relative to center and stuff
 			armor.width *= 1.75;
-			armor.height *= 1.75;
+			armor.height *= 1.75;*/
 			
 			this.addChild(csPanel_other);
 			csPanel_other.addChild(ImageManager.CharacterSmallPanel());
@@ -306,8 +291,7 @@ package screen
 			csPanel_other.height *= 2.5;
 			
 			this.addChild(other);
-			
-			if (wizard)
+			/*if (wizard)
 			{
 				otherImage = ImageManager.PurpleOrb();
 			}
@@ -319,7 +303,7 @@ package screen
 			other.x = 500; //use relative to center and stuff
 			other.y = 235; //use relative to center and stuff
 			other.width *= 1.75;
-			other.height *= 1.75;
+			other.height *= 1.75;*/
 		}
 		
 		//buttons should be on screens now for example Character

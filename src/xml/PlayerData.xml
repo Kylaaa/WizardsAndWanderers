@@ -1,22 +1,114 @@
 <?xml version="1.0" ?> 
 <game>
-	<charData 
-	gold = "999"
-	atkPwr = "10"
-	speed = "0"
-	effectUnder = "0"
-	missChance = "5"
-	statusPrevention = "0"
-	critChance = "0"
-	healthRegen = "5"
-	speedBoostChance = "0"
-	dodgeChance = "0"
-	/>
-	<armorData
-	id = "0"
-	lvl = "1"
-	iName = "Basic Robes"
-	prof = "0"
-	statCount = "0"
-	/>
+	<player>
+		<id>-1</id>
+		<name>The Wanderer</name>
+		<gold>999</gold>
+		<homeBiome>-1</homeBiome>
+	</player>
+	<character>
+		<type>0</type>
+		<name>Create New Priest</name>
+		<level>1</level>
+		<attack>10</attack>
+		<speed>0</speed>
+		<health>100</health>
+		<healthMax>100</healthMax>
+		<healthRegen>5</healthRegen>
+		<statusEffects></statusEffects>
+		<chanceMiss>5</chanceMiss>
+		<chanceDodge>0</chanceDodge>
+		<chanceCrit>0</chanceCrit>
+		<chanceSpeedBoost>0</chanceSpeedBoost>
+		<lastTimePlayed>0</lastTimePlayed>
+		<equipment>
+			<weapon></weapon>
+			<armor>
+				<id>0</id>
+				<level>1</level>
+				<name>Basic Robes</name>
+				<prof>0</prof>
+				<statCount>0</statCount>
+			</armor>
+		</equipment>
+	</character>
+	<character>
+		<type>1</type>
+		<name>Create New Necromancer</name>
+		<level>1</level>
+		<attack>10</attack>
+		<speed>0</speed>
+		<health></health>
+		<healthMax></healthMax>
+		<healthRegen>5</healthRegen>
+		<statusEffects></statusEffects>
+		<chanceMiss>5</chanceMiss>
+		<chanceDodge>0</chanceDodge>
+		<chanceCrit>0</chanceCrit>
+		<chanceSpeedBoost>0</chanceSpeedBoost>
+		<lastTimePlayed>0</lastTimePlayed>
+		<equipment>
+			<weapon></weapon>
+			<armor>
+				<id>0</id>
+				<level>1</level>
+				<name>Basic Robes</name>
+				<prof>0</prof>
+				<statCount>0</statCount>
+			</armor>
+		</equipment>
+	</character>
+	<character>
+		<type>2</type>
+		<name>Shane</name>
+		<level>1</level>
+		<attack>10</attack>
+		<speed>0</speed>
+		<health></health>
+		<healthMax></healthMax>
+		<healthRegen>5</healthRegen>
+		<statusEffects></statusEffects>
+		<chanceMiss>5</chanceMiss>
+		<chanceDodge>0</chanceDodge>
+		<chanceCrit>0</chanceCrit>
+		<chanceSpeedBoost>0</chanceSpeedBoost>
+		<lastTimePlayed>0</lastTimePlayed>
+		<equipment>
+			<weapon></weapon>
+			<armor>
+				<id>0</id>
+				<level>1</level>
+				<name>Basic Robes</name>
+				<prof>0</prof>
+				<statCount>0</statCount>
+			</armor>
+		</equipment>
+	</character>
+	<character>
+		<type>3</type>
+		<name>Isaac</name>
+		<level>10</level>
+		<attack>10</attack>
+		<speed>0</speed>
+		<health></health>
+		<healthMax></healthMax>
+		<healthRegen>5</healthRegen>
+		<statusEffects></statusEffects>
+		<chanceMiss>5</chanceMiss>
+		<chanceDodge>0</chanceDodge>
+		<chanceCrit>0</chanceCrit>
+		<chanceSpeedBoost>0</chanceSpeedBoost>
+		<lastTimePlayed>0</lastTimePlayed>
+		<equipment>
+			<weapon></weapon>
+			<armor>
+				<id>0</id>
+				<level>1</level>
+				<name>Basic Robes</name>
+				<prof>0</prof>
+				<statCount>0</statCount>
+			</armor>
+		</equipment>
+	</character>
+	
 </game>
