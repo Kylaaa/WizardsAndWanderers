@@ -1,9 +1,12 @@
 package screen
 {
+	import caurina.transitions.Tweener;
 	import flash.display.Bitmap;
+	import flash.display.MovieClip;
 	import flash.display.SimpleButton;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.text.TextField;
 	import managers.ImageManager;
 	import managers.ShapesManager;
 	import gps.Mobile;
@@ -14,113 +17,79 @@ package screen
 	
 	public class TitleScreen extends Screen
 	{
+		//SCREEN ELEMENTS
 		public var play_btn:SimpleButton;
-		
-		private var characterButtons:Array; //array of SimpleButtons
-		//private var wizBtn:SimpleButton;
-		//private var druBtn:SimpleButton;
+		private var txtErrorMessage:TextField;
+		private var loadingMessage:MovieClip;
 		private var background:Bitmap;
 		
+		//CONSTRUCTORS
 		public function TitleScreen(newManager:Game)
 		{
 			super(newManager);
 			
 			background = ImageManager.TitleScreen();
-			background.x = 0;
-			background.y = 0;
 			
-			trace("Current Biome Type: " + manage.device.CurrentBiome.Type);
-			play_btn = ShapesManager.drawButton(-0.2, -0.21, 0.4, 0.20, "PLAY", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM);
+			//loadingMessage = ShapesManager.drawLabel("Loading...", -0.2, -0.2, 0.4, 0.4, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_CENTER_Y);
+			//txtErrorMessage = new TextField();
 		}
 		
+		//BUTTON FUNCTIONS
+		public function addPlayButton():void
+		{
+			//remove our debug stuff
+			Tweener.addTween(txtErrorMessage, { alpha:0.0, time:1.0, transition:"linear"} );
+			Tweener.addTween(loadingMessage,  { alpha:0.0, time:1.0, transition:"linear"} );
+			
+			//the play button will wait for the game to tell it that everything is ready
+			play_btn = ShapesManager.drawButton( -0.2, -0.21, 0.4, 0.20, "PLAY", manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM);
+			play_btn.alpha = 0.0;
+			
+			//add the play button to the stage
+			this.addChild(play_btn);
+			play_btn.addEventListener(MouseEvent.CLICK, onPlay);
+			
+			Tweener.addTween(play_btn,  { alpha:1.0, time:1.0, delay:1.0, transition:"linear"} );
+		}
+		private function onPlay(e:MouseEvent):void
+		{
+			manage.displayScreen(CharacterSelectScreen);
+		}
+		
+		//SCREEN FUNCTIONS
 		override public function bringIn():void 
 		{
 			super.bringIn();
-			trace("");
 			
 			//format the logo image
-			background.width = stage.stageWidth;
-			background.height = stage.stageHeight;
+			//trace("Stage Dimensions:", stage.stageWidth, stage.stageHeight);
+			//************** THERE IS A BUG HERE!!! FIX IT FUTURE ME! ********************
+			background.width = stage.stageHeight; //stage.stageWidth;
+			background.height = stage.stageWidth; //stage.stageHeight;
 			this.addChild(background);
 			
-			//add the play button
-			this.addChild(play_btn);
-			play_btn.addEventListener(MouseEvent.CLICK, onPlay);
+			//debug
+			/*manage.device.txtOut = txtErrorMessage;
+			manage.database.txtOut = txtErrorMessage;
+			txtErrorMessage.width = Main.STAGE_RIGHT;
+			txtErrorMessage.height = Main.STAGE_BOTTOM;
+			
+			this.addChild(loadingMessage);
+			this.addChild(txtErrorMessage);*/
 		}
-		
-		private function onPlay(e:MouseEvent):void
-		{
-			//character select
-			/*TO DO: 
-			 * - IMPLEMENT MULTIPLE CHARACTERS, NOT JUST TWO
-			 * - READ PLAYER INFORMATION FROM FILE AND DYNAMICALLY CHANGE BUTTONS
-			 * - - CHARACTER TYPE, NAME, AND LEVEL
-			 */
-			
-			characterButtons = new Array();
-			
-			
-			//priest
-			characterButtons.push(ShapesManager.drawButton(0.0, 0.0, 0.25, .25, null, "wizard"));
-			characterButtons[0].addEventListener(MouseEvent.CLICK, choosePlayer);
-			addChild(characterButtons[0]);
-			
-			//necromancer
-			characterButtons.push(ShapesManager.drawButton(0.0, 0.0, 0.25, .25, null, "wizard"));
-			characterButtons[1].addEventListener(MouseEvent.CLICK, choosePlayer);
-			addChild(characterButtons[1]);
-			
-			//wizard
-			characterButtons.push(ShapesManager.drawButton(0.0, 0.0, 0.25, .25, null, "wizard"));
-			characterButtons[2].addEventListener(MouseEvent.CLICK, choosePlayer);
-			addChild(characterButtons[2]);
-			
-			//druid
-			characterButtons.push(ShapesManager.drawButton(0.5, 0.0, 0.25, .25, null, "druid"));
-			characterButtons[3].addEventListener(MouseEvent.CLICK, choosePlayer);
-			addChild(characterButtons[3]);
-		}
-		
-		
-		private function choosePlayer(e:MouseEvent):void
-		{
-			var playerChoice:int = characterButtons.indexOf(e.target);
-			if (playerChoice == -1) return; //something's wrong, escape
-			/*switch(e.target)
-			{
-				case(characterButtons[0]): playerChoice = Player.CLASS_PRIEST; break; //priest
-				case(characterButtons[1]): playerChoice = Player.CLASS_NECRO;  break; //necromancer
-				case(characterButtons[2]): playerChoice = Player.CLASS_WIZARD; break; //wizard
-				case(characterButtons[3]): playerChoice = Player.CLASS_DRUID;  break; //druid
-				default: return; break; //do nothing
-			}*/
-			
-			//initialize the player information from the character selected
-			loadPlayerStats(playerChoice);
-			
-			//go to the home screen
-			manage.displayScreen(MainScreen);
-		}
-		
-		private function loadPlayerStats(characterType:int):void
-		{
-			//open up the database or player stats and load in the player's level, health, etc.
-			
-			manage.player.level = 10;
-			manage.displayScreen(MainScreen);
-		}
-		
 		override public function cleanUp():void 
 		{		
+			//remove the connection to the mobile and database debug text
+			manage.device.txtOut = null;
+			manage.database.txtOut = null;
+			
 			//remove event listeners
 			play_btn.removeEventListener(MouseEvent.CLICK, onPlay);
-			for (var i:int = 0; i < characterButtons.length; i++)
-			{
-				characterButtons[i].removeEventListener(MouseEvent.CLICK, choosePlayer);
-			}
 			
 			//clean up the screen
 			this.removeChild(play_btn);
+			//this.removeChild(txtErrorMessage);
+			//this.removeChild(loadingMessage);
 			super.cleanUp();
 		}
 	}

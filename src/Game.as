@@ -61,8 +61,6 @@
 		public var database:Database;
 		public var device:Mobile;
 		public var biomeBackground:Bitmap;
-		private var txtErrorMessage:TextField;
-		private var loadingMessage:MovieClip;
 		
 		// spell stuff
 		public var threeHourSpellOne:Timer = new Timer(1000, 60);
@@ -83,14 +81,6 @@
 			weaponArray = new Array();
 			recipeArray = new Array();
 			
-			//consider drawing a loading screen for now
-			loadingMessage = ShapesManager.drawLabel("Loading...", -0.2, -0.2, 0.4, 0.4, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_CENTER_Y);
-			this.addChild(loadingMessage);
-			txtErrorMessage = new TextField();
-			txtErrorMessage.width = Main.STAGE_RIGHT;
-			txtErrorMessage.height = Main.STAGE_BOTTOM;
-			this.addChild(txtErrorMessage);
-			
 			//initialize the spell stuff
 			threeHourSpellOne.addEventListener(TimerEvent.TIMER_COMPLETE, activateOne);
 			threeHourSpellTwo.addEventListener(TimerEvent.TIMER_COMPLETE, activateTwo);
@@ -102,8 +92,11 @@
 			
 			//initialize the database
 			//once the database and mobile device is initialize, the game will start 
-			database = new Database(txtErrorMessage);
+			database = new Database();
 			database.addEventListener(Event.COMPLETE, dbLoaded);
+			
+			//consider drawing a loading screen for now
+			addEventListener(Event.ADDED_TO_STAGE, addTitleScreen);
 		}
 		
 		//INITIALIZATION FUNCTIONS
@@ -132,12 +125,9 @@
 		private function dbLoaded(e:Event):void
 		{
 			trace("database completely loaded");
-			//clean up the stage
-			this.removeChild(txtErrorMessage);
-			this.removeChild(loadingMessage);
 			
 			//initialize our mobile stuff
-			device = new Mobile(database, txtErrorMessage);
+			device = new Mobile(database);
 			device.addEventListener(Event.CHANGE, locationChange);
 			device.addEventListener(Event.COMPLETE, locationReady);
 			device.addEventListener(Event.COMPLETE, startUp);
@@ -147,21 +137,16 @@
 			//remove the event listener from the device and start the game
 			device.removeEventListener(Event.COMPLETE, startUp);
 			
-			//Set the default weapon (later get the weapon/armor from the Player XML)
-			//var tempWeapon:Weapon = new Weapon(this,0,true,1,"Wooden Staff",true,15,1.75,6);
-			//populateWeaponArray(tempWeapon);
-			//equippedWeaponId = tempWeapon.idNumber; //equip the default weapon
-			//currentWeapon = tempWeapon;
+			//reveal the play button on the title screen
+			if (! currentScreen is TitleScreen) 
+			{
+				displayScreen(TitleScreen); //contingency plan
+				try { startUp(e); }
+				catch (e:Error) { return; }
+				return;
+			}
 			
-			//Set the default armor
-			//var tempStatArray:Array;
-			//var tempStatEffectArray:Array
-			//var tempArmor:Armor = new Armor(this,0,true,1,"Basic Robes",false,0,tempStatArray,tempStatEffectArray);
-			//populateArmorArray(tempArmor);
-			//equippedArmorId = tempArmor.idNumber; //equip the default armor
-			//tempArmor.onEquip(); //changes stats based on the equipped armor
-			
-			displayScreen(TitleScreen);
+			(currentScreen as TitleScreen).addPlayButton();
 		}
 		public function populateArmorArray(armor:Armor):void
 		{
@@ -253,6 +238,7 @@
 		
 		
 		//SPELL FUNCTIONS
+		//I'M NOT SURE BUT I FEEL LIKE THESE SHOULD BE ATTACHED TO A PLAYER_DATA OBJECT.
 		public function activateOne(e:TimerEvent):void 
 		{	
 			spellOne = true;
@@ -276,6 +262,13 @@
 		
 		
 		//NOTIFICATION & SCREEN FUNCTIONS
+		public function addTitleScreen(e:Event):void
+		{
+			//the stage has been properly initialized, display the title screen
+			removeEventListener(Event.ADDED_TO_STAGE, addTitleScreen);
+			
+			displayScreen(TitleScreen);
+		}
 		public function displayScreen(screenClass:Class):void
 		{
 			trace("displaying screen: " + screenClass);

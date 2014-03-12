@@ -56,7 +56,8 @@ package
 		private function deactivate(e:Event):void 
 		{
 			// should the app go into the background, start to close things down
-			theGame.device.closeAllConnections(e);
+			if (theGame.device.IsReady)
+				theGame.device.closeAllConnections(e);
 			theGame.saveProgress();
 			//NativeApplication.nativeApplication.exit();
 		}		

@@ -56,7 +56,7 @@ package gps {
 		private var isReady:Boolean;
 		
 		//debug stuff
-		private var txtOut:TextField;
+		public var txtOut:TextField;
 		private var enemyPictures:Array;
 		
 		

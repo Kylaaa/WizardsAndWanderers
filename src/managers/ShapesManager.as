@@ -124,9 +124,7 @@ package managers
 				case (THEME_SWAMP):		backgroundImage = ImageManager.LargeButtonSwamp();		break;
 				case (THEME_WETLANDS):	backgroundImage = ImageManager.LargeButtonWetlands();	break;
 				case ("exit"):			backgroundImage = ImageManager.IconExit();				break;
-				case ("wizard"):		backgroundImage = ImageManager.CharacterWizard();		break;
-				case ("druid"):			backgroundImage = ImageManager.CharacterDruid();		break;
-				default:				backgroundImage = ImageManager.CharacterEssencePanel();	break;
+				default:				backgroundImage = ImageManager.MissingImage();			break;
 			}
 				backgroundImage.x = 0;
 				backgroundImage.y = 0;
@@ -163,9 +161,7 @@ package managers
 				case (THEME_SWAMP):		backgroundImage = ImageManager.LargeButtonSwamp();		break;
 				case (THEME_WETLANDS):	backgroundImage = ImageManager.LargeButtonWetlands();	break;
 				case ("exit"):			backgroundImage = ImageManager.IconExit();				break;
-				case ("wizard"):		backgroundImage = ImageManager.CharacterWizard();		break;
-				case ("druid"):			backgroundImage = ImageManager.CharacterDruid();		break;
-				default:				backgroundImage = ImageManager.CharacterEssencePanel();	break;
+				default:				backgroundImage = ImageManager.MissingImage();			break;
 			}
 				backgroundImage.x = 0;
 				backgroundImage.y = 0;
@@ -203,9 +199,7 @@ package managers
 				case (THEME_SWAMP):		backgroundImage = ImageManager.LargeButtonSwamp();		break;
 				case (THEME_WETLANDS):	backgroundImage = ImageManager.LargeButtonWetlands();	break;
 				case ("exit"):			backgroundImage = ImageManager.IconExit();				break;
-				case ("wizard"):		backgroundImage = ImageManager.CharacterWizard();		break;
-				case ("druid"):			backgroundImage = ImageManager.CharacterDruid();		break;
-				default:				backgroundImage = ImageManager.CharacterEssencePanel();	break;
+				default:				backgroundImage = ImageManager.MissingImage();			break;
 			}
 				backgroundImage.x = 0;
 				backgroundImage.y = 0;
@@ -386,9 +380,12 @@ package managers
 			aLabel.addChild(labelImage);*/
 				
 			//add the text
-			var text:TextField = drawText(caption, margin, margin, w - (2 * margin), h - (2 * margin), JUSTIFY_LEFT, JUSTIFY_TOP, verticalAlign);
-			text.name = "text";
-			aLabel.addChild(text);
+			if (caption.length != 0)
+			{
+				var text:TextField = drawText(caption, margin, margin, w - (2 * margin), h - (2 * margin), JUSTIFY_LEFT, JUSTIFY_TOP, verticalAlign);
+				text.name = "text";
+				aLabel.addChild(text);
+			}
 			
 			return aLabel;
 		}

@@ -1,5 +1,9 @@
 ﻿package rpg
 {
+	import flash.display.Bitmap;
+	import flash.display.MovieClip;
+	import managers.ImageManager;
+	import managers.ShapesManager;
 	import rpg.Weapon;
 	import rpg.Armor;
 	import flash.utils.ByteArray;
@@ -12,9 +16,9 @@
 	public class Player
 	{		
 		//CONSTANTS
-		public static const CLASS_DRUID:int = 0;
-		public static const CLASS_PRIEST:int= 1;
-		public static const CLASS_NECRO:int = 2;
+		public static const CLASS_DRUID:int = 2;
+		public static const CLASS_PRIEST:int= 0;
+		public static const CLASS_NECRO:int = 1;
 		public static const CLASS_WIZARD:int= 3;
 		public static const ESSENCE_FOREST:int  = 0;
 		public static const ESSENCE_WETLAND:int = 1;
@@ -23,6 +27,7 @@
 		
 		
 		public var manager:Game;
+		public var sprite:MovieClip;
 		
 		//player variables
 		public var name:String;
@@ -84,6 +89,10 @@
 			
 			//pass a <character> tag to be parsed
 			initFromXML(characterXML);
+			
+			//build the character sprite
+			sprite = new MovieClip();
+			sprite.addChild(ImageManager.MissingImage());
 		}
 		private function initFromXML(characterXML:XML):void
 		{
@@ -92,6 +101,7 @@
 			
 			name   			= characterXML.name[0];
 			characterType   = characterXML.type[0];
+			characterClass 	= Player.getCharacterClassName(characterType);
 			level			= characterXML.level[0];
 			curHealth		= characterXML.health[0];
 			health			= characterXML.maxHealth[0];
@@ -119,6 +129,12 @@
 		private function initWeaponFromXML(weaponXML:XML):void
 		{
 			//lol weapons whut?
+			//Set the default weapon (later get the weapon/armor from the Player XML)
+			currentWeapon = new Weapon(manager, 0, true, 1, "Wooden Staff", true, 15, 1.75, 6);
+			manager.populateWeaponArray(currentWeapon);
+			
+			
+			//currentWeapon.onEquip(); //function does not exist yet?!
 		}
 		private function initArmorFromXML(armorXML:XML):void
 		{
@@ -162,6 +178,17 @@
 		
 		
 		//HELPER FUNCTIONS
+		public static function getCharacterClassName(classID:int):String
+		{
+			switch (classID)
+			{
+				case(CLASS_DRUID): return "Druid";
+				case(CLASS_NECRO): return "Necromancer";
+				case(CLASS_PRIEST):return "Priest";
+				case(CLASS_WIZARD):return "Wizard";
+			}
+			return "Invalid Class ID";
+		}
 		public function toString():String
 		{
 			//converts the character object to a string object

@@ -59,11 +59,11 @@
 			backgroundImg = new Bitmap();
 			backgroundImg.x = 0;
 			backgroundImg.y = 0;
-			
+			trace("Current Biome Type: " + manage.device.CurrentBiome.Type);
 
-			character_btn = ShapesManager.drawButtonFromImage( -.66, -.25, .2, .2, "", "iconWizard.png", ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM);
-			quests_btn = 	ShapesManager.drawButtonFromImage(  .10, -.25, .2, .2, "", "iconScroll.png", ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM);
-			castle_btn = 	ShapesManager.drawButtonFromImage(  .66, -.25, .2, .2, "", "iconCastle.png",ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM);
+			character_btn = ShapesManager.drawButtonFromImage( -.4, -.25, .2, .2, "", "iconWizard.png", ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM);
+			quests_btn = 	ShapesManager.drawButtonFromImage(  .1, -.25, .2, .2, "", "iconScroll.png", ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM);
+			castle_btn = 	ShapesManager.drawButtonFromImage(  .4, -.25, .2, .2, "", "iconCastle.png",ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_BOTTOM);
 			
 			encounter_btn =	ShapesManager.drawButton(-.25, -.2, .5, .12, "Encounter", 	manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_CENTER_Y);
 			explore_btn =	ShapesManager.drawButton(-.25,   0, .5, .12, "Explore", 	manage.device.CurrentBiome.Type, ShapesManager.JUSTIFY_CENTER_X, ShapesManager.JUSTIFY_CENTER_Y);

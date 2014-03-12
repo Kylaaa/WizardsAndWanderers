@@ -14,7 +14,7 @@
 	public class Database extends MovieClip 
 	{		
 		//GLOBAL VARIABLES
-		private var txtOut:TextField;
+		public var txtOut:TextField;
 		private var tablesLoadedFromServer:int;
 		private var latestDBVersion:Object;
 		private var localDBVersion:Object;
